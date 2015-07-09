@@ -6,7 +6,7 @@ $(document).ready(function() {
 	var camera,
 		scene,
 		renderer;
-	// var starfield,
+	var starfield;
 	// 	starParticleSystem;
 
 
@@ -28,9 +28,10 @@ $(document).ready(function() {
 		// INITIAL CAMERA POSITIONING
 		camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 1, 3000 );
 		camera.position.x = 0;
-		camera.position.y = 600;
-		camera.position.z = 600;
-
+		camera.position.y = 2000;
+		camera.position.z = 2000;
+		// camera.position.y = 600;
+		// camera.position.z = 600;
 
 		// RENDERING SETUP
 		renderer = new THREE.WebGLRenderer({
@@ -63,9 +64,10 @@ $(document).ready(function() {
 		var starMaterial = [],
 			starParticleSystem = [];
 
-		for ( outer = 0; outer < 4; outer ++ ) {
-			console.log(outer);
-			// starfield = new THREE.Object3D( 0, 0, 0 );
+		starfield = new THREE.Object3D( 0, 0, 0 );
+
+		for ( outer = 0; outer < 3; outer ++ ) {
+			// console.log(outer);
 
 	        var starParticles = new THREE.Geometry();
 
@@ -81,9 +83,9 @@ $(document).ready(function() {
 	            z *= d;
 
 				var starParticle = new THREE.Vector3(
-	               // (x * starDistance) + randomRange(0, 200),
-	               // (y * starDistance) + randomRange(0, 200),
-	               // (z * starDistance) + randomRange(0, 200)
+	               // (x * starDistance) + randomRange(0, 100),
+	               // (y * starDistance) + randomRange(0, 100),
+	               // (z * starDistance) + randomRange(0, 100)
 	               x * starDistance,
 	               y * starDistance,
 	               z * starDistance
@@ -95,9 +97,8 @@ $(document).ready(function() {
 			starMaterial[outer] = new THREE.PointCloudMaterial({
 				map: THREE.ImageUtils.loadTexture( '/img/sprite-star.png' ),
 				blending: THREE.AdditiveBlending,
-				// color: 0xffffff,
-				size: randomRange(14, 24),
-				opacity: randomRange(0.2, 1),
+				size: ((outer * 8) + 12),
+				opacity: ((outer + 1) / 3),
 				alphaTest: 0.5,
 				transparent: true,
 				fog: true
@@ -106,9 +107,10 @@ $(document).ready(function() {
 	        starParticleSystem[outer] = new THREE.PointCloud( starParticles, starMaterial[outer] );
 	        starParticleSystem[outer].sortParticles = true;
 
-	        // starfield.add( starParticleSystem );
-	        scene.add( starParticleSystem[outer] );
+	        starfield.add( starParticleSystem[outer] );
     	}
+
+        scene.add( starfield );
 	}
 	function randomRange(min, max) {
 		return Math.random() * (max - min) + min;
@@ -125,7 +127,8 @@ $(document).ready(function() {
 	function render() {
 		var time = Date.now() * 0.00005;
 
-		// starParticles.rotation.z = time * 0.05;
+		// starfield.rotation.x = time * -0.25;
+		// starfield.rotation.y = time * -0.5;
 
 		camera.lookAt( scene.position );
 		renderer.render( scene, camera );
