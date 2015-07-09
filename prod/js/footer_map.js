@@ -6,7 +6,7 @@ $(document).ready(function() {
 	var camera,
 		scene,
 		renderer;
-	var starfield;
+	var starfield = [];
 	// 	starParticleSystem;
 
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 
 		// CREATE STARFIELD
-		makeStars(1000, 1);
+		makeStars(1000, 3);
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -60,57 +60,63 @@ $(document).ready(function() {
 
 
 	// STARFIELD PARTICLE FUNCTION
-	function makeStars(starDistance, numStarFields) {
-		var starMaterial = [],
-			starParticleSystem = [];
+	function makeStars(initialStarDistance, numStarFields) {
+		for ( fields = 0; fields < numStarFields; fields ++ ) {
 
-		starfield = new THREE.Object3D( 0, 0, 0 );
+			var starDistance = initialStarDistance + (fields * 250);
+			var starMaterial = [],
+				starParticleSystem = [];
 
-		for ( outer = 0; outer < 3; outer ++ ) {
-			// console.log(outer);
+			starfield[fields] = new THREE.Object3D( 0, 0, 0 );
 
-	        var starParticles = new THREE.Geometry();
+			for ( outer = 0; outer < 3; outer ++ ) {
+				// console.log(outer);
 
-	        // CREATE SPHERE OF PARTICLES
-	        for ( inner = 0; inner < 150; inner ++ ) {
-				var x = -1 + Math.random() * 2,
-	            	y = -1 + Math.random() * 2,
-	            	z = -1 + Math.random() * 2;
-	            var d = 1 / Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+		        var starParticles = new THREE.Geometry();
 
-	            x *= d;
-	            y *= d;
-	            z *= d;
+		        // CREATE SPHERE OF PARTICLES
+		        for ( inner = 0; inner < 150; inner ++ ) {
+					var x = -1 + Math.random() * 2,
+		            	y = -1 + Math.random() * 2,
+		            	z = -1 + Math.random() * 2;
+		            var d = 1 / Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 
-				var starParticle = new THREE.Vector3(
-	               // (x * starDistance) + randomRange(0, 100),
-	               // (y * starDistance) + randomRange(0, 100),
-	               // (z * starDistance) + randomRange(0, 100)
-	               x * starDistance,
-	               y * starDistance,
-	               z * starDistance
-	            );
+		            x *= d;
+		            y *= d;
+		            z *= d;
 
-	            starParticles.vertices.push(starParticle);
-	        }
+					var starParticle = new THREE.Vector3(
+		               (x * starDistance) + randomRange(0, 100),
+		               (y * starDistance) + randomRange(0, 100),
+		               (z * starDistance) + randomRange(0, 100)
+		               // x * starDistance,
+		               // y * starDistance,
+		               // z * starDistance
+		            );
 
-			starMaterial[outer] = new THREE.PointCloudMaterial({
-				map: THREE.ImageUtils.loadTexture( '/img/sprite-star.png' ),
-				blending: THREE.AdditiveBlending,
-				size: ((outer * 8) + 12),
-				opacity: ((outer + 1) / 3),
-				alphaTest: 0.5,
-				transparent: true,
-				fog: true
-	        });
+		            starParticles.vertices.push(starParticle);
+		        }
 
-	        starParticleSystem[outer] = new THREE.PointCloud( starParticles, starMaterial[outer] );
-	        starParticleSystem[outer].sortParticles = true;
+				starMaterial[outer] = new THREE.PointCloudMaterial({
+					map: THREE.ImageUtils.loadTexture( '/img/sprite-star.png' ),
+					blending: THREE.AdditiveBlending,
+					size: ((outer * 8) + 12),
+					opacity: ((outer + 1) / 3),
+					alphaTest: 0.5,
+					transparent: true,
+					fog: true
+		        });
 
-	        starfield.add( starParticleSystem[outer] );
-    	}
+		        starParticleSystem[outer] = new THREE.PointCloud( starParticles, starMaterial[outer] );
+		        starParticleSystem[outer].sortParticles = true;
 
-        scene.add( starfield );
+		        starfield[fields].add( starParticleSystem[outer] );
+	    	}
+
+	        scene.add( starfield[fields] );
+	        console.log(starDistance, fields);
+
+	    }
 	}
 	function randomRange(min, max) {
 		return Math.random() * (max - min) + min;
