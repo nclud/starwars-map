@@ -7,7 +7,6 @@ $(document).ready(function() {
 		scene,
 		renderer;
 	var starfield = [];
-	// 	starParticleSystem;
 
 
 
@@ -32,6 +31,23 @@ $(document).ready(function() {
 		// camera.position.z = 2000;
 		camera.position.y = 600;
 		camera.position.z = 600;
+
+
+		// TESTING CAMERA POSITION & LIGHTS
+		scene.add( new THREE.AmbientLight( 0x2f2f2f ) );
+		// light = new THREE.HemisphereLight( 0xffffff, 0x000000, 1 );
+		light = new THREE.DirectionalLight( 0xffffff );
+		light.position.set( -0.25, 1, 0.25 );
+		scene.add( light );
+
+		var material = new THREE.MeshLambertMaterial({
+			map: THREE.ImageUtils.loadTexture( '/img/test/test.jpg' ),
+			side: THREE.DoubleSide
+		});
+		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
+		object.position.set( 0, 0, 0 );
+		scene.add( object );
+
 
 		// RENDERING SETUP
 		renderer = new THREE.WebGLRenderer({
