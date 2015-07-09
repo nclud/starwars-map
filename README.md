@@ -1,2 +1,1 @@
-# Star Wars Map
-More information comign soon...
+More to come.
