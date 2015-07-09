@@ -6,7 +6,8 @@ $(document).ready(function() {
 	var camera,
 		scene,
 		renderer;
-	var starfield;
+	// var starfield,
+	// 	starParticleSystem;
 
 
 
@@ -46,7 +47,7 @@ $(document).ready(function() {
 
 
 		// CREATE STARFIELD
-		makeStars(1000);
+		makeStars(1000, 1);
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -58,46 +59,56 @@ $(document).ready(function() {
 
 
 	// STARFIELD PARTICLE FUNCTION
-	function makeStars(starDistance) {
-		starfield = new THREE.Object3D( 0, 0, 0 );
+	function makeStars(starDistance, numStarFields) {
+		var starMaterial = [],
+			starParticleSystem = [];
 
-		var starMaterial = new THREE.ParticleBasicMaterial({
-			map: THREE.ImageUtils.loadTexture( '/img/sprite-star.png' ),
-			color: 0xffffff,
-			size: 14,
-			opacity: 1,
-			blending: THREE.AdditiveBlending,
-			alphaTest: 0.5,
-			transparent: true
-        });
-        var starParticles = new THREE.Geometry();
+		for ( outer = 0; outer < 4; outer ++ ) {
+			console.log(outer);
+			// starfield = new THREE.Object3D( 0, 0, 0 );
 
+	        var starParticles = new THREE.Geometry();
 
-        // CREATE SPHERE OF PARTICLES
-        for ( i = 0; i < 1000; i ++ ) {
-			var x = -1 + Math.random() * 2,
-            	y = -1 + Math.random() * 2,
-            	z = -1 + Math.random() * 2;
-            var d = 1 / Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+	        // CREATE SPHERE OF PARTICLES
+	        for ( inner = 0; inner < 150; inner ++ ) {
+				var x = -1 + Math.random() * 2,
+	            	y = -1 + Math.random() * 2,
+	            	z = -1 + Math.random() * 2;
+	            var d = 1 / Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 
-            x *= d;
-            y *= d;
-            z *= d;
+	            x *= d;
+	            y *= d;
+	            z *= d;
 
-			var starParticle = new THREE.Vector3(
-               x * starDistance,
-               y * starDistance,
-               z * starDistance
-            );
+				var starParticle = new THREE.Vector3(
+	               // (x * starDistance) + randomRange(0, 200),
+	               // (y * starDistance) + randomRange(0, 200),
+	               // (z * starDistance) + randomRange(0, 200)
+	               x * starDistance,
+	               y * starDistance,
+	               z * starDistance
+	            );
 
-            starParticles.vertices.push(starParticle);
-        }
+	            starParticles.vertices.push(starParticle);
+	        }
 
-        var starParticleSystem = new THREE.ParticleSystem( starParticles, starMaterial );
-        starParticleSystem.sortParticles = true;
+			starMaterial[outer] = new THREE.PointCloudMaterial({
+				map: THREE.ImageUtils.loadTexture( '/img/sprite-star.png' ),
+				blending: THREE.AdditiveBlending,
+				// color: 0xffffff,
+				size: randomRange(14, 24),
+				opacity: randomRange(0.2, 1),
+				alphaTest: 0.5,
+				transparent: true,
+				fog: true
+	        });
 
-        starfield.add( starParticleSystem );
-        scene.add( starfield );
+	        starParticleSystem[outer] = new THREE.PointCloud( starParticles, starMaterial[outer] );
+	        starParticleSystem[outer].sortParticles = true;
+
+	        // starfield.add( starParticleSystem );
+	        scene.add( starParticleSystem[outer] );
+    	}
 	}
 	function randomRange(min, max) {
 		return Math.random() * (max - min) + min;
@@ -119,5 +130,5 @@ $(document).ready(function() {
 		camera.lookAt( scene.position );
 		renderer.render( scene, camera );
 	}
-	
+
 });
