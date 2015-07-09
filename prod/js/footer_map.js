@@ -29,8 +29,8 @@ $(document).ready(function() {
 		camera.position.x = 0;
 		// camera.position.y = 2000;
 		// camera.position.z = 2000;
-		camera.position.y = 600;
-		camera.position.z = 600;
+		camera.position.y = 800;
+		camera.position.z = 400;
 
 
 		// TESTING CAMERA POSITION & LIGHTS
@@ -41,13 +41,21 @@ $(document).ready(function() {
 		scene.add( light );
 
 		var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
-		texture.repeat.set( 2, 2 );
+		// texture.repeat.set( 2, 2 );
 		var material = new THREE.MeshLambertMaterial({
 			map: texture,
 			side: THREE.DoubleSide
 		});
 		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
 		object.position.set( 0, 0, 0 );
+		scene.add( object );
+
+		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
+		object.position.set( 0, 0, 300 );
+		scene.add( object );
+
+		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
+		object.position.set( 0, 0, -300 );
 		scene.add( object );
 
 
@@ -119,7 +127,7 @@ $(document).ready(function() {
 					map: THREE.ImageUtils.loadTexture( '/img/sprite-star.png' ),
 					blending: THREE.AdditiveBlending,
 					size: ((outer * 6) + 12),
-					opacity: ((outer + 1) / 3),
+					opacity: ((outer + 1) / 3) - 0.1,
 					alphaTest: 0.5,
 					transparent: true,
 					fog: true
