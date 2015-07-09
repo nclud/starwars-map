@@ -40,8 +40,10 @@ $(document).ready(function() {
 		light.position.set( -0.25, 1, 0.25 );
 		scene.add( light );
 
+		var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
+		texture.repeat.set( 2, 2 );
 		var material = new THREE.MeshLambertMaterial({
-			map: THREE.ImageUtils.loadTexture( '/img/test/test.jpg' ),
+			map: texture,
 			side: THREE.DoubleSide
 		});
 		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
