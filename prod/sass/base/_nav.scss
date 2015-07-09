@@ -1,0 +1,78 @@
+/* NAV */
+
+nav {
+	position: relative;
+	width: 23rem;
+	height: 100%;
+	padding: 1.5rem;
+
+	font-size: 1rem;
+}
+
+.filter-list {
+	margin-bottom: 3.5rem;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+.filter-list-single {
+	position: relative;
+	border-bottom: 1px solid rgba($gold,0.15);
+
+	&:first-child {
+		border-top: 1px solid $gold-darkest;
+	}
+	&:last-child {
+		border: 0;
+	}
+}
+
+
+input[type=checkbox] {
+	@include appearance(none);
+	outline: none;
+	cursor: pointer;
+	pointer-events: none;
+
+	position: absolute;
+	left: 0;
+	top: 50%;
+
+	display: block;
+	width: 0.8rem;
+	height: 0.8rem;
+	margin-top: -0.5rem;
+
+	border-radius: 100%;
+	border: 1px solid white;
+
+	&:before {
+		width: 100%;
+		height: 100%;
+		display: block;
+
+		background: none;
+
+		border: 2px solid black;
+		border-radius: 100%;
+
+		@include transition(background 0.1s);
+		
+		content: "";
+	}
+
+
+	&:checked {
+		&:before {
+			background: $gold;
+		}
+	}
+}
+
+label {
+	cursor: pointer;
+	
+	display: block;
+	padding: 1.4rem 0 1.4rem 2em;
+}

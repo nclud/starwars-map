@@ -1,0 +1,26 @@
+/* Z-INDEX & LAYERS */
+
+#long-ago {
+	z-index: 999;
+}
+
+
+#logo-fill {
+	z-index: 501;
+}
+#load-overlay {
+	z-index: 500;
+}
+
+
+#button-nav {
+	z-index: 100;
+}
+#star-map {
+	z-index: 50;
+}
+
+
+nav {
+	z-index: 1;
+}

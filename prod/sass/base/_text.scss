@@ -1,0 +1,122 @@
+/* TEXT SETTINGS */
+
+* {
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern=1";
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+}
+
+h2 {
+	font-family: "freight-display-pro", georgia, sans-serif;
+	font-weight: 600;
+
+	// font-family: "acta-display",sans-serif;
+	// font-weight: 700;
+}
+
+h2 {
+	display: block;
+	background: $gold-dark;
+	padding: 0.3em 1rem 0.4em;
+	border-bottom: 1px solid $gold;
+
+	font-size: 2.25em;
+
+	color: $gray-dark;
+}
+
+h3 {
+	display: block;
+	padding-bottom: 1.3rem;
+
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 0.75em;
+	letter-spacing: 0.05em;
+
+	color: $gold-darkest;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+label {
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: 0.9em;
+	letter-spacing: 0.025em;
+
+	color: rgba(white,0.5);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@include transition(color 0.1s);
+
+	&:hover {
+		color: rgba(white,0.65);
+	}
+
+	input[type=checkbox]:checked + & {
+		color: white;
+	}
+}
+
+.load-text {
+	display: block;
+	padding-left: 0.04em;
+
+	text-align: center;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 0.9em;
+	letter-spacing: 0.04em;
+	line-height: 1.3;
+
+	color: $gold-darkest;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	a {
+		display: inline-block;
+		border-bottom: 2px solid rgba($gold-darkest,0.3);
+
+		color: $gold-darkest;
+		text-decoration: none;
+		
+		@include transition(border-color 0.1s);
+
+		&:hover {
+			border-color: $gold-darkest;
+		}
+	}
+}
+
+
+.site-credits {
+	display: block;
+	padding-top: 5rem;
+	padding-bottom: 1.5rem;
+
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: 0.75em;
+	line-height: 1.5;
+
+	color: white;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	opacity: 0.3;
+
+	a {
+		color: white;
+		text-decoration: underline;
+		font-weight: 900;
+	}
+}
