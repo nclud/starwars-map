@@ -54,7 +54,7 @@ $(document).ready(function() {
 				// console.log( planetData[i].name );
 			}
 
-			console.log( planetData );
+			// console.log( planetData );
 		});
 	}
 
@@ -64,14 +64,15 @@ $(document).ready(function() {
 
 	var camera,
 		scene,
-		renderer;
+		renderer,
+		globalLight;
 	var starfield = [];
 
 
 
 	// INITIATE OVERALL THREE.JS SCENE
-	// init();
-	// animate();
+	init();
+	animate();
 
 	function init() {
 		// CONTAINER SETUP
@@ -88,17 +89,21 @@ $(document).ready(function() {
 		camera.position.x = 0;
 		// camera.position.y = 2000;
 		// camera.position.z = 2000;
-		camera.position.y = 800;
-		camera.position.z = 400;
+		camera.position.y = 750;
+		camera.position.z = 650;
 
 
-		// TESTING CAMERA POSITION & LIGHTS
+		// ADDING LIGHTS
 		scene.add( new THREE.AmbientLight( 0x2f2f2f ) );
-		// light = new THREE.HemisphereLight( 0xffffff, 0x000000, 1 );
-		light = new THREE.DirectionalLight( 0xffffff );
-		light.position.set( -0.25, 1, 0.25 );
-		scene.add( light );
+		globalLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.9 );
+		scene.add( globalLight );
 
+		// light = new THREE.DirectionalLight( 0x3d3d3d );
+		// light.position.set( -0.25, 1, 0.5 );
+		// scene.add(light);
+
+
+		// TESTING POSITIONS
 		var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
 		// texture.repeat.set( 2, 2 );
 		var material = new THREE.MeshLambertMaterial({
