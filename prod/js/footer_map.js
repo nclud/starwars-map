@@ -39,7 +39,7 @@ $(document).ready(function() {
 				}
 
 				// REMOVE PLANETS WITHOUT DIAMETER
-				if ( planetData[i].diameter === 'unknown' ) {
+				if ( planetData[i].diameter === 'unknown' || planetData[i].diameter === '0' ) {
 					planetData.splice(i, 1);
 				}
 
