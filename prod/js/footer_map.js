@@ -238,7 +238,7 @@ $(document).ready(function() {
 			var divisor = (fields + 1);
 
 			starfield[fields].rotation.x = time * (-0.025 / divisor);
-			starfield[fields].rotation.y = time * (-0.1 / divisor);
+			starfield[fields].rotation.y = time * (0.1 / divisor);
 		}
 
 		camera.lookAt( scene.position );
