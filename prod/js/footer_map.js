@@ -13,7 +13,6 @@ $(document).ready(function() {
 		// REQUESTS
 		var localRequest = $.getJSON( '/data/planets.json', function( data ) {
 				// console.log('local success');
-				// console.log( data.name );
 				localPlanetData.push( data );
 			})
 			.fail(function() {
@@ -21,9 +20,7 @@ $(document).ready(function() {
 			});
 
 		var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=6', function( data ) {
-				console.log('SWAPI success');
-				// console.log( data.results );
-				// planetData.push( data.results );
+				// console.log('SWAPI success');
 				$.each( data.results, function( key, value ) {
 					planetData.push( value );
 				});
@@ -35,23 +32,25 @@ $(document).ready(function() {
 		// COMPLETED
 		planetRequest.done(function(){
 			// BACKWARDS LOOP SINCE REMOVING OBJECTS
-			// for ( i = 0; i < planetData.length; i ++ ) {
 			for( var i = planetData.length; i--; ) {
 				// REMOVE PLANETS WITHOUT MOVIES
-				// console.log( planetData[i].films.length );
 				if ( planetData[i].films.length < 1 ) {
+					planetData.splice(i, 1);
+				}
+
+				// REMOVE PLANETS WITHOUT DIAMETER
+				if ( planetData[i].diameter === 'unknown' ) {
 					planetData.splice(i, 1);
 				}
 
 				// ADD X & Z POSITION TO PLANET DATA
 				localPlanetData.filter(function (planet) {
 				    if (planet.name === planetData[i].name) {
-				    	// console.log( planet.xpos, planet.zpos );
 				    	planetData[i].xpos = planet.xpos;
 				    	planetData[i].zpos = planet.zpos;
 				    }
 				});
-				
+
 				// console.log( planetData[i].name );
 			}
 
