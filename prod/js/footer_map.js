@@ -38,10 +38,19 @@ $(document).ready(function() {
 					planetData.splice(i, 1);
 				}
 
-				// REMOVE PLANETS WITHOUT DIAMETER
+				// GIVE GENERAL DIAMETER & ROTATION IF MISSING
 				if ( planetData[i].diameter === 'unknown' || planetData[i].diameter === '0' ) {
 					planetData[i].diameter = 10000;
 				}
+				if ( planetData[i].rotation_period === 'unknown' || planetData[i].rotation_period === '0' ) {
+					planetData[i].rotation_period = 24;
+				}
+
+				// CHANGE DIAMETER & ORBIT TO NUMBERS FROM STRINGS
+				var numberDiameter = parseInt( planetData[i].diameter );
+				planetData[i].diameter = numberDiameter;
+				var numberOrbit = parseInt(planetData[i].rotation_period);
+				planetData[i].rotation_period = numberOrbit;
 
 				// ADD X & Z POSITION TO PLANET DATA
 				localPlanetData.filter(function (planet) {
@@ -87,7 +96,7 @@ $(document).ready(function() {
 		camera.position.x = 0;
 		// camera.position.y = 2000;
 		// camera.position.z = 2000;
-		camera.position.y = 750;
+		camera.position.y = 720;
 		camera.position.z = 650;
 
 
