@@ -1,15 +1,17 @@
-[
-	{
-		"name": "Tatooine",
-		"xpos": 0,
-		"zpos": 0
-	},{
-		"name": "Tatooine",
-		"xpos": 0,
-		"zpos": 0
-	},{
-		"name": "Tatooine",
-		"xpos": 0,
-		"zpos": 0
-	}
-]
+{
+	"planets": [
+		{
+			"name": "Tatooine",
+			"xpos": 0,
+			"zpos": 0
+		},{
+			"name": "Alderaan",
+			"xpos": 5,
+			"zpos": 5
+		},{
+			"name": "Coruscant",
+			"xpos": -5,
+			"zpos": 5
+		}
+	]
+}

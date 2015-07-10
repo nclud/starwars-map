@@ -13,7 +13,9 @@ $(document).ready(function() {
 		// REQUESTS
 		var localRequest = $.getJSON( '/data/planets.json', function( data ) {
 				// console.log('local success');
-				localPlanetData.push( data );
+				$.each( data.planets, function( key, value ) {
+					localPlanetData.push( value );
+				});
 			})
 			.fail(function() {
 				console.log('local error');
