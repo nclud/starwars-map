@@ -14,6 +14,7 @@ $(document).ready(function() {
 		var localRequest = $.getJSON( '/data/planets.json', function( data ) {
 				// console.log('local success');
 				localPlanetData.push( data );
+				// console.log(data);
 			})
 			.fail(function() {
 				console.log('local error');
@@ -36,7 +37,7 @@ $(document).ready(function() {
 
 				// REMOVE PLANETS WITHOUT MOVIES OR NAMES
 				if ( planetData[i].films.length < 1 || planetData[i].name === 'unknown ') {
-					planetData.splice(i, 1);
+					// planetData.splice(i, 1);
 				}
 
 				// GIVE GENERAL DIAMETER & ROTATION IF MISSING
@@ -54,16 +55,25 @@ $(document).ready(function() {
 				planetData[i].rotation_period = numberOrbit;
 
 				// ADD X & Z POSITION TO PLANET DATA
-				localPlanetData.filter(function (planet) {
-				    if (planet.name === planetData[i].name) {
-				    	planetData[i].xpos = planet.xpos;
-				    	planetData[i].zpos = planet.zpos;
-				    }
-				});
-
+				// for( var x = localPlanetData.length; x--; ) {
+				// 	console.log(localPlanetData[x].data.name);
+				// 	console.log(x);
+				// }
+				// localPlanetData.filter(function (planet) {
+				//     if (planet.name == planetData[i].name) {
+				//     	// planetData[i].xpos = planet.xpos;
+				//     	// planetData[i].zpos = planet.zpos;
+				//     	console.log('yes');
+				//     }
+				// });
+				// var wanted = localPlanetData.filter( function(planet){
+				// 	return (planet.name === "Tatooine");
+				// });
+				// console.log( wanted );
 			}
 
-			// console.log( planetData );
+			console.log( localPlanetData );
+			console.log( planetData );
 		});
 	}
 
