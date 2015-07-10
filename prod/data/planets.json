@@ -1,15 +1,5 @@
-[
-	{
-		"name": "Alderaan",
-		"zpos": 5,
-		"xpos": 5
-	},{
-		"name": "Tatooine",
-		"zpos": 0,
-		"xpos": 0
-	},{
-		"name": "Coruscant",
-		"zpos": 0,
-		"xpos": 0
-	}
-]
+{
+	"name": "Tatooine",
+	"xpos": 0,
+	"zpos": 0
+}
