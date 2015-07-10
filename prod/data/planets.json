@@ -1,5 +1,15 @@
-{
-	"name": "Tatooine",
-	"xpos": 0,
-	"zpos": 0
-}
+[
+	{
+		"name": "Tatooine",
+		"xpos": 0,
+		"zpos": 0
+	},{
+		"name": "Tatooine",
+		"xpos": 0,
+		"zpos": 0
+	},{
+		"name": "Tatooine",
+		"xpos": 0,
+		"zpos": 0
+	}
+]

@@ -54,16 +54,17 @@ $(document).ready(function() {
 				planetData[i].rotation_period = numberOrbit;
 
 				// ADD X & Z POSITION TO PLANET DATA
-				localPlanetData.filter(function (planet) {
-				    if (planet.name === planetData[i].name) {
-				    	planetData[i].xpos = planet.xpos;
-				    	planetData[i].zpos = planet.zpos;
-				    }
-				});
+				// localPlanetData.filter(function (planet) {
+				//     if (planet.name === planetData[i].name) {
+				//     	planetData[i].xpos = planet.xpos;
+				//     	planetData[i].zpos = planet.zpos;
+				//     }
+				// });
 
 			}
 
-			// console.log( planetData );
+			console.log( localPlanetData );
+			console.log( planetData );
 		});
 	}
 
