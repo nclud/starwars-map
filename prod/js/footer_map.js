@@ -33,8 +33,9 @@ $(document).ready(function() {
 		planetRequest.done(function(){
 			// BACKWARDS LOOP SINCE REMOVING OBJECTS
 			for( var i = planetData.length; i--; ) {
-				// REMOVE PLANETS WITHOUT MOVIES
-				if ( planetData[i].films.length < 1 ) {
+
+				// REMOVE PLANETS WITHOUT MOVIES OR NAMES
+				if ( planetData[i].films.length < 1 || planetData[i].name === 'unknown ') {
 					planetData.splice(i, 1);
 				}
 
@@ -59,6 +60,7 @@ $(document).ready(function() {
 				    	planetData[i].zpos = planet.zpos;
 				    }
 				});
+
 			}
 
 			// console.log( planetData );
