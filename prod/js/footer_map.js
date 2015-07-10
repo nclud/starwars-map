@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 				// REMOVE PLANETS WITHOUT DIAMETER
 				if ( planetData[i].diameter === 'unknown' || planetData[i].diameter === '0' ) {
-					planetData.splice(i, 1);
+					planetData[i].diameter = 10000;
 				}
 
 				// ADD X & Z POSITION TO PLANET DATA
@@ -50,8 +50,6 @@ $(document).ready(function() {
 				    	planetData[i].zpos = planet.zpos;
 				    }
 				});
-
-				// console.log( planetData[i].name );
 			}
 
 			// console.log( planetData );
