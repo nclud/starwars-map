@@ -30,12 +30,12 @@ $(document).ready(function() {
 
 
 		// INITIAL CAMERA POSITIONING
-		camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 1, 3000 );
+		camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 3000 );
 		camera.position.x = 0;
-		camera.position.y = 2000;
-		camera.position.z = 2000;
-		// camera.position.y = 720;
-		// camera.position.z = 650;
+		// camera.position.y = 2000;
+		// camera.position.z = 2000;
+		camera.position.y = 600;
+		camera.position.z = 900;
 
 
 		// ADDING LIGHTS
@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 
 		// CREATE STARFIELD
-		makeStars(1000, 450, 3);
+		makeStars(1100, 450, 3);
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -236,8 +236,8 @@ $(document).ready(function() {
 		for ( i = 0; i < planetData.length; i++ ) {
 			// console.log(planetData[i].name);
 			var planetName = planetData[i].name,
-				planetX = (planetData[i].xpos * 150),
-				planetZ = (planetData[i].zpos * 150),
+				planetX = (planetData[i].xpos * 130),
+				planetZ = (planetData[i].zpos * 130),
 				planetSize = (planetData[i].diameter / 500),
 				planetRotation = planetData[i].rotation_period;
 
