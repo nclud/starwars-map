@@ -159,7 +159,7 @@ $(document).ready(function() {
 	getPlanetData();
 
 	function getPlanetData() {
-		// REQUESTS
+		// LOCAL REQUEST
 		var localRequest = $.getJSON( '/data/planets.json', function( data ) {
 				// console.log('local success');
 				$.each( data.planets, function( key, value ) {
@@ -170,25 +170,37 @@ $(document).ready(function() {
 				console.log('local error');
 			});
 
-		var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=1', function( data ) {
-				// console.log('SWAPI success');
-				$.each( data.results, function( key, value ) {
-					planetData.push( value );
-				});
-			})
-			.fail(function() {
-				console.log('SWAPI error');
-			});
+		// SWAPI LOOP REQUEST
+		var planetRequestLoop = function() {
+			var pages = 7;
 
-		// COMPLETED
-		planetRequest.done(function(){
-			// BACKWARDS LOOP SINCE REMOVING OBJECTS
-			for( var i = planetData.length; i--; ) {
+			for ( i = 1; i < (pages + 1); i ++ ) {
+				// console.log(i);
 
-				// REMOVE PLANETS WITHOUT MOVIES OR NAMES
-				if ( planetData[i].films.length < 1 || planetData[i].name === 'unknown ') {
-					planetData.splice(i, 1);
+				var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=' + i, function( data ) {
+						// console.log('SWAPI success');
+						$.each( data.results, function( key, value ) {
+							// ONLY STORE PLANETS WITH FILM ASSOCIATIONS
+							if ( value.films.length > 0 ) {
+								planetData.push( value );
+							}
+						});
+					})
+					.fail(function() {
+						console.log('SWAPI error on page' + i);
+					});
+
+				if ( pages === i ) {
+					planetRequest.done(function(){
+						planetRequestComplete();
+					});
 				}
+			}
+		}
+
+		// COMPLETED SWAPI PULL
+		var planetRequestComplete = function() {
+			for ( i = 0; i < planetData.length; i ++ ) {
 
 				// GIVE GENERAL DIAMETER & ROTATION IF MISSING
 				if ( planetData[i].diameter === 'unknown' || planetData[i].diameter === '0' ) {
@@ -220,11 +232,14 @@ $(document).ready(function() {
 			}
 
 			// console.log( localPlanetData );
-			// console.log( planetData );
+			console.log( planetData );
 
 			// ADD PLANETS
 			makePlanets();
-		});
+		}
+
+		planetRequestLoop();
+
 	}
 
 
