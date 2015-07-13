@@ -245,6 +245,7 @@ $(document).ready(function() {
 			object.position.set( planetX, 0, planetZ );
 			object.name = planetName;
 			object.rotation_period = planetRotation;
+			
 			scene.add( object );
 		}
 	}
