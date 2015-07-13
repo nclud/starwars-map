@@ -32,10 +32,10 @@ $(document).ready(function() {
 		// INITIAL CAMERA POSITIONING
 		camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 1, 3000 );
 		camera.position.x = 0;
-		// camera.position.y = 2000;
-		// camera.position.z = 2000;
-		camera.position.y = 720;
-		camera.position.z = 650;
+		camera.position.y = 2000;
+		camera.position.z = 2000;
+		// camera.position.y = 720;
+		// camera.position.z = 650;
 
 
 		// ADDING LIGHTS
@@ -46,26 +46,6 @@ $(document).ready(function() {
 		// light = new THREE.DirectionalLight( 0x3d3d3d );
 		// light.position.set( -0.25, 1, 0.5 );
 		// scene.add(light);
-
-
-		// TESTING POSITIONS
-		// var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
-		// // texture.repeat.set( 2, 2 );
-		// var material = new THREE.MeshLambertMaterial({
-		// 	map: texture,
-		// 	side: THREE.DoubleSide
-		// });
-		// object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
-		// object.position.set( 0, 0, 0 );
-		// scene.add( object );
-
-		// object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
-		// object.position.set( 0, 0, 300 );
-		// scene.add( object );
-
-		// object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
-		// object.position.set( 0, 0, -300 );
-		// scene.add( object );
 
 
 		// RENDERING SETUP
@@ -181,9 +161,9 @@ $(document).ready(function() {
 						// console.log('SWAPI success');
 						$.each( data.results, function( key, value ) {
 							// ONLY STORE PLANETS WITH FILM ASSOCIATIONS
-							if ( value.films.length > 0 ) {
+							// if ( value.films.length > 0 ) {
 								planetData.push( value );
-							}
+							// }
 						});
 					})
 					.fail(function() {
@@ -256,8 +236,8 @@ $(document).ready(function() {
 		for ( i = 0; i < planetData.length; i++ ) {
 			// console.log(planetData[i].name);
 			var planetName = planetData[i].name,
-				planetX = (planetData[i].xpos * 100),
-				planetZ = (planetData[i].zpos * 100),
+				planetX = (planetData[i].xpos * 150),
+				planetZ = (planetData[i].zpos * 150),
 				planetSize = (planetData[i].diameter / 500),
 				planetRotation = planetData[i].rotation_period;
 

@@ -40,6 +40,202 @@
 			"name": "Geonosis",
 			"zpos": 2.4,
 			"xpos": -5.2
+		},{
+			"name": "Utapau",
+			"zpos": -2,
+			"xpos": -7.9
+		},{
+			"name": "Mustafar",
+			"zpos": -1.9,
+			"xpos": -4.8
+		},{
+			"name": "Kashyyyk",
+			"zpos": 0.7,
+			"xpos": 2.2
+		},{
+			"name": "Polis Massa",
+			"zpos": -4.4,
+			"xpos": -8.8
+		},{
+			"name": "Mygeeto",
+			"zpos": -4.5,
+			"xpos": 6.9
+		},{
+			"name": "Felucia",
+			"zpos": 2.7,
+			"xpos": 5.7
+		},{
+			"name": "Cato Neimoidia",
+			"zpos": -1.8,
+			"xpos": 0.6
+		},{
+			"name": "Saleucami",
+			"zpos": 3.3,
+			"xpos": 3.7
+		},{
+			"name": "Eriadu",
+			"zpos": -2.3,
+			"xpos": -6.3
+		},{
+			"name": "Corellia",
+			"zpos": -2.4,
+			"xpos": 0.4
+		},{
+			"name": "Rodia",
+			"zpos": 1.2,
+			"xpos": -3.6
+		},{
+			"name": "Nal Hutta",
+			"zpos": 3,
+			"xpos": 0
+		},{
+			"name": "Dantooine",
+			"zpos": -4,
+			"xpos": 7.6
+		},{
+			"name": "Bestine IV",
+			"zpos": -3,
+			"xpos": -2
+		},{
+			"name": "Ord Mantell",
+			"zpos": -4,
+			"xpos": 4.6
+		},{
+			"name": "Trandosha",
+			"zpos": 1,
+			"xpos": 2
+		},{
+			"name": "Socorro",
+			"zpos": 1.2,
+			"xpos": 5.7
+		},{
+			"name": "Mon Cala",
+			"zpos": 5,
+			"xpos": 5.3
+		},{
+			"name": "Chandrila",
+			"zpos": -3.2,
+			"xpos": 2.7
+		},{
+			"name": "Sullust",
+			"zpos": -2.4,
+			"xpos": -5.8
+		},{
+			"name": "Rodia",
+			"zpos": 1.2,
+			"xpos": -3.6
+		},{
+			"name": "Toydaria",
+			"zpos": 2.7,
+			"xpos": 0.4
+		},{
+			"name": "Malastare",
+			"zpos": -1.9,
+			"xpos": -4.8
+		},{
+			"name": "Dathomir",
+			"zpos": -0.8,
+			"xpos": 5.6
+		},{
+			"name": "Ryloth",
+			"zpos": 2.7,
+			"xpos": -5.6
+		},{
+			"name": "Aleen Minor",
+			"zpos": -2.1,
+			"xpos": -1.6
+		},{
+			"name": "Vulpter",
+			"zpos": -3.4,
+			"xpos": 1.4
+		},{
+			"name": "Troiken",
+			"zpos": 3.6,
+			"xpos": 7
+		},{
+			"name": "Tund",
+			"zpos": 5.6,
+			"xpos": 3.5
+		},{
+			"name": "Haruun Kal",
+			"zpos": -2.1,
+			"xpos": -5.1
+		},{
+			"name": "Cerea",
+			"zpos": -6.3,
+			"xpos": -4.7
+		},{
+			"name": "Glee Anselm",
+			"zpos": -5.8,
+			"xpos": 4.4
+		},{
+			"name": "Iridonia",
+			"zpos": -5.2,
+			"xpos": 5
+		},{
+			"name": "Tholoth",
+			"zpos": -1.6,
+			"xpos": -0.5
+		},{
+			"name": "Iktotch",
+			"zpos": -2,
+			"xpos": -0.4
+		},{
+			"name": "Quermia",
+			"zpos": 3.9,
+			"xpos": 6.8
+		},{
+			"name": "Dorin",
+			"zpos": -5.5,
+			"xpos": 3.8
+		},{
+			"name": "Champala",
+			"zpos": -3.6,
+			"xpos": 3.5
+		},{
+			"name": "Mirial",
+			"zpos": 1.5,
+			"xpos": 7.6
+		},{
+			"name": "Serenna",
+			"zpos": -0.4,
+			"xpos": 7.3
+		},{
+			"name": "Concord Dawn",
+			"zpos": -0.4,
+			"xpos": 4.7
+		},{
+			"name": "Zolan",
+			"zpos": 0.7,
+			"xpos": -4.4
+		},{
+			"name": "Ojom",
+			"zpos": -3,
+			"xpos": 0.3
+		},{
+			"name": "Skako",
+			"zpos": -3.3,
+			"xpos": 2.2
+		},{
+			"name": "Muunilinst",
+			"zpos": -4.8,
+			"xpos": 7.6
+		},{
+			"name": "Shili",
+			"zpos": -3.3,
+			"xpos": 3.9
+		},{
+			"name": "Kalee",
+			"zpos": -5.6,
+			"xpos": 7.6
+		},{
+			"name": "Umbara",
+			"zpos": 0.2,
+			"xpos": 1.4
+		},{
+			"name": "Tatooine",
+			"zpos": 2.2,
+			"xpos": -4.5
 		}
 	]
 }
