@@ -1,76 +1,5 @@
 $(document).ready(function() {
 
-	// DATA GLOBAL VARIABLES
-	var planetData = [],
-		localPlanetData = [];
-
-
-
-	// GET PLANET DATA
-	getPlanetData();
-
-	function getPlanetData() {
-		// REQUESTS
-		var localRequest = $.getJSON( '/data/planets.json', function( data ) {
-				// console.log('local success');
-				$.each( data.planets, function( key, value ) {
-					localPlanetData.push( value );
-				});
-			})
-			.fail(function() {
-				console.log('local error');
-			});
-
-		var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=1', function( data ) {
-				// console.log('SWAPI success');
-				$.each( data.results, function( key, value ) {
-					planetData.push( value );
-				});
-			})
-			.fail(function() {
-				console.log('SWAPI error');
-			});
-
-		// COMPLETED
-		planetRequest.done(function(){
-			// BACKWARDS LOOP SINCE REMOVING OBJECTS
-			for( var i = planetData.length; i--; ) {
-
-				// REMOVE PLANETS WITHOUT MOVIES OR NAMES
-				if ( planetData[i].films.length < 1 || planetData[i].name === 'unknown ') {
-					planetData.splice(i, 1);
-				}
-
-				// GIVE GENERAL DIAMETER & ROTATION IF MISSING
-				if ( planetData[i].diameter === 'unknown' || planetData[i].diameter === '0' ) {
-					planetData[i].diameter = 10000;
-				}
-				if ( planetData[i].rotation_period === 'unknown' || planetData[i].rotation_period === '0' ) {
-					planetData[i].rotation_period = 24;
-				}
-
-				// CHANGE DIAMETER & ORBIT TO NUMBERS FROM STRINGS
-				var numberDiameter = parseInt( planetData[i].diameter );
-				planetData[i].diameter = numberDiameter;
-				var numberOrbit = parseInt(planetData[i].rotation_period);
-				planetData[i].rotation_period = numberOrbit;
-
-				// ADD X & Z POSITION TO PLANET DATA
-				for ( x = 0; x < localPlanetData.length; x ++ ) {
-					if ( localPlanetData[x].name == planetData[i].name ) {
-						planetData[i].xpos = localPlanetData[x].xpos;
-						planetData[i].zpos = localPlanetData[x].zpos;
-					}
-				}
-
-			}
-
-			// console.log( localPlanetData );
-			console.log( planetData );
-		});
-	}
-
-
 	// MAP GLOBAL VARIABLES
 	var container;
 
@@ -79,6 +8,10 @@ $(document).ready(function() {
 		renderer,
 		globalLight;
 	var starfield = [];
+
+	// DATA GLOBAL VARIABLES
+	var planetData = [],
+		localPlanetData = [];
 
 
 
@@ -116,23 +49,23 @@ $(document).ready(function() {
 
 
 		// TESTING POSITIONS
-		var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
-		// texture.repeat.set( 2, 2 );
-		var material = new THREE.MeshLambertMaterial({
-			map: texture,
-			side: THREE.DoubleSide
-		});
-		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
-		object.position.set( 0, 0, 0 );
-		scene.add( object );
+		// var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
+		// // texture.repeat.set( 2, 2 );
+		// var material = new THREE.MeshLambertMaterial({
+		// 	map: texture,
+		// 	side: THREE.DoubleSide
+		// });
+		// object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
+		// object.position.set( 0, 0, 0 );
+		// scene.add( object );
 
-		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
-		object.position.set( 0, 0, 300 );
-		scene.add( object );
+		// object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
+		// object.position.set( 0, 0, 300 );
+		// scene.add( object );
 
-		object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
-		object.position.set( 0, 0, -300 );
-		scene.add( object );
+		// object = new THREE.Mesh( new THREE.SphereGeometry( 36, 36, 36 ), material );
+		// object.position.set( 0, 0, -300 );
+		// scene.add( object );
 
 
 		// RENDERING SETUP
@@ -218,6 +151,107 @@ $(document).ready(function() {
 	        scene.add( starfield[fields] );
 
 	    }
+	}
+
+
+
+	// GET PLANET DATA
+	getPlanetData();
+
+	function getPlanetData() {
+		// REQUESTS
+		var localRequest = $.getJSON( '/data/planets.json', function( data ) {
+				// console.log('local success');
+				$.each( data.planets, function( key, value ) {
+					localPlanetData.push( value );
+				});
+			})
+			.fail(function() {
+				console.log('local error');
+			});
+
+		var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=1', function( data ) {
+				// console.log('SWAPI success');
+				$.each( data.results, function( key, value ) {
+					planetData.push( value );
+				});
+			})
+			.fail(function() {
+				console.log('SWAPI error');
+			});
+
+		// COMPLETED
+		planetRequest.done(function(){
+			// BACKWARDS LOOP SINCE REMOVING OBJECTS
+			for( var i = planetData.length; i--; ) {
+
+				// REMOVE PLANETS WITHOUT MOVIES OR NAMES
+				if ( planetData[i].films.length < 1 || planetData[i].name === 'unknown ') {
+					planetData.splice(i, 1);
+				}
+
+				// GIVE GENERAL DIAMETER & ROTATION IF MISSING
+				if ( planetData[i].diameter === 'unknown' || planetData[i].diameter === '0' ) {
+					planetData[i].diameter = 10000;
+				}
+				if ( planetData[i].rotation_period === 'unknown' || planetData[i].rotation_period === '0' ) {
+					planetData[i].rotation_period = 24;
+				}
+
+				// CHANGE DIAMETER & ORBIT TO NUMBERS FROM STRINGS
+				var numberDiameter = parseInt( planetData[i].diameter );
+				planetData[i].diameter = numberDiameter;
+				var numberOrbit = parseInt(planetData[i].rotation_period);
+				planetData[i].rotation_period = numberOrbit;
+
+				// SHRINK LARGE PLANETS
+				if ( planetData[i].diameter > 100000 ) {
+					planetData[i].diameter = numberDiameter / 5;
+				}
+
+				// ADD X & Z POSITION TO PLANET DATA
+				for ( x = 0; x < localPlanetData.length; x ++ ) {
+					if ( localPlanetData[x].name == planetData[i].name ) {
+						planetData[i].xpos = localPlanetData[x].xpos;
+						planetData[i].zpos = localPlanetData[x].zpos;
+					}
+				}
+
+			}
+
+			// console.log( localPlanetData );
+			// console.log( planetData );
+
+			// ADD PLANETS
+			makePlanets();
+		});
+	}
+
+
+
+	// ADDING PLANETS BASED ON DATA
+	function makePlanets() {
+		var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
+		// texture.repeat.set( 2, 2 );
+		var material = new THREE.MeshLambertMaterial({
+			map: texture,
+			side: THREE.DoubleSide
+		});
+
+		for ( i = 0; i < planetData.length; i++ ) {
+			// console.log(planetData[i].name);
+			var planetName = planetData[i].name,
+				planetX = (planetData[i].xpos * 100),
+				planetZ = (planetData[i].zpos * 100),
+				planetSize = (planetData[i].diameter / 500),
+				planetRotation = planetData[i].rotation_period;
+
+			object = new THREE.Mesh( new THREE.SphereGeometry( planetSize, 36, 36 ), material );
+			object.position.set( planetX, 0, planetZ );
+			object.name = planetName;
+			object.rotation_period = planetRotation;
+			scene.add( object );
+		}
 	}
 
 

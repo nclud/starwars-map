@@ -1,17 +1,45 @@
 {
 	"planets": [
 		{
-			"name": "Tatooine",
-			"xpos": 0,
-			"zpos": 0
-		},{
 			"name": "Alderaan",
-			"xpos": 5,
-			"zpos": 5
+			"zpos": -2.6,
+			"xpos": 1.8
+		},{
+			"name": "Yavin IV",
+			"zpos": 0.8,
+			"xpos": 5.8
+		},{
+			"name": "Hoth",
+			"zpos": -4.4,
+			"xpos": -6.8
+		},{
+			"name": "Dagobah",
+			"zpos": -2.4,
+			"xpos": -7.5
+		},{
+			"name": "Bespin",
+			"zpos": -5,
+			"xpos": -6.4
+		},{
+			"name": "Endor",
+			"zpos": -7.4,
+			"xpos": -4.8
+		},{
+			"name": "Naboo",
+			"zpos": -0.6,
+			"xpos": -5
 		},{
 			"name": "Coruscant",
-			"xpos": -5,
-			"zpos": 5
+			"zpos": -4,
+			"xpos": 2
+		},{
+			"name": "Kamino",
+			"zpos": 3.3,
+			"xpos": -2.8
+		},{
+			"name": "Geonosis",
+			"zpos": 2.4,
+			"xpos": -5.2
 		}
 	]
 }
