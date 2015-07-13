@@ -21,7 +21,7 @@ $(document).ready(function() {
 				console.log('local error');
 			});
 
-		var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=6', function( data ) {
+		var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=1', function( data ) {
 				// console.log('SWAPI success');
 				$.each( data.results, function( key, value ) {
 					planetData.push( value );
@@ -56,16 +56,16 @@ $(document).ready(function() {
 				planetData[i].rotation_period = numberOrbit;
 
 				// ADD X & Z POSITION TO PLANET DATA
-				// localPlanetData.filter(function (planet) {
-				//     if (planet.name === planetData[i].name) {
-				//     	planetData[i].xpos = planet.xpos;
-				//     	planetData[i].zpos = planet.zpos;
-				//     }
-				// });
+				for ( x = 0; x < localPlanetData.length; x ++ ) {
+					if ( localPlanetData[x].name == planetData[i].name ) {
+						planetData[i].xpos = localPlanetData[x].xpos;
+						planetData[i].zpos = localPlanetData[x].zpos;
+					}
+				}
 
 			}
 
-			console.log( localPlanetData );
+			// console.log( localPlanetData );
 			console.log( planetData );
 		});
 	}
@@ -219,9 +219,6 @@ $(document).ready(function() {
 
 	    }
 	}
-	function randomRange(min, max) {
-		return Math.random() * (max - min) + min;
-	}
 
 
 
@@ -243,6 +240,13 @@ $(document).ready(function() {
 
 		camera.lookAt( scene.position );
 		renderer.render( scene, camera );
+	}
+
+
+
+	// FUNCTION TO GENERATE RANDOM NUMBER
+	function randomRange(min, max) {
+		return Math.random() * (max - min) + min;
 	}
 
 });
