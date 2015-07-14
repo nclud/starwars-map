@@ -85,6 +85,12 @@ THREE.OrbitControls = function ( object, domElement ) {
 		ORBIT: THREE.MOUSE.RIGHT
 	};
 
+	// MIN/MAX FOR PANNING
+	this.Xmin = -1250;
+	this.Xmax = 1250;
+	this.Ymin = -100;
+	this.Ymax = 1250;
+
 	////////////
 	// internals
 
@@ -328,7 +334,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 		var newX = this.target.x + pan.x;
 		var newY = this.target.y + pan.y;
 
-		if (newX <= 1250 && newX >= -1250 && newY <= 1250 && newY >= -500) {
+		if (newX <= this.Xmax && newX >= this.Xmin && newY <= this.Ymax && newY >= this.Ymin) {
 		    this.target.add( pan );
 		}
 
@@ -718,7 +724,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 	this.domElement.addEventListener( 'touchend', touchend, false );
 	this.domElement.addEventListener( 'touchmove', touchmove, false );
 
-	// window.addEventListener( 'keydown', onKeyDown, false );
+	window.addEventListener( 'keydown', onKeyDown, false );
 
 	// force an update at start
 	this.update();

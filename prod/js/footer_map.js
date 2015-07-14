@@ -98,6 +98,10 @@ $(document).ready(function() {
 		controls.zoomSpeed = 1.5;
 		controls.panSpeed = 1;
 		controls.dynamicDampingFactor = 0.3;
+		controls.Xmin = -1250;
+		controls.Xmax = 1250;
+		controls.Ymin = -100;
+		controls.Ymax = 1250;
 		controls.minDistance = (gridMultiplier / 2);
 		controls.maxDistance = 1000;
 		controls.minPolarAngle = 0;
@@ -215,7 +219,7 @@ $(document).ready(function() {
 			for ( i = 1; i < (pages + 1); i ++ ) {
 				// console.log(i);
 
-				var planetRequest = $.getJSON( 'http://swapi.co/api/planets/?page=' + i, function( data ) {
+				var planetRequest = $.getJSON( '//swapi.co/api/planets/?page=' + i, function( data ) {
 						// console.log('SWAPI success');
 						$.each( data.results, function( key, value ) {
 							// ONLY STORE PLANETS WITH FILM ASSOCIATIONS
