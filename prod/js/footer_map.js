@@ -3,10 +3,11 @@ $(document).ready(function() {
 	// MAP GLOBAL VARIABLES
 	var container;
 
-	var camera,
-		scene,
+	var scene,
 		renderer,
 		globalLight;
+	var camera,
+		focalPoint;
 	var starfield = [];
 
 	// DATA GLOBAL VARIABLES
@@ -30,12 +31,22 @@ $(document).ready(function() {
 
 
 		// INITIAL CAMERA POSITIONING
-		camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 3000 );
-		camera.position.x = 0;
-		// camera.position.y = 2000;
-		// camera.position.z = 2000;
-		camera.position.y = 600;
-		camera.position.z = 900;
+		// camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 3000 );
+		// camera.position.x = 0;
+		// camera.position.y = 2500;
+		// camera.position.z = 2500;
+		// camera.position.y = 600;
+		// camera.position.z = 900;
+		var aspect = window.innerWidth / window.innerHeight,
+			d = 500;
+		camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 1, 3000 );
+		camera.position.set( 0, d, d );
+
+		focalPoint = new THREE.Vector3(
+			(0.5 * 150),
+			(0 * 150),
+			(-1.5 * 150)
+		);
 
 
 		// ADDING LIGHTS
@@ -100,9 +111,9 @@ $(document).ready(function() {
 		            z *= d;
 
 					var starParticle = new THREE.Vector3(
-		               (x * starDistance) + randomRange(0, 100),
-		               (y * starDistance) + randomRange(0, 100),
-		               (z * starDistance) + randomRange(0, 100)
+		               (x * starDistance) + randomRange(0, 50),
+		               (y * starDistance) + randomRange(0, 50),
+		               (z * starDistance) + randomRange(0, 50)
 		               // x * starDistance,
 		               // y * starDistance,
 		               // z * starDistance
@@ -236,8 +247,8 @@ $(document).ready(function() {
 		for ( i = 0; i < planetData.length; i++ ) {
 			// console.log(planetData[i].name);
 			var planetName = planetData[i].name,
-				planetX = (planetData[i].xpos * 130),
-				planetZ = (planetData[i].zpos * 130),
+				planetX = (planetData[i].xpos * 150),
+				planetZ = (planetData[i].zpos * 150),
 				planetSize = (planetData[i].diameter / 500),
 				planetRotation = planetData[i].rotation_period;
 
@@ -245,7 +256,7 @@ $(document).ready(function() {
 			object.position.set( planetX, 0, planetZ );
 			object.name = planetName;
 			object.rotation_period = planetRotation;
-			
+
 			scene.add( object );
 		}
 	}
@@ -268,7 +279,8 @@ $(document).ready(function() {
 			starfield[fields].rotation.y = time * (0.1 / divisor);
 		}
 
-		camera.lookAt( scene.position );
+		camera.lookAt( focalPoint );
+
 		renderer.render( scene, camera );
 	}
 
