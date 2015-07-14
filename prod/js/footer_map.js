@@ -8,6 +8,8 @@ $(document).ready(function() {
 		globalLight;
 	var camera,
 		focalPoint;
+	var controls;
+	var clock = new THREE.Clock();
 	var starfield = [];
 
 	// DATA GLOBAL VARIABLES
@@ -27,7 +29,7 @@ $(document).ready(function() {
 
 		// SCENE SETUP AND VARIABLES
 		scene = new THREE.Scene();
-		scene.fog = new THREE.FogExp2( 0x000000, 0.0001 );
+		// scene.fog = new THREE.FogExp2( 0x000000, 0.0001 );
 
 
 		// INITIAL CAMERA POSITIONING
@@ -39,7 +41,7 @@ $(document).ready(function() {
 		// camera.position.z = 900;
 		var aspect = window.innerWidth / window.innerHeight,
 			d = 500;
-		camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 1, 3000 );
+		camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 0, 3000 );
 		camera.position.set( 0, d, d );
 
 		focalPoint = new THREE.Vector3(
@@ -47,6 +49,8 @@ $(document).ready(function() {
 			(-0.25 * 150),
 			(-1.5 * 150)
 		);
+
+		camera.lookAt( focalPoint );
 
 
 		// ADDING LIGHTS
@@ -62,14 +66,14 @@ $(document).ready(function() {
 
 		// ADDING GRID FOR REFERENCE
 		var gridGeometry = new THREE.PlaneGeometry(
-	           2500,
-	           2500,
+	           3000,
+	           3000,
 	           Math.round(2000 / 150),
 	           Math.round(2000 / 150)
            );
 		var gridMaterial = new THREE.MeshBasicMaterial({
 				wireframe: true,
-				opacity: 0.1,
+				opacity: 0.15,
 				transparent: true,
 				side: THREE.DoubleSide
 			});
@@ -78,6 +82,15 @@ $(document).ready(function() {
 		grid.rotation.y = - Math.PI / 2;
 		grid.rotation.x = - Math.PI / 2;
 		scene.add( grid );
+
+
+		// ADDING CONTROLS
+		controls = new THREE.TrackballControls( camera );
+		controls.rotateSpeed = 1;
+		controls.zoomSpeed = 1.5;
+		controls.panSpeed = 1;
+		// controls.staticMoving = true;
+		controls.dynamicDampingFactor = 0.3;
 
 
 		// RENDERING SETUP
@@ -100,6 +113,8 @@ $(document).ready(function() {
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
+
+		controls.handleResize();
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 	}
@@ -300,8 +315,8 @@ $(document).ready(function() {
 			starfield[fields].rotation.y = time * (0.1 / divisor);
 		}
 
-		camera.lookAt( focalPoint );
-
+		// controls.update( clock.getDelta() );
+		controls.update();
 		renderer.render( scene, camera );
 	}
 
