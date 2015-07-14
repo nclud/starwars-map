@@ -17,6 +17,9 @@ $(document).ready(function() {
 	var planetData = [],
 		localPlanetData = [];
 
+	// CHECK IF CURRENTLY HOVERING OBJECT FOR CAMERA CONTROLS
+	var objectHover = false;
+
 
 
 	// INITIATE OVERALL THREE.JS SCENE
@@ -62,7 +65,7 @@ $(document).ready(function() {
 		// ADDING LIGHTS
 		scene.add( new THREE.AmbientLight( 0x2f2f2f ) );
 
-		globalLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.9 );
+		globalLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.85 );
 		scene.add( globalLight );
 
 		// light = new THREE.DirectionalLight( 0x3d3d3d );
@@ -330,7 +333,9 @@ $(document).ready(function() {
 			starfield[fields].rotation.y = time * (0.1 / divisor);
 		}
 
-		controls.update( clock.getDelta() );
+		if (!objectHover) {
+			controls.update( clock.getDelta() );
+		}
 
 		renderer.render( scene, camera );
 	}
