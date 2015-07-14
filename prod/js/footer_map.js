@@ -44,19 +44,40 @@ $(document).ready(function() {
 
 		focalPoint = new THREE.Vector3(
 			(0.5 * 150),
-			(0 * 150),
+			(-0.25 * 150),
 			(-1.5 * 150)
 		);
 
 
 		// ADDING LIGHTS
 		scene.add( new THREE.AmbientLight( 0x2f2f2f ) );
+
 		globalLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.9 );
 		scene.add( globalLight );
 
 		// light = new THREE.DirectionalLight( 0x3d3d3d );
 		// light.position.set( -0.25, 1, 0.5 );
 		// scene.add(light);
+
+
+		// ADDING GRID FOR REFERENCE
+		var gridGeometry = new THREE.PlaneGeometry(
+	           2500,
+	           2500,
+	           Math.round(2000 / 150),
+	           Math.round(2000 / 150)
+           );
+		var gridMaterial = new THREE.MeshBasicMaterial({
+				wireframe: true,
+				opacity: 0.1,
+				transparent: true,
+				side: THREE.DoubleSide
+			});
+		var grid = new THREE.Mesh( gridGeometry, gridMaterial );
+		grid.rotation.order = 'YXZ';
+		grid.rotation.y = - Math.PI / 2;
+		grid.rotation.x = - Math.PI / 2;
+		scene.add( grid );
 
 
 		// RENDERING SETUP
@@ -286,7 +307,7 @@ $(document).ready(function() {
 
 
 
-	// FUNCTION TO GENERATE RANDOM NUMBER
+	// GENERAL FUNCTION TO GENERATE RANDOM NUMBER
 	function randomRange(min, max) {
 		return Math.random() * (max - min) + min;
 	}
