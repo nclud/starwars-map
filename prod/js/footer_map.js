@@ -11,6 +11,7 @@ $(document).ready(function() {
 	var controls;
 	var clock = new THREE.Clock();
 	var starfield = [];
+	var gridMultiplier = 150;
 
 	// DATA GLOBAL VARIABLES
 	var planetData = [],
@@ -41,13 +42,18 @@ $(document).ready(function() {
 		// camera.position.z = 900;
 		var aspect = window.innerWidth / window.innerHeight,
 			d = 500;
-		camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 0, 3000 );
-		camera.position.set( 0, d, d );
+		// camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 0, 4000 );
+		camera = new THREE.PerspectiveCamera( 60, aspect, 1, 3000 );
+		camera.position.set(
+			0,
+			d + (gridMultiplier / 2),
+			d - gridMultiplier
+		);
 
 		focalPoint = new THREE.Vector3(
-			(0.5 * 150),
-			(-0.25 * 150),
-			(-1.5 * 150)
+			(0.5 * gridMultiplier),
+			(0 * gridMultiplier),
+			(-1.5 * gridMultiplier)
 		);
 
 		camera.lookAt( focalPoint );
@@ -84,13 +90,18 @@ $(document).ready(function() {
 		scene.add( grid );
 
 
-		// ADDING CONTROLS
-		controls = new THREE.TrackballControls( camera );
+		// ADDING CONTROLS & LIMITS
+		controls = new THREE.OrbitControls( camera );
+		controls.target = focalPoint;
+		controls.noKeys = true;
 		controls.rotateSpeed = 1;
 		controls.zoomSpeed = 1.5;
 		controls.panSpeed = 1;
-		// controls.staticMoving = true;
 		controls.dynamicDampingFactor = 0.3;
+		controls.minDistance = (gridMultiplier / 2);
+		controls.maxDistance = 1000;
+		controls.minPolarAngle = 0;
+		controls.maxPolarAngle = Math.PI/2;
 
 
 		// RENDERING SETUP
@@ -108,7 +119,7 @@ $(document).ready(function() {
 
 
 		// CREATE STARFIELD
-		makeStars(1100, 450, 3);
+		makeStars(1500, 450, 3);
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -166,7 +177,7 @@ $(document).ready(function() {
 					opacity: ((outer + 1) / 3) - 0.1,
 					alphaTest: 0.5,
 					transparent: true,
-					fog: true
+					fog: false
 		        });
 
 		        starParticleSystem[outer] = new THREE.PointCloud( starParticles, starMaterial[outer] );
@@ -283,8 +294,8 @@ $(document).ready(function() {
 		for ( i = 0; i < planetData.length; i++ ) {
 			// console.log(planetData[i].name);
 			var planetName = planetData[i].name,
-				planetX = (planetData[i].xpos * 150),
-				planetZ = (planetData[i].zpos * 150),
+				planetX = (planetData[i].xpos * gridMultiplier),
+				planetZ = (planetData[i].zpos * gridMultiplier),
 				planetSize = (planetData[i].diameter / 500),
 				planetRotation = planetData[i].rotation_period;
 
@@ -315,8 +326,8 @@ $(document).ready(function() {
 			starfield[fields].rotation.y = time * (0.1 / divisor);
 		}
 
-		// controls.update( clock.getDelta() );
-		controls.update();
+		controls.update( clock.getDelta() );
+
 		renderer.render( scene, camera );
 	}
 
