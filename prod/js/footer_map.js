@@ -9,18 +9,27 @@ $(document).ready(function() {
 	var camera,
 		initialCameraPos,
 		focalPoint;
-	var controls;
 	var gridMultiplier = 150;
 
 	// DATA GLOBAL VARIABLES
 	var planetData = [],
 		localPlanetData = [];
 
-	// CHECK IF CURRENTLY HOVERING OBJECT FOR CAMERA CONTROLS
+	// CONTROLS VARIABLES
+	var controls,
+		projector,
+		intersected;
 	var objectHover = false;
+	var mousePos = {
+			x: 0,
+			y: 0
+		};
 
 	// OBJECT GLOBAL VARIABLES
-	var starfield = [];
+	var starfield = [],
+		planets = [];
+	var attributes,
+		uniforms;
 	var galaxy;
 
 	// MOTION VARIABLES
@@ -129,8 +138,9 @@ $(document).ready(function() {
 		container.appendChild( renderer.domElement );
 
 
-		// RESIZING WINDOW
+		// EVENT LISTENERS
 		window.addEventListener( 'resize', onWindowResize, false );
+		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 
 		// CREATE STARFIELD
@@ -138,7 +148,11 @@ $(document).ready(function() {
 
 
 		// CREATE GALAXY
-		makeGalaxy(20000);
+		// makeGalaxy(20000);
+
+
+		// PROJECTOR FOR WORLD/SCREEN INTERACTION
+		projector = new THREE.Projector();
 
 	}
 	function onWindowResize() {
@@ -450,6 +464,8 @@ $(document).ready(function() {
 			object.rotation_period = planetRotation;
 
 			scene.add( object );
+			planets.push( object );
+			// console.log(i);
 		}
 	}
 
@@ -465,18 +481,36 @@ $(document).ready(function() {
 		clockDelta = clock.getDelta();
 		time = Date.now() * 0.00005;
 
-		for ( fields = 0; fields < starfield.length; fields ++ ) {
-			var divisor = (fields + 1);
+		// STARFIELD ROTATION
+		for ( field = 0; field < starfield.length; field ++ ) {
+			var divisor = (field + 1),
+				singleField = starfield[field];
 
-			starfield[fields].rotation.x = time * (-0.025 / divisor);
-			starfield[fields].rotation.y = time * (0.1 / divisor);
+			singleField.rotation.x = time * (-0.025 / divisor);
+			singleField.rotation.y = time * (0.1 / divisor);
 		}
 
+		// PLANET ROTATION
+		for ( planet = 0; planet < planets.length; planet ++ ) {
+			var singlePlanet = planets[planet];
+
+			singlePlanet.rotation.y = time * ( singlePlanet.rotation_period / 25 );
+		}
+
+		// ONLY UPDATE CONTROLS IF NOT HOVERING
 		if (!objectHover) {
 			controls.update( clock.getDelta() );
 		}
 
 		renderer.render( scene, camera );
+	}
+
+
+
+	// DETERMINE MOUSE POSITION
+	function onDocumentMouseMove( event ) {
+		mousePos.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+		mousePos.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 	}
 
 
