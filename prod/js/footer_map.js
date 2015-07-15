@@ -18,7 +18,7 @@ $(document).ready(function() {
 	// CONTROLS VARIABLES
 	var controls,
 		projector,
-		intersected;
+		INTERSECTED;
 	var objectHover = false;
 	var mousePos = {
 			x: 0,
@@ -476,8 +476,12 @@ $(document).ready(function() {
 		requestAnimationFrame( animate );
 
 		render();
+		update();
 	}
 	function render() {
+		renderer.render( scene, camera );
+	}
+	function update() {
 		clockDelta = clock.getDelta();
 		time = Date.now() * 0.00005;
 
@@ -497,12 +501,13 @@ $(document).ready(function() {
 			singlePlanet.rotation.y = ( time / 24) * singlePlanet.rotation_period;
 		}
 
+		// FIND INTERSECTIONS
+		findIntersection();
+
 		// ONLY UPDATE CONTROLS IF NOT HOVERING
 		if (!objectHover) {
 			controls.update( clock.getDelta() );
 		}
-
-		renderer.render( scene, camera );
 	}
 
 
@@ -511,6 +516,35 @@ $(document).ready(function() {
 	function onDocumentMouseMove( event ) {
 		mousePos.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mousePos.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	}
+
+
+
+	// DETERMINE INTERSECTIONS
+	function findIntersection() {
+		// RAY INTO SCENE
+		var vector = new THREE.Vector3( mousePos.x, mousePos.y, 1 );
+		// projector.unprojectVector( vector, camera );
+		vector.unproject( camera );
+		var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+		// ARRAY OF ALL OBJECTS INTERSECTED
+		var intersects = ray.intersectObjects( planets );
+
+		// WHAT TO DO IF INTERSECTED
+		if ( intersects.length > 0 ) {
+			if ( intersects[0].object != INTERSECTED ) {
+
+				INTERSECTED = intersects[0].object;
+				document.body.style.cursor = 'pointer';
+
+				console.log( intersects[0].object.name );
+			}
+		}
+		else {
+			INTERSECTED = null;
+			document.body.style.cursor = 'auto';
+		}
 	}
 
 

@@ -102,7 +102,7 @@
 			"xpos": 4.6
 		},{
 			"name": "Trandosha",
-			"zpos": 1,
+			"zpos": 1.2,
 			"xpos": 2
 		},{
 			"name": "Socorro",
@@ -130,7 +130,7 @@
 			"xpos": 0.4
 		},{
 			"name": "Malastare",
-			"zpos": -1.9,
+			"zpos": -1.7,
 			"xpos": -4.8
 		},{
 			"name": "Dathomir",
