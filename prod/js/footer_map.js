@@ -215,10 +215,10 @@ $(document).ready(function() {
 		var list = [];
 
 		// MATH VARIABLES
-		var a = 2,
+		var a = 9,
 			b = 0.15;
-		var windings = 3.5;
-		var drift = 0.3;
+		var windings = 2;
+		var drift = 0.275;
 
 		// FUNCTION TO ADD PARTICLES TO GEOMETRY
 		function addStar(x, z) {
@@ -281,9 +281,9 @@ $(document).ready(function() {
 		}
 
 		// GENERATE INNER RING
-		for ( var i = 0; i < (starCount / 20); i++ ) {
+		for ( var i = 0; i < (starCount / 4); i++ ) {
 			var vec = {
-					x: Math.sRandom(1.5, 2.5),
+					x: Math.sRandom(6, 11),
 					z: 0
 				};
 			var angle = Math.sRandom(0, Math.PI * 2.5);
@@ -297,9 +297,9 @@ $(document).ready(function() {
 		}
 
 		// GENERATE INNER CIRCLE
-		for (var i = 0; i < (starCount / 20); i++) {
+		for (var i = 0; i < (starCount / 5); i++) {
 			var vec = {
-					x: Math.sRandom(0.001, 1.5),
+					x: Math.sRandom(0.001, 6),
 					z: 0
 				};
 			var angle = Math.sRandom(0, Math.PI * 2.5);
