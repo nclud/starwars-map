@@ -504,9 +504,14 @@ $(document).ready(function() {
 		// FIND INTERSECTIONS
 		findIntersection();
 
-		// ONLY UPDATE CONTROLS IF NOT HOVERING
-		if (!objectHover) {
-			controls.update( clock.getDelta() );
+		// CONTROLS UPDATE / PAUSE ON HOVER
+		controls.update( clock.getDelta() );
+
+		if ( objectHover ) {
+			controls.enabled = false;
+		}
+		else {
+			controls.enabled = true;
 		}
 	}
 
@@ -533,8 +538,9 @@ $(document).ready(function() {
 
 		// WHAT TO DO IF INTERSECTED
 		if ( intersects.length > 0 ) {
-			if ( intersects[0].object != INTERSECTED ) {
+			objectHover = true;
 
+			if ( intersects[0].object != INTERSECTED ) {
 				INTERSECTED = intersects[0].object;
 				document.body.style.cursor = 'pointer';
 
@@ -542,6 +548,8 @@ $(document).ready(function() {
 			}
 		}
 		else {
+			objectHover = false;
+
 			INTERSECTED = null;
 			document.body.style.cursor = 'auto';
 		}
