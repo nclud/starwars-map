@@ -494,7 +494,7 @@ $(document).ready(function() {
 		for ( planet = 0; planet < planets.length; planet ++ ) {
 			var singlePlanet = planets[planet];
 
-			singlePlanet.rotation.y = time * ( singlePlanet.rotation_period / 25 );
+			singlePlanet.rotation.y = ( time / 24) * singlePlanet.rotation_period;
 		}
 
 		// ONLY UPDATE CONTROLS IF NOT HOVERING
