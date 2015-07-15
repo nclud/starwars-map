@@ -126,7 +126,7 @@ $(document).ready(function() {
 
 
 		// CREATE STARFIELD
-		makeStars(1500, 450, 3);
+		makeStars(12, 450, 3);
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -140,10 +140,10 @@ $(document).ready(function() {
 
 
 	// STARFIELD PARTICLE FUNCTION
-	function makeStars(initialStarDistance, numStars, numStarFields) {
+	function makeStars(initialGridDistance, numStars, numStarFields) {
 		for ( fields = 0; fields < numStarFields; fields ++ ) {
 
-			var starDistance = initialStarDistance + (fields * 250);
+			var starDistance = (initialGridDistance * gridMultiplier) + (fields * 250);
 			var starMaterial = [],
 				starParticleSystem = [];
 
