@@ -7,9 +7,9 @@ $(document).ready(function() {
 		renderer,
 		globalLight;
 	var camera,
+		initialCameraPos,
 		focalPoint;
 	var controls;
-	var clock = new THREE.Clock();
 	var gridMultiplier = 150;
 
 	// DATA GLOBAL VARIABLES
@@ -22,6 +22,11 @@ $(document).ready(function() {
 	// OBJECT GLOBAL VARIABLES
 	var starfield = [];
 	var galaxy;
+
+	// MOTION VARIABLES
+	var clock = new THREE.Clock();
+	var time,
+		clockDelta;
 
 
 
@@ -50,18 +55,17 @@ $(document).ready(function() {
 			d = 500;
 		// camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 0, 4000 );
 		camera = new THREE.PerspectiveCamera( 60, aspect, 1, 3000 );
-		camera.position.set(
+		focalPoint = new THREE.Vector3(
+			0.5 * gridMultiplier,
+			0 * gridMultiplier,
+			-1.5 * gridMultiplier
+		);
+		initialCameraPos = new THREE.Vector3(
 			0,
 			d + (gridMultiplier / 2),
 			d - gridMultiplier
 		);
-
-		focalPoint = new THREE.Vector3(
-			(0.5 * gridMultiplier),
-			(0 * gridMultiplier),
-			(-1.5 * gridMultiplier)
-		);
-
+		camera.position.set( initialCameraPos.x, initialCameraPos.y, initialCameraPos.z );
 		camera.lookAt( focalPoint );
 
 
@@ -216,7 +220,7 @@ $(document).ready(function() {
 
 		// MATH VARIABLES
 		var a = 9,
-			b = 0.15;
+			b = 0.16;
 		var windings = 2;
 		var drift = 0.275;
 
@@ -281,7 +285,7 @@ $(document).ready(function() {
 		}
 
 		// GENERATE INNER RING
-		for ( var i = 0; i < (starCount / 4); i++ ) {
+		for ( var i = 0; i < (starCount / 5); i++ ) {
 			var vec = {
 					x: Math.sRandom(6, 11),
 					z: 0
@@ -299,7 +303,7 @@ $(document).ready(function() {
 		// GENERATE INNER CIRCLE
 		for (var i = 0; i < (starCount / 5); i++) {
 			var vec = {
-					x: Math.sRandom(0.001, 6),
+					x: Math.sRandom(0.1, 6.1),
 					z: 0
 				};
 			var angle = Math.sRandom(0, Math.PI * 2.5);
@@ -315,14 +319,14 @@ $(document).ready(function() {
 		// POINT CLOUD ADDITIONS
 		var material = new THREE.PointCloudMaterial({
 		      color: 0x0069ff,
-		      size: 3
+		      size: 2
 		});
 
 		galaxy = new THREE.PointCloud( geometry, material );
 		galaxy.position.set(
-			(0.5 * gridMultiplier),
+			(0.25 * gridMultiplier),
 			(0 * gridMultiplier),
-			(-1.5 * gridMultiplier)
+			(-2 * gridMultiplier)
 		);
 
 		for (var i = 0; i < list.length; i++) {
@@ -458,7 +462,8 @@ $(document).ready(function() {
 		render();
 	}
 	function render() {
-		var time = Date.now() * 0.00005;
+		clockDelta = clock.getDelta();
+		time = Date.now() * 0.00005;
 
 		for ( fields = 0; fields < starfield.length; fields ++ ) {
 			var divisor = (fields + 1);
