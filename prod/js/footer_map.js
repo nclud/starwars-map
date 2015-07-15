@@ -10,7 +10,6 @@ $(document).ready(function() {
 		focalPoint;
 	var controls;
 	var clock = new THREE.Clock();
-	var starfield = [];
 	var gridMultiplier = 150;
 
 	// DATA GLOBAL VARIABLES
@@ -19,6 +18,10 @@ $(document).ready(function() {
 
 	// CHECK IF CURRENTLY HOVERING OBJECT FOR CAMERA CONTROLS
 	var objectHover = false;
+
+	// OBJECT GLOBAL VARIABLES
+	var starfield = [];
+	var galaxy;
 
 
 
@@ -116,6 +119,7 @@ $(document).ready(function() {
 			antialias: true
 		});
 		renderer.setPixelRatio( window.devicePixelRatio );
+		renderer.setClearColor( 0x000000 );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
 		container.appendChild( renderer.domElement );
@@ -127,6 +131,11 @@ $(document).ready(function() {
 
 		// CREATE STARFIELD
 		makeStars(12, 450, 3);
+
+
+		// CREATE GALAXY
+		makeGalaxy(20000);
+
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -173,7 +182,7 @@ $(document).ready(function() {
 		               // z * starDistance
 		            );
 
-		            starParticles.vertices.push(starParticle);
+		            starParticles.vertices.push( starParticle );
 		        }
 
 		        // SPRITES AND SHADING
@@ -200,6 +209,131 @@ $(document).ready(function() {
 
 
 
+	// GALAXY PARTICLE FUNCTION
+	function makeGalaxy(starCount) {
+		var geometry = new THREE.Geometry();
+		var list = [];
+
+		// MATH VARIABLES
+		var a = 2,
+			b = 0.15;
+		var windings = 3.5;
+		var drift = 0.3;
+
+		// FUNCTION TO ADD PARTICLES TO GEOMETRY
+		function addStar(x, z) {
+		    var v = new THREE.Vector3();
+		    v.x = x * 10;
+		    v.z = z * 10;
+
+		    geometry.vertices.push(v);
+		}
+
+		// FUNCTION TO ROTATE
+        function rotate(dir, angle) {
+            var vecRes = {
+            	x: 0,
+            	z: 0
+            };
+
+            vecRes.x = dir.x * Math.cos(angle) - dir.z * Math.sin(angle);
+            vecRes.z = dir.x * Math.sin(angle) + dir.z * Math.cos(angle);
+
+            return vecRes;
+        }
+
+        // FUNCTION FOR RANDOM MATH
+        Math.seed = 10;
+		Math.sRandom = function (max, min) {
+		    max = max || 1;
+		    min = min || 0;
+
+		    Math.seed = (Math.seed * 9301 + 49297) % 233280;
+		    var rnd = Math.seed / 233280;
+
+		    return min + rnd * (max - min);
+		};
+
+		// LOGARITHMIC SPIRAL EQUATION
+		var tMax = 2.5 * Math.PI * windings;
+
+		for ( var i = 0; i < starCount; i++ ) {
+			var t = tMax * Math.random();
+
+			var x = a * Math.exp(b * t) * Math.cos(t);
+			x = x + (drift * x * Math.random()) - (drift * x * Math.random());
+
+			var z = a * Math.exp(b * t) * Math.sin(t);
+			z = z + (drift * z * Math.random()) - (drift * z * Math.random());
+
+			if (Math.random() > 0.5) {
+				list.push({
+					vecX: x,
+					vecZ: z
+				});
+			}
+			else {
+				list.push({
+					vecX: -x,
+					vecZ: -z
+				});
+			}
+		}
+
+		// GENERATE INNER RING
+		for ( var i = 0; i < (starCount / 20); i++ ) {
+			var vec = {
+					x: Math.sRandom(1.5, 2.5),
+					z: 0
+				};
+			var angle = Math.sRandom(0, Math.PI * 2.5);
+
+			vec = rotate(vec, angle);
+
+			list.push({
+				vecX: vec.x,
+				vecZ: vec.z
+			});
+		}
+
+		// GENERATE INNER CIRCLE
+		for (var i = 0; i < (starCount / 20); i++) {
+			var vec = {
+					x: Math.sRandom(0.001, 1.5),
+					z: 0
+				};
+			var angle = Math.sRandom(0, Math.PI * 2.5);
+
+			vec = rotate(vec, angle);
+
+			list.push({
+				vecX: vec.x,
+				vecZ: vec.z
+			});
+		}
+
+		// POINT CLOUD ADDITIONS
+		var material = new THREE.PointCloudMaterial({
+		      color: 0x0069ff,
+		      size: 3
+		});
+
+		galaxy = new THREE.PointCloud( geometry, material );
+		galaxy.position.set(
+			(0.5 * gridMultiplier),
+			(0 * gridMultiplier),
+			(-1.5 * gridMultiplier)
+		);
+
+		for (var i = 0; i < list.length; i++) {
+			addStar(list[i].vecX, list[i].vecZ);
+		}
+
+		scene.add( galaxy );
+	}
+
+
+
 	// GET PLANET DATA
 	getPlanetData();
 
@@ -216,7 +350,7 @@ $(document).ready(function() {
 			});
 
 		// SWAPI LOOP REQUEST
-		var planetRequestLoop = function() {
+		function planetRequestLoop() {
 			var pages = 7;
 
 			for ( i = 1; i < (pages + 1); i ++ ) {
@@ -244,7 +378,7 @@ $(document).ready(function() {
 		}
 
 		// COMPLETED SWAPI PULL
-		var planetRequestComplete = function() {
+		function planetRequestComplete() {
 			for ( i = 0; i < planetData.length; i ++ ) {
 
 				// GIVE GENERAL DIAMETER & ROTATION IF MISSING
@@ -277,7 +411,7 @@ $(document).ready(function() {
 			}
 
 			// console.log( localPlanetData );
-			console.log( planetData );
+			// console.log( planetData );
 
 			// ADD PLANETS
 			makePlanets();
