@@ -1,48 +1,48 @@
+// GENERAL VARIABLES
+var container;
+var scene,
+	renderer;
+
+// MAP VARIABLES
+var gridMultiplier = 150;
+
+// DATA GLOBAL VARIABLES
+var planetData = [],
+	localPlanetData = [];
+
+// CAMERA VARIABLES
+var camera,
+	initialCameraPos,
+	focalPoint;
+
+// CONTROLS VARIABLES
+var controls,
+	projector,
+	INTERSECTED;
+var objectHover = false;
+var mousePos = {
+		x: -1000,
+		y: -1000
+	};
+
+// OBJECT VARIABLES
+var starfield = [],
+	planets = [];
+var galaxy;
+var planetsLoaded = false;
+
+// LIGHT GLOBAL VARIABLES
+var globalLight,
+	planetSpotlight = [];
+
+// MOTION VARIABLES
+var clock = new THREE.Clock();
+var time,
+	clockDelta;
+
+
+		
 $(document).ready(function() {
-
-	// GENERAL VARIABLES
-	var container;
-	var scene,
-		renderer;
-
-	// MAP VARIABLES
-	var gridMultiplier = 150;
-
-	// DATA GLOBAL VARIABLES
-	var planetData = [],
-		localPlanetData = [];
-
-	// CAMERA VARIABLES
-	var camera,
-		initialCameraPos,
-		focalPoint;
-
-	// CONTROLS VARIABLES
-	var controls,
-		projector,
-		INTERSECTED;
-	var objectHover = false;
-	var mousePos = {
-			x: -1000,
-			y: -1000
-		};
-
-	// OBJECT VARIABLES
-	var starfield = [],
-		planets = [];
-	var galaxy;
-	var planetsLoaded = false;
-
-	// LIGHT GLOBAL VARIABLES
-	var globalLight,
-		planetSpotlight = [];
-
-	// MOTION VARIABLES
-	var clock = new THREE.Clock();
-	var time,
-		clockDelta;
-
-
 
 	// INITIATE OVERALL THREE.JS SCENE
 	init();
@@ -550,7 +550,7 @@ $(document).ready(function() {
 
 				// ADD PLANET SPOTLIGHT
 				// console.log( INTERSECTED.position.x, INTERSECTED.position.z );
-				planetHoverLight( INTERSECTED );
+				// planetHoverLight( INTERSECTED );
 			}
 		}
 		else {
