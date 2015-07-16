@@ -148,7 +148,7 @@ $(document).ready(function() {
 
 
 		// CREATE GALAXY
-		makeGalaxy(20000);
+		makeGalaxy(15000);
 
 
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
@@ -315,7 +315,7 @@ $(document).ready(function() {
 		}
 
 		// GENERATE INNER CIRCLE
-		for (var i = 0; i < (starCount / 4); i++) {
+		for (var i = 0; i < (starCount / 4.5); i++) {
 			var vec = {
 					x: Math.sRandom(0.1, (a + 3) / 2),
 					z: 0
