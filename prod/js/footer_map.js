@@ -41,7 +41,7 @@ var time,
 	clockDelta;
 
 
-		
+
 $(document).ready(function() {
 
 	// INITIATE OVERALL THREE.JS SCENE
@@ -352,7 +352,19 @@ $(document).ready(function() {
 
 
 	// GET PLANET DATA
-	getPlanetData();
+	var workerLocalPlanets = new Worker('/js/workers/worker_json.js');
+
+	workerLocalPlanets.postMessage({
+		'cmd': 'start',
+		'pages': 7
+	});
+	workerLocalPlanets.addEventListener( 'message', function(e) {
+		// localPlanetData = e.data;
+		console.log( e.data );
+	}, false);
+
+
+	// getPlanetData();
 
 	function getPlanetData() {
 		// LOCAL REQUEST
@@ -427,11 +439,11 @@ $(document).ready(function() {
 
 			}
 
-			// console.log( localPlanetData );
+			console.log( localPlanetData );
 			// console.log( planetData );
 
 			// ADD PLANETS
-			makePlanets();
+			// makePlanets();
 		}
 
 		planetRequestLoop();
