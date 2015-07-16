@@ -6,34 +6,12 @@ var workerLocalPlanets = [],
 	workerRemotePlanets = [];
 
 function getLocalPlanetData() {
-	// var localRequest = new XMLHttpRequest();
-
-	// localRequest.open( 'GET', '/data/planets.json', true );
-	// localRequest.send();
-
-	// localRequest.onreadystatechange = function(){
-	// 	if ( localRequest.readyState == 4 && localRequest.status == 200 ) {
-	// 		var responseLocal = JSON.parse( localRequest.responseText );
-
-	// 		for ( i = 1; i < responseLocal.planets.length; i ++ ) {
-	// 			// console.log( responseLocal.planets[i] );
-	// 			workerLocalPlanets.push( responseLocal.planets[i] );
-	// 		}
-
-	// 		// postMessage( workerLocalPlanets );
-	// 	}
-	// 	else if ( localRequest.status != 200 ) {
-	// 		console.log('Local JSON error');
-	// 	}
-	// }
-
-	oboe('/data/planets.json')
+	oboe( '/data/planets.json' )
 		.node('planets.*', function( planet ){
 			workerLocalPlanets.push( planet );
 		})
 		.done(function( data ) {
 			// we got it
-			console.log( workerLocalPlanets );
 		})
 		.fail(function() {
 			console.log('Local JSON error.');
@@ -42,45 +20,19 @@ function getLocalPlanetData() {
 
 function getRemotePlanetData() {
 	for ( i = 1; i < (pages + 1); i ++ ) {
-		var remoteRequest = new XMLHttpRequest();
+		console.log(i);
 
-		remoteRequest.open( 'GET', '//swapi.co/api/planets/?page=' + i, true );
-		remoteRequest.send();
-
-		remoteRequest.onreadystatechange = function(){
-			if ( remoteRequest.readyState == 4 && remoteRequest.status == 200 ) {
-				console.log( remoteRequest.responseText );
-			}
-			else if ( remoteRequest.status != 200 ) {
-				console.log('SWAPI JSON error on page ' + i);
-			}
-		}
+		oboe( '//swapi.co/api/planets/?page=' + i )
+			.node('results.*', function( planet ){
+				workerRemotePlanets.push( planet );
+			})
+			.done(function( data ) {
+				// we got it
+			})
+			.fail(function() {
+				console.log('Remote SWAPI JSON error.');
+			});
 	}
-
-	// var pages = 7;
-
-	// for ( i = 1; i < (pages + 1); i ++ ) {
-	// 	// console.log(i);
-
-	// 	var planetRequest = $.getJSON( '//swapi.co/api/planets/?page=' + i, function( data ) {
-	// 			// console.log('SWAPI success');
-	// 			$.each( data.results, function( key, value ) {
-	// 				// ONLY STORE PLANETS WITH FILM ASSOCIATIONS
-	// 				// if ( value.films.length > 0 ) {
-	// 					planetData.push( value );
-	// 				// }
-	// 			});
-	// 		})
-	// 		.fail(function() {
-	// 			console.log('SWAPI error');
-	// 		});
-
-	// 	if ( pages === i ) {
-	// 		planetRequest.done(function(){
-	// 			planetRequestComplete();
-	// 		});
-	// 	}
-	// }
 }
 
 
@@ -92,7 +44,7 @@ self.addEventListener( 'message', function( e ) {
 			pages = data.pages;
 
 			getLocalPlanetData();
-			// getRemotePlanetData();
+			getRemotePlanetData();
 
 			break;
 
