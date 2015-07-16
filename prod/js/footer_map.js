@@ -6,9 +6,8 @@ var scene,
 // MAP VARIABLES
 var gridMultiplier = 150;
 
-// DATA GLOBAL VARIABLES
-var planetData = [],
-	localPlanetData = [];
+// PLANET GLOBAL VARIABLES
+var planetData = [];
 
 // CAMERA VARIABLES
 var camera,
@@ -359,96 +358,9 @@ $(document).ready(function() {
 		'pages': 7
 	});
 	workerLocalPlanets.addEventListener( 'message', function(e) {
-		// localPlanetData = e.data;
-		console.log( e.data );
+		planetData = e.data;
+		console.log( planetData );
 	}, false);
-
-
-	// getPlanetData();
-
-	function getPlanetData() {
-		// LOCAL REQUEST
-		var localRequest = $.getJSON( '/data/planets.json', function( data ) {
-				// console.log('local success');
-				$.each( data.planets, function( key, value ) {
-					localPlanetData.push( value );
-				});
-			})
-			.fail(function() {
-				console.log('local error');
-			});
-
-		// SWAPI LOOP REQUEST
-		function planetRequestLoop() {
-			var pages = 7;
-
-			for ( i = 1; i < (pages + 1); i ++ ) {
-				// console.log(i);
-
-				var planetRequest = $.getJSON( '//swapi.co/api/planets/?page=' + i, function( data ) {
-						// console.log('SWAPI success');
-						$.each( data.results, function( key, value ) {
-							// ONLY STORE PLANETS WITH FILM ASSOCIATIONS
-							// if ( value.films.length > 0 ) {
-								planetData.push( value );
-							// }
-						});
-					})
-					.fail(function() {
-						console.log('SWAPI error');
-					});
-
-				if ( pages === i ) {
-					planetRequest.done(function(){
-						planetRequestComplete();
-					});
-				}
-			}
-		}
-
-		// COMPLETED SWAPI PULL
-		function planetRequestComplete() {
-			for ( i = 0; i < planetData.length; i ++ ) {
-
-				// GIVE GENERAL DIAMETER & ROTATION IF MISSING
-				if ( planetData[i].diameter === 'unknown' || planetData[i].diameter === '0' ) {
-					planetData[i].diameter = 10000;
-				}
-				if ( planetData[i].rotation_period === 'unknown' || planetData[i].rotation_period === '0' ) {
-					planetData[i].rotation_period = 24;
-				}
-
-				// CHANGE DIAMETER & ORBIT TO NUMBERS FROM STRINGS
-				var numberDiameter = parseInt( planetData[i].diameter );
-				planetData[i].diameter = numberDiameter;
-				var numberOrbit = parseInt(planetData[i].rotation_period);
-				planetData[i].rotation_period = numberOrbit;
-
-				// SHRINK LARGE PLANETS
-				if ( planetData[i].diameter > 100000 ) {
-					planetData[i].diameter = numberDiameter / 5;
-				}
-
-				// ADD X & Z POSITION TO PLANET DATA
-				for ( x = 0; x < localPlanetData.length; x ++ ) {
-					if ( localPlanetData[x].name == planetData[i].name ) {
-						planetData[i].xpos = localPlanetData[x].xpos;
-						planetData[i].zpos = localPlanetData[x].zpos;
-					}
-				}
-
-			}
-
-			console.log( localPlanetData );
-			// console.log( planetData );
-
-			// ADD PLANETS
-			// makePlanets();
-		}
-
-		planetRequestLoop();
-
-	}
 
 
 

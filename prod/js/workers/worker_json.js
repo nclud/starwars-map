@@ -72,7 +72,8 @@ function planetRequestComplete() {
 		}
 	}
 
-	console.log(workerRemotePlanets);
+	// console.log(workerRemotePlanets);
+	postMessage( workerRemotePlanets );
 }
 
 
