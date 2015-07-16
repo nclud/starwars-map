@@ -359,7 +359,9 @@ $(document).ready(function() {
 	});
 	workerLocalPlanets.addEventListener( 'message', function(e) {
 		planetData = e.data;
-		console.log( planetData );
+		// console.log( planetData );
+
+		makePlanets();
 	}, false);
 
 
