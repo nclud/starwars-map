@@ -66,7 +66,7 @@
 			"xpos": 5.7
 		},{
 			"name": "Cato Neimoidia",
-			"zpos": -1.8,
+			"zpos": -1.6,
 			"xpos": 0.6
 		},{
 			"name": "Saleucami",
@@ -178,8 +178,8 @@
 			"xpos": -0.5
 		},{
 			"name": "Iktotch",
-			"zpos": -2,
-			"xpos": -0.4
+			"zpos": -0.5,
+			"xpos": -2
 		},{
 			"name": "Quermia",
 			"zpos": 3.9,

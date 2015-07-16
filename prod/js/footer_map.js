@@ -148,7 +148,7 @@ $(document).ready(function() {
 
 
 		// CREATE GALAXY
-		// makeGalaxy(20000);
+		makeGalaxy(20000);
 
 
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
@@ -233,9 +233,9 @@ $(document).ready(function() {
 		var list = [];
 
 		// MATH VARIABLES
-		var a = 9,
-			b = 0.16;
-		var windings = 2;
+		var a = 12.5,
+			b = 0.2;
+		var windings = 1.5;
 		var drift = 0.275;
 
 		// FUNCTION TO ADD PARTICLES TO GEOMETRY
@@ -299,9 +299,9 @@ $(document).ready(function() {
 		}
 
 		// GENERATE INNER RING
-		for ( var i = 0; i < (starCount / 5); i++ ) {
+		for ( var i = 0; i < (starCount / 3); i++ ) {
 			var vec = {
-					x: Math.sRandom(6, 11),
+					x: Math.sRandom((a + 3) / 2, a + 3),
 					z: 0
 				};
 			var angle = Math.sRandom(0, Math.PI * 2.5);
@@ -315,9 +315,9 @@ $(document).ready(function() {
 		}
 
 		// GENERATE INNER CIRCLE
-		for (var i = 0; i < (starCount / 5); i++) {
+		for (var i = 0; i < (starCount / 4); i++) {
 			var vec = {
-					x: Math.sRandom(0.1, 6.1),
+					x: Math.sRandom(0.1, (a + 3) / 2),
 					z: 0
 				};
 			var angle = Math.sRandom(0, Math.PI * 2.5);
@@ -338,9 +338,9 @@ $(document).ready(function() {
 
 		galaxy = new THREE.PointCloud( geometry, material );
 		galaxy.position.set(
-			(0.25 * gridMultiplier),
+			(0.75 * gridMultiplier),
 			(0 * gridMultiplier),
-			(-2 * gridMultiplier)
+			(-3.25 * gridMultiplier)
 		);
 
 		for (var i = 0; i < list.length; i++) {
