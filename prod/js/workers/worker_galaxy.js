@@ -50,14 +50,14 @@ function makeGalaxy( starCount ) {
 		if (Math.random() > 0.5) {
 			list.push({
 				vecX: x,
-				vecY: randomRange(-15, 15),
+				vecY: randomRange(-10, 10),
 				vecZ: z
 			});
 		}
 		else {
 			list.push({
 				vecX: -x,
-				vecY: randomRange(-15, 15),
+				vecY: randomRange(-10, 10),
 				vecZ: -z
 			});
 		}
@@ -76,15 +76,15 @@ function makeGalaxy( starCount ) {
 
 		list.push({
 			vecX: vec.x,
-			vecY: randomRange(-17, 17),
+			vecY: randomRange(-15, 15),
 			vecZ: vec.z
 		});
 	}
 
 	// GENERATE INNER CIRCLE
-	for (var i = 0; i < (starCount / 4.5); i++) {
+	for (var i = 0; i < (starCount / 4); i++) {
 		var vec = {
-				x: Math.sRandom(0.1, (a + 3) / 2),
+				x: Math.sRandom(0.1, ((a + 3) / 2) + 0.5),
 				y: 0,
 				z: 0
 			};

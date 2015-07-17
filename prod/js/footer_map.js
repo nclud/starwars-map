@@ -145,16 +145,16 @@ $(document).ready(function() {
 		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 
-		// GET & MAKE PLANETS
-		// getPlanets();
-
-
 		// CREATE STARFIELD
 		makeStars( 12, 450, 3 );
 
 
 		// CREATE GALAXY
 		getGalaxy( 15000 );
+
+
+		// GET & MAKE PLANETS
+		// getPlanets();
 
 
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
@@ -201,9 +201,6 @@ $(document).ready(function() {
 		               (x * starDistance) + randomRange(0, 50),
 		               (y * starDistance) + randomRange(0, 50),
 		               (z * starDistance) + randomRange(0, 50)
-		               // x * starDistance,
-		               // y * starDistance,
-		               // z * starDistance
 		            );
 
 		            starParticles.vertices.push( starParticle );
@@ -251,7 +248,10 @@ $(document).ready(function() {
 
 	function makeGalaxy( data ) {
 		var geometry,
+			texture,
 			material;
+		var attributes,
+			uniforms;
 
 		// FUNCTION TO ADD PARTICLES TO GEOMETRY
 		function addStar( x, y, z ) {
@@ -265,9 +265,20 @@ $(document).ready(function() {
 
 		// ADDING PARTICLES
 		geometry = new THREE.Geometry();
+
+		texture = THREE.ImageUtils.loadTexture( '/img/test/particle4B.png' );
+		texture.minFilter = THREE.LinearFilter;
+
 		material = new THREE.PointCloudMaterial({
-		      color: 0x0069ff,
-		      size: 2
+		    // color: 0x0069ff,
+		    color: 0xa9ccff,
+		    map: texture,
+		    size: 15,
+			blending: THREE.AdditiveBlending,
+			opacity: 0.75,
+			alphaTest: 0.1,
+			transparent: true,
+			fog: false
 		});
 
 		galaxy = new THREE.PointCloud( geometry, material );
