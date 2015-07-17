@@ -41,26 +41,32 @@
 </main>
 
 <script type="x-shader/x-vertex" id="galaxyvertex">
+	uniform float time;
+	uniform vec3 color;
+
 	attribute float customSize;
+	attribute float customFrequency;
+
 	varying vec3 vColor;
 
 	void main() {
-		vColor = vec3(0.5, 0.5, 1.0); // set RGB color associated to vertex; use later in fragment shader.
+		vColor = color;
+		// vColor = vec3(0.5, 0.5, 1.0); // set RGB color associated to vertex; use later in fragment shader.
 		vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-		// option (1): draw particles at constant size on screen
-		// gl_PointSize = size;
 	    // option (2): scale particles as objects in 3D space
 		gl_PointSize = customSize * ( 300.0 / length( mvPosition.xyz ) );
+		// gl_PointSize = (1.0 + sin( customFrequency * time )) * 50.0 * ( 300.0 / length( mvPosition.xyz ) );
 		gl_Position = projectionMatrix * mvPosition;
 	}
 </script>
 <script type="x-shader/x-fragment" id="galaxyfragment">
 	uniform sampler2D texture;
-	varying vec3 vColor; // colors associated to vertices; assigned by vertex shader
+
+	varying vec3 vColor;
 
 	void main() {
 		// calculates a color for the particle
-		gl_FragColor = vec4( vColor, 1.0 );
+		gl_FragColor = vec4( vColor, 0.9 );
 		// sets a white particle texture to desired color
 		gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
 	}

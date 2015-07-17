@@ -66,7 +66,7 @@ function makeGalaxy( starCount ) {
 	// GENERATE INNER RING
 	for ( var i = 0; i < (starCount / 3); i++ ) {
 		var vec = {
-				x: Math.sRandom((a + 3) / 2, a + 3),
+				x: Math.sRandom((a + 5) / 2, a + 4),
 				y: 0,
 				z: 0
 			};
@@ -76,15 +76,15 @@ function makeGalaxy( starCount ) {
 
 		list.push({
 			vecX: vec.x,
-			vecY: randomRange(-15, 15),
+			vecY: randomRange(-18, 18),
 			vecZ: vec.z
 		});
 	}
 
 	// GENERATE INNER CIRCLE
-	for (var i = 0; i < (starCount / 4); i++) {
+	for (var i = 0; i < (starCount / 5); i++) {
 		var vec = {
-				x: Math.sRandom(0.1, ((a + 3) / 2) + 0.5),
+				x: Math.sRandom(0.1, (a + 5) / 2),
 				y: 0,
 				z: 0
 			};
@@ -94,7 +94,7 @@ function makeGalaxy( starCount ) {
 
 		list.push({
 			vecX: vec.x,
-			vecY: randomRange(-20, 20),
+			vecY: randomRange(-25, 25),
 			vecZ: vec.z
 		});
 	}

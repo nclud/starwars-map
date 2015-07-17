@@ -33,6 +33,8 @@ var mousePos = {
 var starfield = [],
 	planets = [];
 var galaxy;
+var galaxyUniforms,
+	galaxyAttributes;
 var planetsLoaded = false;
 
 // LIGHT GLOBAL VARIABLES
@@ -69,7 +71,7 @@ $(document).ready(function() {
 		// INITIAL CAMERA POSITIONING
 		var aspect = window.innerWidth / window.innerHeight,
 			d = 500;
-		camera = new THREE.PerspectiveCamera( 60, aspect, 1, 3000 );
+		camera = new THREE.PerspectiveCamera( 60, aspect, 1, 2500 );
 		focalPoint = new THREE.Vector3(
 			0.5 * gridMultiplier,
 			0 * gridMultiplier,
@@ -155,11 +157,11 @@ $(document).ready(function() {
 
 
 		// CREATE GALAXY
-		getGalaxy( 15000 );
+		// getGalaxy( 15000 );
 
 
 		// GET & MAKE PLANETS
-		// getPlanets();
+		getPlanets();
 
 
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
@@ -263,8 +265,6 @@ $(document).ready(function() {
 		var geometry,
 			texture,
 			material;
-		var attributes,
-			uniforms;
 
 		// FUNCTION TO ADD PARTICLES TO GEOMETRY
 		function addStar( x, y, z ) {
@@ -283,7 +283,7 @@ $(document).ready(function() {
 			addStar( data[i].vecX, data[i].vecY, data[i].vecZ );
 		}
 
-		texture = THREE.ImageUtils.loadTexture( '/img/test/particle.png' );
+		texture = THREE.ImageUtils.loadTexture( '/img/test/particle4B.png' );
 		texture.minFilter = THREE.LinearFilter;
 
 		// material = new THREE.PointCloudMaterial({
@@ -298,30 +298,33 @@ $(document).ready(function() {
 		// 	fog: false
 		// });
 
-		uniforms = {
-			texture: 		{ type: 't', value: texture }
+		galaxyUniforms = {
+			texture: 		{ type: 't', value: texture },
+			time: 			{ type: 'f', value: 1.0 },
+			color: 			{ type: 'c', value: new THREE.Color(0x70abff) }
 		}
-		attributes = {
+		galaxyAttributes = {
 			customSize: 	{ type: 'f', value: [] }
+			// customFrequency:{ type: 'f', value: [] },
+			// customOpacity: 	{ type: 'f', value: [] }
 		}
 
 		for ( var s = 0; s < geometry.vertices.length; s++ ) {
-			var randomSize = Math.round(randomRange(45, 75));
+			var randomSize = Math.round(randomRange(65, 90));
 
-			attributes.customSize.value[s] = randomSize.toFixed(1);
+			galaxyAttributes.customSize.value[s] = randomSize.toFixed(1);
+			// galaxyAttributes.customFrequency.value[s] = 0.5 * Math.random() + 0.5;
 		}
 
 		material = new THREE.ShaderMaterial({
-			uniforms: 		uniforms,
-			attributes: 	attributes,
+			uniforms: 		galaxyUniforms,
+			attributes: 	galaxyAttributes,
 			vertexShader:   document.getElementById('galaxyvertex').textContent,
 			fragmentShader: document.getElementById('galaxyfragment').textContent,
 			transparent: 	true,
 			alphaTest: 		0.5,  // if having transparency issues, try including: alphaTest: 0.5,
 			blending: 		THREE.AdditiveBlending,
 			depthTest: 		false
-			// I guess you don't need to do a depth test if you are alpha blending?
-			//
 		});
 
 		galaxy = new THREE.PointCloud( geometry, material );
@@ -355,7 +358,8 @@ $(document).ready(function() {
 		// texture.repeat.set( 2, 2 );
 		var material = new THREE.MeshLambertMaterial({
 			map: texture,
-			side: THREE.DoubleSide
+			side: THREE.DoubleSide,
+			depthTest: true
 		});
 
 		for ( i = 0; i < planetData.length; i++ ) {
@@ -402,6 +406,10 @@ $(document).ready(function() {
 			singleField.rotation.y = time * (0.1 / divisor);
 		}
 
+		// GALAXY CHANGES
+		// var t = clock.getElapsedTime();
+		// galaxyUniforms.time.value = t;
+
 		// PLANET ROTATION
 		// for ( planet = 0; planet < planets.length; planet ++ ) {
 		// 	var singlePlanet = planets[planet];
@@ -410,9 +418,9 @@ $(document).ready(function() {
 		// }
 
 		// FIND INTERSECTIONS
-		if ( planetsLoaded ) {
-			findIntersection();
-		}
+		// if ( planetsLoaded ) {
+		// 	findIntersection();
+		// }
 
 		// CONTROLS UPDATE / PAUSE ON HOVER
 		controls.update( clock.getDelta() );
