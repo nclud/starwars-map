@@ -39,6 +39,10 @@ var clock = new THREE.Clock();
 var time,
 	clockDelta;
 
+// WORKERS
+var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
+	workerLocalPlanets = new Worker('/js/workers/worker_json.js');
+
 
 
 $(document).ready(function() {
@@ -103,7 +107,7 @@ $(document).ready(function() {
 		grid.rotation.order = 'YXZ';
 		grid.rotation.y = - Math.PI / 2;
 		grid.rotation.x = - Math.PI / 2;
-		scene.add( grid );
+		// scene.add( grid );
 
 
 		// ADDING CONTROLS & LIMITS
@@ -141,12 +145,16 @@ $(document).ready(function() {
 		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 
+		// GET & MAKE PLANETS
+		// getPlanets();
+
+
 		// CREATE STARFIELD
-		makeStars(12, 450, 3);
+		makeStars( 12, 450, 3 );
 
 
 		// CREATE GALAXY
-		// makeGalaxy(15000);
+		getGalaxy( 15000 );
 
 
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
@@ -165,7 +173,7 @@ $(document).ready(function() {
 
 
 	// STARFIELD PARTICLE FUNCTION
-	function makeStars(initialGridDistance, numStars, numStarFields) {
+	function makeStars( initialGridDistance, numStars, numStarFields ) {
 		for ( fields = 0; fields < numStarFields; fields ++ ) {
 
 			var starDistance = (initialGridDistance * gridMultiplier) + (fields * 250);
@@ -226,110 +234,38 @@ $(document).ready(function() {
 
 
 	// GALAXY PARTICLE FUNCTION
-	function makeGalaxy(starCount) {
-		var geometry = new THREE.Geometry();
+	function getGalaxy( starCount ) {
 		var list = [];
 
-		// MATH VARIABLES
-		var a = 12.5,
-			b = 0.2;
-		var windings = 1.5;
-		var drift = 0.275;
+		workerGalaxy.postMessage({
+			'cmd': 'start',
+			'gridMultiplier': gridMultiplier,
+			'stars': starCount
+		});
+		workerGalaxy.addEventListener( 'message', function(e) {
+			list = e.data;
+
+			makeGalaxy( list );
+		}, false);
+	}
+
+	function makeGalaxy( data ) {
+		var geometry,
+			material;
 
 		// FUNCTION TO ADD PARTICLES TO GEOMETRY
-		function addStar(x, z) {
+		function addStar( x, y, z ) {
 		    var v = new THREE.Vector3();
 		    v.x = x * 10;
+		    v.y = y;
 		    v.z = z * 10;
 
 		    geometry.vertices.push(v);
 		}
 
-		// FUNCTION TO ROTATE
-        function rotate(dir, angle) {
-            var vecRes = {
-            	x: 0,
-            	z: 0
-            };
-
-            vecRes.x = dir.x * Math.cos(angle) - dir.z * Math.sin(angle);
-            vecRes.z = dir.x * Math.sin(angle) + dir.z * Math.cos(angle);
-
-            return vecRes;
-        }
-
-        // FUNCTION FOR RANDOM MATH
-        Math.seed = 10;
-		Math.sRandom = function (max, min) {
-		    max = max || 1;
-		    min = min || 0;
-
-		    Math.seed = (Math.seed * 9301 + 49297) % 233280;
-		    var rnd = Math.seed / 233280;
-
-		    return min + rnd * (max - min);
-		};
-
-		// LOGARITHMIC SPIRAL EQUATION
-		var tMax = 2.5 * Math.PI * windings;
-
-		for ( var i = 0; i < starCount; i++ ) {
-			var t = tMax * Math.random();
-
-			var x = a * Math.exp(b * t) * Math.cos(t);
-			x = x + (drift * x * Math.random()) - (drift * x * Math.random());
-
-			var z = a * Math.exp(b * t) * Math.sin(t);
-			z = z + (drift * z * Math.random()) - (drift * z * Math.random());
-
-			if (Math.random() > 0.5) {
-				list.push({
-					vecX: x,
-					vecZ: z
-				});
-			}
-			else {
-				list.push({
-					vecX: -x,
-					vecZ: -z
-				});
-			}
-		}
-
-		// GENERATE INNER RING
-		for ( var i = 0; i < (starCount / 3); i++ ) {
-			var vec = {
-					x: Math.sRandom((a + 3) / 2, a + 3),
-					z: 0
-				};
-			var angle = Math.sRandom(0, Math.PI * 2.5);
-
-			vec = rotate(vec, angle);
-
-			list.push({
-				vecX: vec.x,
-				vecZ: vec.z
-			});
-		}
-
-		// GENERATE INNER CIRCLE
-		for (var i = 0; i < (starCount / 4.5); i++) {
-			var vec = {
-					x: Math.sRandom(0.1, (a + 3) / 2),
-					z: 0
-				};
-			var angle = Math.sRandom(0, Math.PI * 2.5);
-
-			vec = rotate(vec, angle);
-
-			list.push({
-				vecX: vec.x,
-				vecZ: vec.z
-			});
-		}
-
-		// POINT CLOUD ADDITIONS
-		var material = new THREE.PointCloudMaterial({
+		// ADDING PARTICLES
+		geometry = new THREE.Geometry();
+		material = new THREE.PointCloudMaterial({
 		      color: 0x0069ff,
 		      size: 2
 		});
@@ -341,8 +277,8 @@ $(document).ready(function() {
 			(-3.25 * gridMultiplier)
 		);
 
-		for (var i = 0; i < list.length; i++) {
-			addStar(list[i].vecX, list[i].vecZ);
+		for ( var i = 0; i < data.length; i++ ) {
+			addStar( data[i].vecX, data[i].vecY, data[i].vecZ );
 		}
 
 		scene.add( galaxy );
@@ -350,23 +286,19 @@ $(document).ready(function() {
 
 
 
-	// GET PLANET DATA
-	var workerLocalPlanets = new Worker('/js/workers/worker_json.js');
+	// GET PLANET DATA & MAKE PLANETS
+	function getPlanets() {
+		workerLocalPlanets.postMessage({
+			'cmd': 'start',
+			'pages': 7
+		});
+		workerLocalPlanets.addEventListener( 'message', function(e) {
+			planetData = e.data;
 
-	workerLocalPlanets.postMessage({
-		'cmd': 'start',
-		'pages': 7
-	});
-	workerLocalPlanets.addEventListener( 'message', function(e) {
-		planetData = e.data;
-		// console.log( planetData );
+			makePlanets();
+		}, false);
+	}
 
-		makePlanets();
-	}, false);
-
-
-
-	// ADDING PLANETS BASED ON DATA
 	function makePlanets() {
 		var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
 		// texture.repeat.set( 2, 2 );
@@ -530,7 +462,7 @@ $(document).ready(function() {
 
 
 	// GENERAL FUNCTION TO GENERATE RANDOM NUMBER
-	function randomRange(min, max) {
+	function randomRange( min, max ) {
 		return Math.random() * (max - min) + min;
 	}
 
