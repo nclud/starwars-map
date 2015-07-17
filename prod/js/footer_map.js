@@ -1,3 +1,8 @@
+// STATS
+var stats;
+
+
+
 // GENERAL VARIABLES
 var container;
 var scene,
@@ -160,6 +165,14 @@ $(document).ready(function() {
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
 		projector = new THREE.Projector();
 
+
+
+		// STATS
+		stats = new Stats();
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.top = '0px';
+		container.appendChild( stats.domElement );
+
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -266,19 +279,49 @@ $(document).ready(function() {
 		// ADDING PARTICLES
 		geometry = new THREE.Geometry();
 
-		texture = THREE.ImageUtils.loadTexture( '/img/test/particle4B.png' );
+		for ( var i = 0; i < data.length; i++ ) {
+			addStar( data[i].vecX, data[i].vecY, data[i].vecZ );
+		}
+
+		texture = THREE.ImageUtils.loadTexture( '/img/test/particle.png' );
 		texture.minFilter = THREE.LinearFilter;
 
-		material = new THREE.PointCloudMaterial({
-		    // color: 0x0069ff,
-		    color: 0xa9ccff,
-		    map: texture,
-		    size: 15,
-			blending: THREE.AdditiveBlending,
-			opacity: 0.75,
-			alphaTest: 0.1,
-			transparent: true,
-			fog: false
+		// material = new THREE.PointCloudMaterial({
+		//     // color: 0x0069ff,
+		//     color: 0xa9ccff,
+		//     map: texture,
+		//     size: 15,
+		// 	blending: THREE.AdditiveBlending,
+		// 	opacity: 0.75,
+		// 	alphaTest: 0.1,
+		// 	transparent: true,
+		// 	fog: false
+		// });
+
+		uniforms = {
+			texture: 		{ type: 't', value: texture }
+		}
+		attributes = {
+			customSize: 	{ type: 'f', value: [] }
+		}
+
+		for ( var s = 0; s < geometry.vertices.length; s++ ) {
+			var randomSize = Math.round(randomRange(45, 75));
+
+			attributes.customSize.value[s] = randomSize.toFixed(1);
+		}
+
+		material = new THREE.ShaderMaterial({
+			uniforms: 		uniforms,
+			attributes: 	attributes,
+			vertexShader:   document.getElementById('galaxyvertex').textContent,
+			fragmentShader: document.getElementById('galaxyfragment').textContent,
+			transparent: 	true,
+			alphaTest: 		0.5,  // if having transparency issues, try including: alphaTest: 0.5,
+			blending: 		THREE.AdditiveBlending,
+			depthTest: 		false
+			// I guess you don't need to do a depth test if you are alpha blending?
+			//
 		});
 
 		galaxy = new THREE.PointCloud( geometry, material );
@@ -287,10 +330,7 @@ $(document).ready(function() {
 			(0 * gridMultiplier),
 			(-3.25 * gridMultiplier)
 		);
-
-		for ( var i = 0; i < data.length; i++ ) {
-			addStar( data[i].vecX, data[i].vecY, data[i].vecZ );
-		}
+		galaxy.sortParticles = true;
 
 		scene.add( galaxy );
 	}
@@ -383,6 +423,10 @@ $(document).ready(function() {
 		// else {
 		// 	controls.enabled = true;
 		// }
+
+
+		// STATS
+		stats.update();
 	}
 
 
