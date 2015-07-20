@@ -403,6 +403,10 @@ $(document).ready(function() {
 			findIntersection();
 		}
 
+		if ( outlineMesh ) {
+			outlineMaterial.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, outlineMesh.position );
+		}
+
 		// CONTROLS UPDATE / PAUSE ON HOVER
 		controls.update( clock.getDelta() );
 
@@ -434,10 +438,22 @@ $(document).ready(function() {
 		var intersects = raycaster.intersectObjects( planets );
 
 		// OUTLINE MATERIAL
-		outlineMaterial = new THREE.MeshBasicMaterial({
-			color: 0xb89e4e,
-			side: THREE.BackSide
+		outlineMaterial = new THREE.ShaderMaterial({
+			uniforms: {
+				c:   		{ type: 'f', value: 0.5 },
+				p:   		{ type: 'f', value: 7.5 },
+				glowColor: 	{ type: 'c', value: new THREE.Color(0x987d2a) },
+				viewVector: { type: 'v3', value: camera.position }
+			},
+			vertexShader:   document.getElementById( 'outlinevertex' ).textContent,
+			fragmentShader: document.getElementById( 'outlinefragment' ).textContent,
+			side: 			THREE.BackSide,
+			blending: 		THREE.AdditiveBlending,
+			transparent: 	true,
+			depthTest: 		true,
+			depthWrite: 	false
 		});
+
 
 		// ACTIONS ON INTERSECT
 		if ( intersects.length > 0 ) {
@@ -454,7 +470,7 @@ $(document).ready(function() {
 				scene.remove( outlineMesh );
 				outlineMesh = new THREE.Mesh( INTERSECTED.geometry, outlineMaterial );
 				outlineMesh.position.set( INTERSECTED.position.x, INTERSECTED.position.y, INTERSECTED.position.z );
-				outlineMesh.scale.multiplyScalar(1.175);
+				outlineMesh.scale.multiplyScalar(1.3);
 				scene.add( outlineMesh );
 			}
 		}
