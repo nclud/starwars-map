@@ -33,8 +33,6 @@ var mousePos = {
 var starfield = [],
 	planets = [];
 var galaxy;
-var galaxyUniforms,
-	galaxyAttributes;
 var planetsLoaded = false;
 
 // LIGHT GLOBAL VARIABLES
@@ -262,9 +260,10 @@ $(document).ready(function() {
 	}
 
 	function makeGalaxy( data ) {
-		var geometry,
-			texture,
-			material;
+		var galaxyGeometry,
+			galaxyUniforms,
+			galaxyAttributes,
+			galaxyMaterial;
 
 		// FUNCTION TO ADD PARTICLES TO GEOMETRY
 		function addStar( x, y, z ) {
@@ -273,65 +272,45 @@ $(document).ready(function() {
 		    v.y = y;
 		    v.z = z * 10;
 
-		    geometry.vertices.push(v);
+		    galaxyGeometry.vertices.push(v);
 		}
 
 		// ADDING PARTICLES
-		geometry = new THREE.Geometry();
+		galaxyGeometry = new THREE.Geometry();
 
 		for ( var i = 0; i < data.length; i++ ) {
 			addStar( data[i].vecX, data[i].vecY, data[i].vecZ );
 		}
 
-		texture = THREE.ImageUtils.loadTexture( '/img/test/particle4B.png' );
-		texture.minFilter = THREE.LinearFilter;
-
-		// material = new THREE.PointCloudMaterial({
-		//     // color: 0x0069ff,
-		//     color: 0xa9ccff,
-		//     map: texture,
-		//     size: 15,
-		// 	blending: THREE.AdditiveBlending,
-		// 	opacity: 0.75,
-		// 	alphaTest: 0.1,
-		// 	transparent: true,
-		// 	fog: false
-		// });
-
 		galaxyUniforms = {
-			// texture: 		{ type: 't', value: texture },
-			// time: 			{ type: 'f', value: 1.0 },
 			color: 			{ type: 'c', value: new THREE.Color(0x70abff) }
-			// border_size: 	{ type: 'f', value: 0.01 },
-			// disc_radius: 	{ type: 'f', value: 0.5 },
-			// disc_center: 	{ type: 'v2', value: new THREE.Vector2( 0.5, 0.5 ) }
 		}
 		galaxyAttributes = {
-			customSize: 	{ type: 'f', value: [] }
-			// customFrequency:{ type: 'f', value: [] },
-			// customOpacity: 	{ type: 'f', value: [] }
+			customSize: 	{ type: 'f', value: [] },
+			customOpacity: 	{ type: 'f', value: [] }
 		}
 
-		for ( var s = 0; s < geometry.vertices.length; s++ ) {
-			var randomSize = Math.round(randomRange(15, 20));
+		for ( var s = 0; s < galaxyGeometry.vertices.length; s++ ) {
+			var randomSize = Math.round(randomRange(15, 25)),
+				randomOpacity = randomRange(0.65, 0.85);
 
 			galaxyAttributes.customSize.value[s] = randomSize.toFixed(1);
-			// galaxyAttributes.customFrequency.value[s] = 0.5 * Math.random() + 0.5;
+			galaxyAttributes.customOpacity.value[s] = randomOpacity.toFixed(2);
 		}
 
-		material = new THREE.ShaderMaterial({
+		galaxyMaterial = new THREE.ShaderMaterial({
 			uniforms: 		galaxyUniforms,
 			attributes: 	galaxyAttributes,
 			vertexShader:   document.getElementById('galaxyvertex').textContent,
 			fragmentShader: document.getElementById('galaxyfragment').textContent,
 			transparent: 	true,
-			alphaTest: 		0.5,  // if having transparency issues, try including: alphaTest: 0.5,
+			alphaTest: 		0.25,
 			blending: 		THREE.AdditiveBlending,
 			depthTest: 		true,
 			depthWrite: 	false
 		});
 
-		galaxy = new THREE.PointCloud( geometry, material );
+		galaxy = new THREE.PointCloud( galaxyGeometry, galaxyMaterial );
 		galaxy.position.set(
 			(0.75 * gridMultiplier),
 			(0 * gridMultiplier),
@@ -410,15 +389,16 @@ $(document).ready(function() {
 			singleField.rotation.y = time * (0.1 / divisor);
 		}
 
-		// GALAXY CHANGES
-		// var t = clock.getElapsedTime();
-		// galaxyUniforms.time.value = t;
+		// GALAXY ROTATION
+		if ( galaxy ) {
+			galaxy.rotation.y = ( time / 24 );
+		}
 
 		// PLANET ROTATION
 		// for ( planet = 0; planet < planets.length; planet ++ ) {
 		// 	var singlePlanet = planets[planet];
 
-		// 	singlePlanet.rotation.y = ( time / 24) * singlePlanet.rotation_period;
+		// 	singlePlanet.rotation.y = ( time / 24 ) * singlePlanet.rotation_period;
 		// }
 
 		// FIND INTERSECTIONS
