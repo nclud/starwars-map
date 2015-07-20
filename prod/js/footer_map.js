@@ -403,6 +403,7 @@ $(document).ready(function() {
 			findIntersection();
 		}
 
+		// UPDATE CAMERA POSITION FOR GLOW POSITIONING
 		if ( outlineMesh ) {
 			outlineMaterial.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, outlineMesh.position );
 		}
