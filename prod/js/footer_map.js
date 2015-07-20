@@ -386,9 +386,9 @@ $(document).ready(function() {
 		}
 
 		// GALAXY ROTATION
-		if ( galaxy ) {
-			// galaxy.rotation.y = ( time / 24 );
-		}
+		// if ( galaxy ) {
+		// 	galaxy.rotation.y = ( time / 24 );
+		// }
 
 		// PLANET ROTATION
 		// for ( planet = 0; planet < planets.length; planet ++ ) {

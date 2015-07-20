@@ -49,11 +49,8 @@
 
 	void main() {
 		opacity = customOpacity;
-
 		vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-	    // option (2): scale particles as objects in 3D space
 		gl_PointSize = customSize * ( 300.0 / length( mvPosition.xyz ) );
-		// gl_PointSize = (1.0 + sin( customFrequency * time )) * 50.0 * ( 300.0 / length( mvPosition.xyz ) );
 		gl_Position = projectionMatrix * mvPosition;
 	}
 </script>
@@ -63,8 +60,6 @@
 	varying float opacity;
 
 	void main(void) {
-		// calculates a color for the particle
-		// gl_FragColor = vec4( vColor, 0.9 );
 		vec2 toCenter = (gl_PointCoord.xy - 0.5) * 2.0;
 		float len = length(toCenter);
 		float a = opacity - len;
