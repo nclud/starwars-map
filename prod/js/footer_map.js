@@ -157,7 +157,7 @@ $(document).ready(function() {
 
 
 		// CREATE GALAXY
-		// getGalaxy( 15000 );
+		getGalaxy( 15000 );
 
 
 		// GET & MAKE PLANETS
@@ -299,9 +299,12 @@ $(document).ready(function() {
 		// });
 
 		galaxyUniforms = {
-			texture: 		{ type: 't', value: texture },
-			time: 			{ type: 'f', value: 1.0 },
+			// texture: 		{ type: 't', value: texture },
+			// time: 			{ type: 'f', value: 1.0 },
 			color: 			{ type: 'c', value: new THREE.Color(0x70abff) }
+			// border_size: 	{ type: 'f', value: 0.01 },
+			// disc_radius: 	{ type: 'f', value: 0.5 },
+			// disc_center: 	{ type: 'v2', value: new THREE.Vector2( 0.5, 0.5 ) }
 		}
 		galaxyAttributes = {
 			customSize: 	{ type: 'f', value: [] }
@@ -310,7 +313,7 @@ $(document).ready(function() {
 		}
 
 		for ( var s = 0; s < geometry.vertices.length; s++ ) {
-			var randomSize = Math.round(randomRange(65, 90));
+			var randomSize = Math.round(randomRange(15, 20));
 
 			galaxyAttributes.customSize.value[s] = randomSize.toFixed(1);
 			// galaxyAttributes.customFrequency.value[s] = 0.5 * Math.random() + 0.5;
@@ -324,7 +327,8 @@ $(document).ready(function() {
 			transparent: 	true,
 			alphaTest: 		0.5,  // if having transparency issues, try including: alphaTest: 0.5,
 			blending: 		THREE.AdditiveBlending,
-			depthTest: 		false
+			depthTest: 		true,
+			depthWrite: 	false
 		});
 
 		galaxy = new THREE.PointCloud( geometry, material );
@@ -358,7 +362,7 @@ $(document).ready(function() {
 		// texture.repeat.set( 2, 2 );
 		var material = new THREE.MeshLambertMaterial({
 			map: texture,
-			side: THREE.DoubleSide,
+			// side: THREE.DoubleSide,
 			depthTest: true
 		});
 
@@ -480,7 +484,7 @@ $(document).ready(function() {
 			INTERSECTED = null;
 			document.body.style.cursor = 'auto';
 
-			globalLight.intensity = 0.85;
+			// globalLight.intensity = 0.85;
 		}
 	}
 

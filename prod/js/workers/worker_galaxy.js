@@ -50,14 +50,14 @@ function makeGalaxy( starCount ) {
 		if (Math.random() > 0.5) {
 			list.push({
 				vecX: x,
-				vecY: randomRange(-10, 10),
+				vecY: randomRange(-5, 5),
 				vecZ: z
 			});
 		}
 		else {
 			list.push({
 				vecX: -x,
-				vecY: randomRange(-10, 10),
+				vecY: randomRange(-5, 5),
 				vecZ: -z
 			});
 		}
@@ -76,7 +76,7 @@ function makeGalaxy( starCount ) {
 
 		list.push({
 			vecX: vec.x,
-			vecY: randomRange(-18, 18),
+			vecY: randomRange(-10, 10),
 			vecZ: vec.z
 		});
 	}
@@ -94,7 +94,7 @@ function makeGalaxy( starCount ) {
 
 		list.push({
 			vecX: vec.x,
-			vecY: randomRange(-25, 25),
+			vecY: randomRange(-15, 15),
 			vecZ: vec.z
 		});
 	}
