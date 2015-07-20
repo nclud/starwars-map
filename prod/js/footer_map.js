@@ -20,14 +20,11 @@ var camera,
 	focalPoint;
 
 // CONTROLS VARIABLES
-var controls,
-	projector,
+var controls;
+var raycaster,
+	mousePos = new THREE.Vector2( -1000, 1000 ),
 	INTERSECTED;
 var objectHover = false;
-var mousePos = {
-		x: -1000,
-		y: -1000
-	};
 
 // OBJECT VARIABLES
 var starfield = [],
@@ -133,18 +130,6 @@ $(document).ready(function() {
 		controls.maxPolarAngle = Math.PI/2;
 
 
-		// RENDERING SETUP
-		renderer = new THREE.WebGLRenderer({
-			antialias: true
-		});
-		renderer.setPixelRatio( window.devicePixelRatio );
-		renderer.setClearColor( 0x000000 );
-		renderer.shadowMapEnabled = true;
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		container.appendChild( renderer.domElement );
-
-
 		// EVENT LISTENERS
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -163,8 +148,7 @@ $(document).ready(function() {
 
 
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
-		projector = new THREE.Projector();
-
+		raycaster = new THREE.Raycaster();
 
 
 		// STATS
@@ -173,6 +157,17 @@ $(document).ready(function() {
 		stats.domElement.style.top = '0px';
 		container.appendChild( stats.domElement );
 
+
+		// RENDERING SETUP
+		renderer = new THREE.WebGLRenderer({
+			antialias: true
+		});
+		renderer.setPixelRatio( window.devicePixelRatio );
+		renderer.setClearColor( 0x000000 );
+		renderer.shadowMapEnabled = true;
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		container.appendChild( renderer.domElement );
 	}
 	function onWindowResize() {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -391,7 +386,7 @@ $(document).ready(function() {
 
 		// GALAXY ROTATION
 		if ( galaxy ) {
-			galaxy.rotation.y = ( time / 24 );
+			// galaxy.rotation.y = ( time / 24 );
 		}
 
 		// PLANET ROTATION
@@ -402,9 +397,10 @@ $(document).ready(function() {
 		// }
 
 		// FIND INTERSECTIONS
-		// if ( planetsLoaded ) {
-		// 	findIntersection();
-		// }
+		if ( planetsLoaded ) {
+			raycaster.setFromCamera( mousePos, camera );
+			findIntersection();
+		}
 
 		// CONTROLS UPDATE / PAUSE ON HOVER
 		controls.update( clock.getDelta() );
@@ -433,38 +429,26 @@ $(document).ready(function() {
 
 	// DETERMINE INTERSECTIONS
 	function findIntersection() {
-		// RAY INTO SCENE
-		var vector = new THREE.Vector3( mousePos.x, mousePos.y, 1 );
-		vector.unproject( camera );
+		// FIND PLANETS INTERSECTED
+		var intersects = raycaster.intersectObjects( planets );
 
-		var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
-		// ARRAY OF ALL OBJECTS INTERSECTED
-		var intersects = ray.intersectObjects( planets );
-
-		// WHAT TO DO IF INTERSECTED
+		// THEN ACTIONS
 		if ( intersects.length > 0 ) {
 			objectHover = true;
 
-			if ( intersects[0].object != INTERSECTED ) {
-				INTERSECTED = intersects[0].object;
+			if ( INTERSECTED != intersects[ 0 ].object ) {
+				INTERSECTED = intersects[ 0 ].object;
+
 				document.body.style.cursor = 'pointer';
 
-				// LOWER GLOBAL LIGHTS
-				// globalLight.intensity = 0.075;
-
-				// ADD PLANET SPOTLIGHT
-				// console.log( INTERSECTED.position.x, INTERSECTED.position.z );
-				// planetHoverLight( INTERSECTED );
+				console.log(INTERSECTED);
 			}
 		}
 		else {
 			objectHover = false;
-
 			INTERSECTED = null;
-			document.body.style.cursor = 'auto';
 
-			// globalLight.intensity = 0.85;
+			document.body.style.cursor = 'auto';
 		}
 	}
 
@@ -475,35 +459,35 @@ $(document).ready(function() {
 		// x 0.6
 		// z -1.6
 
-		planetSpotlight[0] = new THREE.SpotLight( 0xe2e2e2 );
-		planetSpotlight[0].intensity = 2;
-		planetSpotlight[0].distance = 200;
-		planetSpotlight[0].angle = 5;
-		planetSpotlight[0].position.set(
-			planet.position.x - (0.3 * gridMultiplier),
-			75,
-			planet.position.z + (0.3 * gridMultiplier)
-		);
-		planetSpotlight[0].target = planet;
-		planetSpotlight[0].castShadow = true;
-		planetSpotlight[0].shadowCameraVisible = true;
+		// planetSpotlight[0] = new THREE.SpotLight( 0xe2e2e2 );
+		// planetSpotlight[0].intensity = 2;
+		// planetSpotlight[0].distance = 200;
+		// planetSpotlight[0].angle = 5;
+		// planetSpotlight[0].position.set(
+		// 	planet.position.x - (0.3 * gridMultiplier),
+		// 	75,
+		// 	planet.position.z + (0.3 * gridMultiplier)
+		// );
+		// planetSpotlight[0].target = planet;
+		// planetSpotlight[0].castShadow = true;
+		// planetSpotlight[0].shadowCameraVisible = true;
 
-		planetSpotlight[1] = new THREE.SpotLight( 0xe2e2e2 );
-		planetSpotlight[1].intensity = 2;
-		planetSpotlight[1].distance = 200;
-		planetSpotlight[1].angle = 5;
-		planetSpotlight[1].position.set(
-            planet.position.x,
-            0,
-            planet.position.z + (1 * gridMultiplier)
-		);
-		planetSpotlight[1].target = planet;
-		planetSpotlight[1].castShadow = true;
-		planetSpotlight[1].shadowCameraVisible = true;
+		// planetSpotlight[1] = new THREE.SpotLight( 0xe2e2e2 );
+		// planetSpotlight[1].intensity = 2;
+		// planetSpotlight[1].distance = 200;
+		// planetSpotlight[1].angle = 5;
+		// planetSpotlight[1].position.set(
+  //           planet.position.x,
+  //           0,
+  //           planet.position.z + (1 * gridMultiplier)
+		// );
+		// planetSpotlight[1].target = planet;
+		// planetSpotlight[1].castShadow = true;
+		// planetSpotlight[1].shadowCameraVisible = true;
 
-		scene.add( planetSpotlight[0], planetSpotlight[1] );
+		// scene.add( planetSpotlight[0], planetSpotlight[1] );
 
-		console.log( planetSpotlight[0].intensity )
+		// console.log( planetSpotlight[0].intensity )
 	}
 
 
