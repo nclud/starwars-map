@@ -35,23 +35,6 @@ var planetsLoaded = false;
 var outlineMaterial,
 	outlineMesh;
 
-// MATERIALS VARIABLES
-var material,
-	plainsMaterial,
-	desertMaterial,
-	jungleMaterial,
-	swampMaterial,
-	tundraMaterial,
-	rockMaterial,
-	urbanMaterial,
-	oceanMaterial,
-	gasMaterial,
-	toxicMaterial,
-	volcanoMaterial,
-	asteroidMaterial,
-	genericMaterial,
-	undefinedMaterial;
-
 // MOTION VARIABLES
 var clock = new THREE.Clock();
 var time,
@@ -348,17 +331,27 @@ $(document).ready(function() {
 	}
 
 	function makePlanets() {
-		buildMaterials();
-
 		for ( i = 0; i < planetData.length; i++ ) {
 			var planetName = planetData[i].name,
 				planetX = (planetData[i].xpos * gridMultiplier),
 				planetZ = (planetData[i].zpos * gridMultiplier),
 				planetSize = (planetData[i].diameter / 500),
 				planetRotation = planetData[i].rotation_period,
-				planetMaterial = planetData[i].texture + 'Material';
+				planetTexture = planetData[i].texture;
 
-			object = new THREE.Mesh( new THREE.SphereGeometry( planetSize, 36, 36 ), material );
+			console.log(planetTexture);
+
+			object = new THREE.Mesh(
+				new THREE.SphereGeometry( planetSize, 36, 36 ),
+				new THREE.MeshPhongMaterial({
+					map: THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
+					bumpMap: THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
+					bumpScale: 3,
+					metal: false,
+					shininess: 20,
+					depthTest: true
+				})
+			);
 			object.position.set( planetX, 0, planetZ );
 			object.name = planetName;
 			object.rotation_period = planetRotation;
@@ -494,37 +487,6 @@ $(document).ready(function() {
 			// REMOVE OUTLINES
 			scene.remove( outlineMesh );
 		}
-	}
-
-
-
-	// CREATE MATERIALS
-	function buildMaterials() {
-		// var texture = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large.jpg' );
-		// var textureBump = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large-bumpmap.jpg' );
-
-		material = new THREE.MeshPhongMaterial({
-			map: THREE.ImageUtils.loadTexture( '/img/test/texture-test-large.jpg' ),
-			bumpMap: THREE.ImageUtils.loadTexture( '/img/test/texture-test-large-bumpmap.jpg' ),
-			bumpScale: 3,
-			metal: false,
-			shininess: 20,
-			depthTest: true
-		});
-
-		// plainsMaterial,
-		// desertMaterial,
-		// jungleMaterial,
-		// swampMaterial,
-		// tundraMaterial,
-		// genericMaterial,
-		// rockMaterial,
-		// urbanMaterial,
-		// oceanMaterial,
-		// gasMaterial,
-		// toxicMaterial,
-		// volcanoMaterial,
-		// asteroidMaterial;
 	}
 
 

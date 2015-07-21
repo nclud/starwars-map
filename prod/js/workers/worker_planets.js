@@ -71,7 +71,7 @@ function planetRequestComplete() {
 				workerRemotePlanets[i].zpos = workerLocalPlanets[x].zpos;
 
 				// ADD TEXTURES
-				workerRemotePlanets[i].texture = workerLocalPlanets[x].terrain;
+				workerRemotePlanets[i].texture = workerLocalPlanets[x].terrain
 			}
 		}
 	}
