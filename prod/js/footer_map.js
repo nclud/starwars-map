@@ -339,8 +339,6 @@ $(document).ready(function() {
 				planetRotation = planetData[i].rotation_period,
 				planetTexture = planetData[i].texture;
 
-			console.log(planetTexture);
-
 			object = new THREE.Mesh(
 				new THREE.SphereGeometry( planetSize, 36, 36 ),
 				new THREE.MeshPhongMaterial({
