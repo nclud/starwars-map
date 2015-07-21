@@ -38,17 +38,19 @@ var outlineMaterial,
 // MATERIALS VARIABLES
 var material,
 	plainsMaterial,
+	desertMaterial,
 	jungleMaterial,
 	swampMaterial,
 	tundraMaterial,
-	genericMaterial,
 	rockMaterial,
 	urbanMaterial,
 	oceanMaterial,
 	gasMaterial,
 	toxicMaterial,
 	volcanoMaterial,
-	asteroidMaterial;
+	asteroidMaterial,
+	genericMaterial,
+	undefinedMaterial;
 
 // MOTION VARIABLES
 var clock = new THREE.Clock();
@@ -353,7 +355,8 @@ $(document).ready(function() {
 				planetX = (planetData[i].xpos * gridMultiplier),
 				planetZ = (planetData[i].zpos * gridMultiplier),
 				planetSize = (planetData[i].diameter / 500),
-				planetRotation = planetData[i].rotation_period;
+				planetRotation = planetData[i].rotation_period,
+				planetMaterial = planetData[i].texture + 'Material';
 
 			object = new THREE.Mesh( new THREE.SphereGeometry( planetSize, 36, 36 ), material );
 			object.position.set( planetX, 0, planetZ );
@@ -508,6 +511,20 @@ $(document).ready(function() {
 			shininess: 20,
 			depthTest: true
 		});
+
+		// plainsMaterial,
+		// desertMaterial,
+		// jungleMaterial,
+		// swampMaterial,
+		// tundraMaterial,
+		// genericMaterial,
+		// rockMaterial,
+		// urbanMaterial,
+		// oceanMaterial,
+		// gasMaterial,
+		// toxicMaterial,
+		// volcanoMaterial,
+		// asteroidMaterial;
 	}
 
 
