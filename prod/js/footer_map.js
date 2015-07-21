@@ -333,11 +333,19 @@ $(document).ready(function() {
 	}
 
 	function makePlanets() {
-		var texture = THREE.ImageUtils.loadTexture( '/img/test/test.jpg' );
-		// texture.repeat.set( 2, 2 );
-		var material = new THREE.MeshLambertMaterial({
+		var texture = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large.jpg' );
+		var textureBump = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large-bumpmap.jpg' );
+		// textureBump.anisotrophy = 20;
+		// textureBump.format = THREE.RGBFormat;
+
+		var material = new THREE.MeshPhongMaterial({
 			map: texture,
-			// side: THREE.DoubleSide,
+			// color: 0xff0000,
+			// specular: 0x333333,
+			bumpMap: textureBump,
+			bumpScale: 3,
+			metal: false,
+			shininess: 20,
 			depthTest: true
 		});
 
@@ -391,11 +399,11 @@ $(document).ready(function() {
 		// }
 
 		// PLANET ROTATION
-		// for ( planet = 0; planet < planets.length; planet ++ ) {
-		// 	var singlePlanet = planets[planet];
+		for ( planet = 0; planet < planets.length; planet ++ ) {
+			var singlePlanet = planets[planet];
 
-		// 	singlePlanet.rotation.y = ( time / 24 ) * singlePlanet.rotation_period;
-		// }
+			singlePlanet.rotation.y = ( time / 24 ) * singlePlanet.rotation_period;
+		}
 
 		// FIND INTERSECTIONS
 		if ( planetsLoaded ) {
