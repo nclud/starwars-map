@@ -308,7 +308,7 @@ $(document).ready(function() {
 		galaxy.position.set(
 			(0.75 * gridMultiplier),
 			(0 * gridMultiplier),
-			(-3.25 * gridMultiplier)
+			(-2.75 * gridMultiplier)
 		);
 		galaxy.sortParticles = true;
 
@@ -397,7 +397,7 @@ $(document).ready(function() {
 		for ( planet = 0; planet < planets.length; planet ++ ) {
 			var singlePlanet = planets[planet];
 
-			singlePlanet.rotation.y = ( time / 24 ) * singlePlanet.rotation_period;
+			singlePlanet.rotation.y = ( time / 48 ) * singlePlanet.rotation_period;
 		}
 
 		// FIND INTERSECTIONS
