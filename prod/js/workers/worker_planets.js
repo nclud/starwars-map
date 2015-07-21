@@ -63,11 +63,15 @@ function planetRequestComplete() {
 			workerRemotePlanets[i].diameter = numberDiameter / 5;
 		}
 
-		// ADD X & Z POSITION TO PLANET DATA
+		// MATCHING DATA SETS
 		for ( x = 0; x < workerLocalPlanets.length; x ++ ) {
 			if ( workerLocalPlanets[x].name == workerRemotePlanets[i].name ) {
+				// ADD X & Z POSITION TO PLANET DATA
 				workerRemotePlanets[i].xpos = workerLocalPlanets[x].xpos;
 				workerRemotePlanets[i].zpos = workerLocalPlanets[x].zpos;
+
+				// ADD TEXTURES
+				workerRemotePlanets[i].texture = workerLocalPlanets[x].terrain;
 			}
 		}
 	}

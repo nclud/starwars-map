@@ -3,239 +3,293 @@
 		{
 			"name": "Alderaan",
 			"zpos": -2.6,
-			"xpos": 1.8
+			"xpos": 1.8,
+			"terrain": "plains"
 		},{
 			"name": "Yavin IV",
 			"zpos": 0.8,
-			"xpos": 5.8
+			"xpos": 5.8,
+			"terrain": "jungle"
 		},{
 			"name": "Hoth",
 			"zpos": -4.4,
-			"xpos": -6.8
+			"xpos": -6.8,
+			"terrain": "tundra"
 		},{
 			"name": "Dagobah",
 			"zpos": -2.4,
-			"xpos": -7.5
+			"xpos": -7.5,
+			"terrain": "swamp"
 		},{
 			"name": "Bespin",
 			"zpos": -5,
-			"xpos": -6.4
+			"xpos": -6.4,
+			"terrain": "gas"
 		},{
 			"name": "Endor",
 			"zpos": -7.4,
-			"xpos": -4.8
+			"xpos": -4.8,
+			"terrain": "jungle"
 		},{
 			"name": "Naboo",
 			"zpos": -0.6,
-			"xpos": -5
+			"xpos": -5,
+			"terrain": "plains"
 		},{
 			"name": "Coruscant",
 			"zpos": -4,
-			"xpos": 2
+			"xpos": 2,
+			"terrain": "urban"
 		},{
 			"name": "Kamino",
 			"zpos": 3.3,
-			"xpos": -2.8
+			"xpos": -2.8,
+			"terrain": "ocean"
 		},{
 			"name": "Geonosis",
 			"zpos": 2.4,
-			"xpos": -5.2
+			"xpos": -5.2,
+			"terrain": "rock"
 		},{
 			"name": "Utapau",
 			"zpos": -2,
-			"xpos": -7.9
+			"xpos": -7.9,
+			"terrain": "plains"
 		},{
 			"name": "Mustafar",
 			"zpos": -1.9,
-			"xpos": -4.8
+			"xpos": -4.8,
+			"terrain": "volcano"
 		},{
 			"name": "Kashyyyk",
 			"zpos": 0.7,
-			"xpos": 2.2
+			"xpos": 2.2,
+			"terrain": "jungle"
 		},{
 			"name": "Polis Massa",
 			"zpos": -4.4,
-			"xpos": -8.8
+			"xpos": -8.8,
+			"terrain": "asteroid"
 		},{
 			"name": "Mygeeto",
 			"zpos": -4.5,
-			"xpos": 6.9
+			"xpos": 6.9,
+			"terrain": "tundra"
 		},{
 			"name": "Felucia",
 			"zpos": 2.7,
-			"xpos": 5.7
+			"xpos": 5.7,
+			"terrain": "jungle"
 		},{
 			"name": "Cato Neimoidia",
 			"zpos": -1.6,
-			"xpos": 0.6
+			"xpos": 0.6,
+			"terrain": "rock"
 		},{
 			"name": "Saleucami",
 			"zpos": 3.3,
-			"xpos": 3.7
+			"xpos": 3.7,
+			"terrain": "desert"
 		},{
 			"name": "Eriadu",
 			"zpos": -2.3,
-			"xpos": -6.3
+			"xpos": -6.3,
+			"terrain": "urban"
 		},{
 			"name": "Corellia",
 			"zpos": -2.4,
-			"xpos": 0.4
+			"xpos": 0.4,
+			"terrain": "urban"
 		},{
 			"name": "Rodia",
 			"zpos": 1.2,
-			"xpos": -3.6
+			"xpos": -3.6,
+			"terrain": "jungle"
 		},{
 			"name": "Nal Hutta",
 			"zpos": 3,
-			"xpos": 0
+			"xpos": 0,
+			"terrain": "urban"
 		},{
 			"name": "Dantooine",
 			"zpos": -4,
-			"xpos": 7.6
+			"xpos": 7.6,
+			"terrain": "plains"
 		},{
 			"name": "Bestine IV",
 			"zpos": -3,
-			"xpos": -2
+			"xpos": -2,
+			"terrain": "ocean"
 		},{
 			"name": "Ord Mantell",
 			"zpos": -4,
-			"xpos": 4.6
+			"xpos": 4.6,
+			"terrain": "plains"
 		},{
 			"name": "Trandosha",
 			"zpos": 1.2,
-			"xpos": 2
+			"xpos": 2,
+			"terrain": "plains"
 		},{
 			"name": "Socorro",
 			"zpos": 1.2,
-			"xpos": 5.7
+			"xpos": 5.7,
+			"terrain": "desert"
 		},{
 			"name": "Mon Cala",
 			"zpos": 5,
-			"xpos": 5.3
+			"xpos": 5.3,
+			"terrain": "ocean"
 		},{
 			"name": "Chandrila",
 			"zpos": -3.2,
-			"xpos": 2.7
+			"xpos": 2.7,
+			"terrain": "plains"
 		},{
 			"name": "Sullust",
 			"zpos": -2.4,
-			"xpos": -5.8
-		},{
-			"name": "Rodia",
-			"zpos": 1.2,
-			"xpos": -3.6
+			"xpos": -5.8,
+			"terrain": "volcano"
 		},{
 			"name": "Toydaria",
 			"zpos": 2.7,
-			"xpos": 0.4
+			"xpos": 0.4,
+			"terrain": "swamp"
 		},{
 			"name": "Malastare",
 			"zpos": -1.7,
-			"xpos": -4.8
+			"xpos": -4.8,
+			"terrain": "swamp"
 		},{
 			"name": "Dathomir",
 			"zpos": -0.8,
-			"xpos": 5.6
+			"xpos": 5.6,
+			"terrain": "jungle"
 		},{
 			"name": "Ryloth",
 			"zpos": 2.7,
-			"xpos": -5.6
+			"xpos": -5.6,
+			"terrain": "desert"
 		},{
 			"name": "Aleen Minor",
 			"zpos": -2.1,
-			"xpos": -1.6
+			"xpos": -1.6,
+			"terrain": "generic"
 		},{
 			"name": "Vulpter",
 			"zpos": -3.4,
-			"xpos": 1.4
+			"xpos": 1.4,
+			"terrain": "urban"
 		},{
 			"name": "Troiken",
 			"zpos": 3.6,
-			"xpos": 7
+			"xpos": 7,
+			"terrain": "desert"
 		},{
 			"name": "Tund",
 			"zpos": 5.6,
-			"xpos": 3.5
+			"xpos": 3.5,
+			"terrain": "asteroid"
 		},{
 			"name": "Haruun Kal",
 			"zpos": -2.1,
-			"xpos": -5.1
+			"xpos": -5.1,
+			"terrain": "toxic"
 		},{
 			"name": "Cerea",
 			"zpos": -6.3,
-			"xpos": -4.7
+			"xpos": -4.7,
+			"terrain": "plains"
 		},{
 			"name": "Glee Anselm",
 			"zpos": -5.8,
-			"xpos": 4.4
+			"xpos": 4.4,
+			"terrain": "ocean"
 		},{
 			"name": "Iridonia",
 			"zpos": -5.2,
-			"xpos": 5
+			"xpos": 5,
+			"terrain": "rock"
 		},{
 			"name": "Tholoth",
 			"zpos": -1.6,
-			"xpos": -0.5
+			"xpos": -0.5,
+			"terrain": "generic"
 		},{
 			"name": "Iktotch",
 			"zpos": -0.5,
-			"xpos": -2
+			"xpos": -2,
+			"terrain": "rock"
 		},{
 			"name": "Quermia",
 			"zpos": 3.9,
-			"xpos": 6.8
+			"xpos": 6.8,
+			"terrain": "generic"
 		},{
 			"name": "Dorin",
 			"zpos": -5.5,
-			"xpos": 3.8
+			"xpos": 3.8,
+			"terrain": "generic"
 		},{
 			"name": "Champala",
 			"zpos": -3.6,
-			"xpos": 3.5
+			"xpos": 3.5,
+			"terrain": "ocean"
 		},{
 			"name": "Mirial",
 			"zpos": 1.5,
-			"xpos": 7.6
+			"xpos": 7.6,
+			"terrain": "desert"
 		},{
 			"name": "Serenna",
 			"zpos": -0.4,
-			"xpos": 7.3
+			"xpos": 7.3,
+			"terrain": "jungle"
 		},{
 			"name": "Concord Dawn",
 			"zpos": -0.4,
-			"xpos": 4.7
+			"xpos": 4.7,
+			"terrain": "jungle"
 		},{
 			"name": "Zolan",
 			"zpos": 0.7,
-			"xpos": -4.4
+			"xpos": -4.4,
+			"terrain": "generic"
 		},{
 			"name": "Ojom",
 			"zpos": -3,
-			"xpos": 0.3
+			"xpos": 0.3,
+			"terrain": "ocean"
 		},{
 			"name": "Skako",
 			"zpos": -3.3,
-			"xpos": 2.2
+			"xpos": 2.2,
+			"terrain": "urban"
 		},{
 			"name": "Muunilinst",
 			"zpos": -4.8,
-			"xpos": 7.6
+			"xpos": 7.6,
+			"terrain": "plains"
 		},{
 			"name": "Shili",
 			"zpos": -3.3,
-			"xpos": 3.9
+			"xpos": 3.9,
+			"terrain": "urban"
 		},{
 			"name": "Kalee",
 			"zpos": -5.6,
-			"xpos": 7.6
+			"xpos": 7.6,
+			"terrain": "jungle"
 		},{
 			"name": "Umbara",
 			"zpos": 0.2,
-			"xpos": 1.4
+			"xpos": 1.4,
+			"terrain": "generic"
 		},{
 			"name": "Tatooine",
 			"zpos": 2.2,
-			"xpos": -4.5
+			"xpos": -4.5,
+			"terrain": "desert"
 		}
 	]
 }

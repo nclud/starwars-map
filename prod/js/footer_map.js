@@ -11,9 +11,6 @@ var scene,
 // MAP VARIABLES
 var gridMultiplier = 150;
 
-// PLANET GLOBAL VARIABLES
-var planetData = [];
-
 // CAMERA VARIABLES
 var camera,
 	initialCameraPos,
@@ -30,12 +27,28 @@ var objectHover = false;
 var globalLight;
 
 // OBJECT VARIABLES
+var planetData = [];
 var starfield = [],
 	planets = [];
 var galaxy;
 var planetsLoaded = false;
 var outlineMaterial,
 	outlineMesh;
+
+// MATERIALS VARIABLES
+var material,
+	plainsMaterial,
+	jungleMaterial,
+	swampMaterial,
+	tundraMaterial,
+	genericMaterial,
+	rockMaterial,
+	urbanMaterial,
+	oceanMaterial,
+	gasMaterial,
+	toxicMaterial,
+	volcanoMaterial,
+	asteroidMaterial;
 
 // MOTION VARIABLES
 var clock = new THREE.Clock();
@@ -44,7 +57,7 @@ var time,
 
 // WORKERS
 var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
-	workerLocalPlanets = new Worker('/js/workers/worker_json.js');
+	workerLocalPlanets = new Worker('/js/workers/worker_planets.js');
 
 
 
@@ -333,21 +346,7 @@ $(document).ready(function() {
 	}
 
 	function makePlanets() {
-		var texture = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large.jpg' );
-		var textureBump = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large-bumpmap.jpg' );
-		// textureBump.anisotrophy = 20;
-		// textureBump.format = THREE.RGBFormat;
-
-		var material = new THREE.MeshPhongMaterial({
-			map: texture,
-			// color: 0xff0000,
-			// specular: 0x333333,
-			bumpMap: textureBump,
-			bumpScale: 3,
-			metal: false,
-			shininess: 20,
-			depthTest: true
-		});
+		buildMaterials();
 
 		for ( i = 0; i < planetData.length; i++ ) {
 			var planetName = planetData[i].name,
@@ -492,6 +491,23 @@ $(document).ready(function() {
 			// REMOVE OUTLINES
 			scene.remove( outlineMesh );
 		}
+	}
+
+
+
+	// CREATE MATERIALS
+	function buildMaterials() {
+		// var texture = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large.jpg' );
+		// var textureBump = THREE.ImageUtils.loadTexture( '/img/test/texture-test-large-bumpmap.jpg' );
+
+		material = new THREE.MeshPhongMaterial({
+			map: THREE.ImageUtils.loadTexture( '/img/test/texture-test-large.jpg' ),
+			bumpMap: THREE.ImageUtils.loadTexture( '/img/test/texture-test-large-bumpmap.jpg' ),
+			bumpScale: 3,
+			metal: false,
+			shininess: 20,
+			depthTest: true
+		});
 	}
 
 
