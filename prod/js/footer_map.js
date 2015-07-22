@@ -69,7 +69,7 @@ $(document).ready(function() {
 		focalPoint = new THREE.Vector3(
 			0.65 * gridMultiplier,
 			0 * gridMultiplier,
-			-2 * gridMultiplier
+			-1.5 * gridMultiplier
 		);
 		initialCameraPos = new THREE.Vector3(
 			0,
