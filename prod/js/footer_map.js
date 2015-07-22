@@ -349,12 +349,12 @@ $(document).ready(function() {
 			object = new THREE.Mesh(
 				new THREE.SphereGeometry( planetSize, 36, 36 ),
 				new THREE.MeshPhongMaterial({
-					map: THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
-					bumpMap: THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
-					bumpScale: 3,
-					metal: false,
-					shininess: 20,
-					depthTest: true
+					map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
+					bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
+					bumpScale: 	3,
+					metal: 		false,
+					shininess: 	20,
+					depthTest: 	true
 				})
 			);
 			object.position.set( planetX, 0, planetZ );
@@ -541,14 +541,18 @@ $(document).ready(function() {
 			oldCameraFocus = cameraLookFocus( camera );
 			oldControlsFocus = controls.target;
 
+			var camDistance = (INTERSECTED.geometry.parameters.radius / 25) * gridMultiplier,
+				camHeight = (INTERSECTED.geometry.parameters.radius / 92) * gridMultiplier;
+			// console.log( INTERSECTED.geometry.parameters.radius );
+
 			newCameraPos = new THREE.Vector3(
 	            INTERSECTED.position.x,
-	            INTERSECTED.position.y - (0.25 * gridMultiplier),
-	            INTERSECTED.position.z + (0.9 * gridMultiplier)
+	            INTERSECTED.position.y - camHeight,
+	            INTERSECTED.position.z + camDistance
 			);
 			newCameraFocus = new THREE.Vector3(
 				INTERSECTED.position.x,
-	            INTERSECTED.position.y - (0.25 * gridMultiplier),
+	            INTERSECTED.position.y - camHeight,
 	            INTERSECTED.position.z
 			);
 
@@ -557,7 +561,7 @@ $(document).ready(function() {
 			controls.target = newCameraFocus;
 			camera.updateProjectionMatrix();
 
-			console.log('click');
+			// console.log('click');
 		}
 	}
 	function hideEverything( object ) {
