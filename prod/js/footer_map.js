@@ -528,22 +528,13 @@ $(document).ready(function() {
 		if ( INTERSECTED ) {
 			hideEverything( INTERSECTED );
 
-			// REMOVE CONTROLS LIMITS
-			// controls.Xmin = controls.Ymin = -Infinity;
-			// controls.Xmax = controls.Ymax = Infinity;
-			// controls.minDistance = 0;
-			// controls.maxDistance = Infinity;
-
 			// MOVE CAMERA TO NEW POSITION
-			// console.log( camera.position );
-			// console.log( cameraLookFocus( camera ) );
 			oldCameraPos = camera.position;
 			oldCameraFocus = cameraLookFocus( camera );
 			oldControlsFocus = controls.target;
 
 			var camDistance = (INTERSECTED.geometry.parameters.radius / 25) * gridMultiplier,
 				camHeight = (INTERSECTED.geometry.parameters.radius / 92) * gridMultiplier;
-			// console.log( INTERSECTED.geometry.parameters.radius );
 
 			newCameraPos = new THREE.Vector3(
 	            INTERSECTED.position.x,
