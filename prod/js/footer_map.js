@@ -92,22 +92,22 @@ $(document).ready(function() {
 
 
 		// ADDING GRID FOR REFERENCE
-		var gridGeometry = new THREE.PlaneGeometry(
-	           3000,
-	           3000,
-	           Math.round(2000 / 150),
-	           Math.round(2000 / 150)
-           );
-		var gridMaterial = new THREE.MeshBasicMaterial({
-				wireframe: true,
-				opacity: 0.15,
-				transparent: true,
-				side: THREE.DoubleSide
-			});
-		var grid = new THREE.Mesh( gridGeometry, gridMaterial );
-		grid.rotation.order = 'YXZ';
-		grid.rotation.y = - Math.PI / 2;
-		grid.rotation.x = - Math.PI / 2;
+		// var gridGeometry = new THREE.PlaneGeometry(
+	 //           3000,
+	 //           3000,
+	 //           Math.round(2000 / 150),
+	 //           Math.round(2000 / 150)
+  //          );
+		// var gridMaterial = new THREE.MeshBasicMaterial({
+		// 		wireframe: true,
+		// 		opacity: 0.15,
+		// 		transparent: true,
+		// 		side: THREE.DoubleSide
+		// 	});
+		// var grid = new THREE.Mesh( gridGeometry, gridMaterial );
+		// grid.rotation.order = 'YXZ';
+		// grid.rotation.y = - Math.PI / 2;
+		// grid.rotation.x = - Math.PI / 2;
 		// scene.add( grid );
 
 
@@ -132,6 +132,7 @@ $(document).ready(function() {
 		// EVENT LISTENERS
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		window.addEventListener( 'click', onDocumentClick, false );
 
 
 		// CREATE STARFIELD
@@ -166,15 +167,9 @@ $(document).ready(function() {
 		renderer.shadowMapEnabled = true;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 
+
+		// CONTAINER BUUILD
 		container.appendChild( renderer.domElement );
-	}
-	function onWindowResize() {
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-
-		controls.handleResize();
-
-		renderer.setSize( window.innerWidth, window.innerHeight );
 	}
 
 
@@ -308,9 +303,9 @@ $(document).ready(function() {
 
 		galaxy = new THREE.PointCloud( galaxyGeometry, galaxyMaterial );
 		galaxy.position.set(
-			(0.75 * gridMultiplier),
+			(1 * gridMultiplier),
 			(0 * gridMultiplier),
-			(-2.75 * gridMultiplier)
+			(-3.5 * gridMultiplier)
 		);
 		galaxy.sortParticles = true;
 		galaxy.castShadow = false;
@@ -432,14 +427,6 @@ $(document).ready(function() {
 
 
 
-	// DETERMINE MOUSE POSITION
-	function onDocumentMouseMove( event ) {
-		mousePos.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		mousePos.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-	}
-
-
-
 	// DETERMINE INTERSECTIONS
 	function findIntersection() {
 		// FIND PLANETS INTERSECTED
@@ -490,6 +477,35 @@ $(document).ready(function() {
 
 			// REMOVE OUTLINES
 			scene.remove( outlineMesh );
+		}
+	}
+
+
+
+	// HANDLER - RESIZE
+	function onWindowResize() {
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		controls.handleResize();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+	}
+
+
+
+	// HANDLER - DETERMINE MOUSE POSITION
+	function onDocumentMouseMove( event ) {
+		mousePos.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+		mousePos.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	}
+
+
+
+	// HANDLER - MOUSE CLICKS
+	function onDocumentClick() {
+		if ( INTERSECTED ) {
+			console.log( INTERSECTED );
 		}
 	}
 
