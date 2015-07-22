@@ -120,3 +120,29 @@ label {
 		font-weight: 900;
 	}
 }
+
+
+.planet-title-text {
+	display: none;
+	position: absolute;
+	left: 50%;
+	bottom: 2.25rem;
+	padding: 0.85em 1.4em 0.75em 1.75em;
+
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 0.9em;
+	letter-spacing: 0.35em;
+	text-align: center;
+
+	background: rgba(black, 0.5);
+	color: white;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	border: 2px solid $gold-dark;
+	border-radius: 8px;
+
+	@include transform(translateX(-50%));
+}

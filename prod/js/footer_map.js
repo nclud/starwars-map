@@ -34,6 +34,7 @@ var starfield = [],
 	planets = [];
 var galaxy;
 var planetsLoaded = false;
+var planetText;
 var outlineMaterial,
 	outlineMesh;
 
@@ -57,6 +58,7 @@ $(document).ready(function() {
 	function init() {
 		// CONTAINER SETUP
 		container = document.getElementById('star-map');
+		planetText = document.getElementById('planet-title');
 
 
 		// SCENE SETUP AND VARIABLES
@@ -468,6 +470,11 @@ $(document).ready(function() {
 				outlineMesh.position.set( INTERSECTED.position.x, INTERSECTED.position.y, INTERSECTED.position.z );
 				outlineMesh.scale.multiplyScalar(1.35);
 				scene.add( outlineMesh );
+
+				planetText.innerHTML = '';
+				planetText.style.display = 'none';
+				planetText.innerHTML = INTERSECTED.name;
+				planetText.style.display = 'block';
 			}
 		}
 		else {
@@ -478,6 +485,9 @@ $(document).ready(function() {
 
 			// REMOVE OUTLINES
 			scene.remove( outlineMesh );
+
+			planetText.innerHTML = '';
+			planetText.style.display = 'none';
 		}
 	}
 
@@ -507,7 +517,7 @@ $(document).ready(function() {
 	function onDocumentClick() {
 		if ( INTERSECTED ) {
 			console.log( camera.position );
-			console.log( cameraLook( camera ) );
+			console.log( cameraLookFocus( camera ) );
 
 			oldCameraPos = camera.position;
 			oldCameraFocus = cameraLookFocus( camera );
