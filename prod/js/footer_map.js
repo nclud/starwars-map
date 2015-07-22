@@ -226,6 +226,8 @@ $(document).ready(function() {
 
 		        starParticleSystem[outer] = new THREE.PointCloud( starParticles, starMaterial[outer] );
 		        starParticleSystem[outer].sortParticles = true;
+		        starParticleSystem[outer].castShadow = false;
+				starParticleSystem[outer].receiveShadow = false;
 
 		        starfield[fields].add( starParticleSystem[outer] );
 	    	}
@@ -311,6 +313,8 @@ $(document).ready(function() {
 			(-2.75 * gridMultiplier)
 		);
 		galaxy.sortParticles = true;
+		galaxy.castShadow = false;
+		galaxy.receiveShadow = false;
 
 		scene.add( galaxy );
 	}
@@ -351,6 +355,8 @@ $(document).ready(function() {
 				})
 			);
 			object.position.set( planetX, 0, planetZ );
+			object.castShadow = true;
+			object.receiveShadow = true;
 			object.name = planetName;
 			object.rotation_period = planetRotation;
 
@@ -444,7 +450,7 @@ $(document).ready(function() {
 			uniforms: {
 				c:   		{ type: 'f', value: 0.5 },
 				p:   		{ type: 'f', value: 7.5 },
-				glowColor: 	{ type: 'c', value: new THREE.Color(0x987d2a) },
+				glowColor: 	{ type: 'c', value: new THREE.Color(0x775c09) },
 				viewVector: { type: 'v3', value: camera.position }
 			},
 			vertexShader:   document.getElementById( 'outlinevertex' ).textContent,
@@ -472,7 +478,7 @@ $(document).ready(function() {
 				scene.remove( outlineMesh );
 				outlineMesh = new THREE.Mesh( INTERSECTED.geometry, outlineMaterial );
 				outlineMesh.position.set( INTERSECTED.position.x, INTERSECTED.position.y, INTERSECTED.position.z );
-				outlineMesh.scale.multiplyScalar(1.3);
+				outlineMesh.scale.multiplyScalar(1.35);
 				scene.add( outlineMesh );
 			}
 		}
