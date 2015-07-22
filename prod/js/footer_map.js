@@ -67,9 +67,9 @@ $(document).ready(function() {
 			d = 500;
 		camera = new THREE.PerspectiveCamera( 60, aspect, 1, 2500 );
 		focalPoint = new THREE.Vector3(
-			0.5 * gridMultiplier,
+			0.65 * gridMultiplier,
 			0 * gridMultiplier,
-			-1.5 * gridMultiplier
+			-2 * gridMultiplier
 		);
 		initialCameraPos = new THREE.Vector3(
 			0,
