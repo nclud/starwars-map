@@ -16,7 +16,8 @@ var camera,
 	initialCameraPos,
 	focalPoint;
 var oldCameraPos,
-	oldCameraFocus;
+	oldCameraFocus,
+	oldControlsFocus;
 var newCameraPos,
 	newCameraFocus;
 
@@ -410,7 +411,7 @@ $(document).ready(function() {
 		// });
 
 		// FIND INTERSECTIONS
-		if ( planetsLoaded ) {
+		if ( planetsLoaded && intersections ) {
 			raycaster.setFromCamera( mousePos, camera );
 			findIntersection();
 		}
@@ -439,64 +440,62 @@ $(document).ready(function() {
 
 	// DETERMINE INTERSECTIONS
 	function findIntersection() {
-		if ( intersections ) {
-			// FIND PLANETS INTERSECTED
-			var intersects = raycaster.intersectObjects( planets );
+		// FIND PLANETS INTERSECTED
+		var intersects = raycaster.intersectObjects( planets );
 
-			// OUTLINE MATERIAL
-			outlineMaterial = new THREE.ShaderMaterial({
-				uniforms: {
-					c:   		{ type: 'f', value: 0.5 },
-					p:   		{ type: 'f', value: 7.5 },
-					glowColor: 	{ type: 'c', value: new THREE.Color(0x775c09) },
-					viewVector: { type: 'v3', value: camera.position }
-				},
-				vertexShader:   document.getElementById( 'outlinevertex' ).textContent,
-				fragmentShader: document.getElementById( 'outlinefragment' ).textContent,
-				side: 			THREE.BackSide,
-				blending: 		THREE.AdditiveBlending,
-				transparent: 	true,
-				depthTest: 		true,
-				depthWrite: 	false
-			});
+		// OUTLINE MATERIAL
+		outlineMaterial = new THREE.ShaderMaterial({
+			uniforms: {
+				c:   		{ type: 'f', value: 0.5 },
+				p:   		{ type: 'f', value: 7.5 },
+				glowColor: 	{ type: 'c', value: new THREE.Color(0x775c09) },
+				viewVector: { type: 'v3', value: camera.position }
+			},
+			vertexShader:   document.getElementById( 'outlinevertex' ).textContent,
+			fragmentShader: document.getElementById( 'outlinefragment' ).textContent,
+			side: 			THREE.BackSide,
+			blending: 		THREE.AdditiveBlending,
+			transparent: 	true,
+			depthTest: 		true,
+			depthWrite: 	false
+		});
 
 
-			// ACTIONS ON INTERSECT
-			if ( intersects.length > 0 ) {
-				objectHover = true;
+		// ACTIONS ON INTERSECT
+		if ( intersects.length > 0 ) {
+			objectHover = true;
 
-				if ( INTERSECTED != intersects[ 0 ].object ) {
-					INTERSECTED = intersects[ 0 ].object;
+			if ( INTERSECTED != intersects[ 0 ].object ) {
+				INTERSECTED = intersects[ 0 ].object;
 
-					document.body.style.cursor = 'pointer';
+				document.body.style.cursor = 'pointer';
 
-					// console.log(INTERSECTED.position);
+				// console.log(INTERSECTED.position);
 
-					// ADD OUTLINE TO PLANETS
-					scene.remove( outlineMesh );
-					outlineMesh = new THREE.Mesh( INTERSECTED.geometry, outlineMaterial );
-					outlineMesh.position.set( INTERSECTED.position.x, INTERSECTED.position.y, INTERSECTED.position.z );
-					outlineMesh.scale.multiplyScalar(1.35);
-					scene.add( outlineMesh );
-
-					planetText.innerHTML = '';
-					planetText.style.display = 'none';
-					planetText.innerHTML = INTERSECTED.name;
-					planetText.style.display = 'block';
-				}
-			}
-			else {
-				objectHover = false;
-				INTERSECTED = null;
-
-				document.body.style.cursor = 'auto';
-
-				// REMOVE OUTLINES
+				// ADD OUTLINE TO PLANETS
 				scene.remove( outlineMesh );
+				outlineMesh = new THREE.Mesh( INTERSECTED.geometry, outlineMaterial );
+				outlineMesh.position.set( INTERSECTED.position.x, INTERSECTED.position.y, INTERSECTED.position.z );
+				outlineMesh.scale.multiplyScalar(1.35);
+				scene.add( outlineMesh );
 
 				planetText.innerHTML = '';
 				planetText.style.display = 'none';
+				planetText.innerHTML = INTERSECTED.name;
+				planetText.style.display = 'block';
 			}
+		}
+		else {
+			objectHover = false;
+			INTERSECTED = null;
+
+			document.body.style.cursor = 'auto';
+
+			// REMOVE OUTLINES
+			scene.remove( outlineMesh );
+
+			planetText.innerHTML = '';
+			planetText.style.display = 'none';
 		}
 	}
 
@@ -529,31 +528,45 @@ $(document).ready(function() {
 		if ( INTERSECTED ) {
 			hideEverything( INTERSECTED );
 
+			// REMOVE CONTROLS LIMITS
+			// controls.Xmin = controls.Ymin = -Infinity;
+			// controls.Xmax = controls.Ymax = Infinity;
+			// controls.minDistance = 0;
+			// controls.maxDistance = Infinity;
+
 			// MOVE CAMERA TO NEW POSITION
 			// console.log( camera.position );
 			// console.log( cameraLookFocus( camera ) );
 			oldCameraPos = camera.position;
 			oldCameraFocus = cameraLookFocus( camera );
+			oldControlsFocus = controls.target;
 
 			newCameraPos = new THREE.Vector3(
 	            INTERSECTED.position.x,
-	            INTERSECTED.position.y,
-	            INTERSECTED.position.z + (3 * gridMultiplier)
+	            INTERSECTED.position.y - (0.25 * gridMultiplier),
+	            INTERSECTED.position.z + (0.9 * gridMultiplier)
 			);
 			newCameraFocus = new THREE.Vector3(
 				INTERSECTED.position.x,
-	            INTERSECTED.position.y,
+	            INTERSECTED.position.y - (0.25 * gridMultiplier),
 	            INTERSECTED.position.z
 			);
 
-			// camera.position.set( initialCameraPos.x, initialCameraPos.y, initialCameraPos.z );
-			// camera.lookAt( focalPoint );
+			camera.position.set( newCameraPos.x, newCameraPos.y, newCameraPos.z );
+			camera.lookAt( newCameraFocus );
+			controls.target = newCameraFocus;
+			camera.updateProjectionMatrix();
+
+			console.log('click');
 		}
 	}
 	function hideEverything( object ) {
+		// REMOVE EVENT LISTENER
+		window.removeEventListener( 'click', onDocumentClick, false );
+
 		// TURN OFF CONTROLS & INTERSECTIONS
 		intersections = false;
-		// controls.enabled = false;
+		controls.enabled = false;
 
 		// CURSOR, GLOW, TEXT
 		document.body.style.cursor = 'auto';
@@ -570,7 +583,9 @@ $(document).ready(function() {
 		}
 	}
 	function showEverything() {
+		window.addEventListener( 'click', onDocumentClick, false );
 		intersections = true;
+		controls.enabled = true;
 
 		galaxy.visible = true;
 		for ( planet = 0; planet < planets.length; planet ++ ) {

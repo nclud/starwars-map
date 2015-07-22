@@ -87,10 +87,10 @@ THREE.OrbitControls = function ( object, domElement ) {
 	};
 
 	// MIN/MAX FOR PANNING
-	this.Xmin = -1250;
-	this.Xmax = 1250;
-	this.Ymin = -100;
-	this.Ymax = 1250;
+	this.Xmin = -Infinity;
+	this.Xmax = Infinity;
+	this.Ymin = -Infinity;
+	this.Ymax = Infinity;
 
 	////////////
 	// internals
