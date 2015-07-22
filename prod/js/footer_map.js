@@ -17,6 +17,8 @@ var camera,
 	focalPoint;
 var oldCameraPos,
 	oldCameraFocus;
+var newCameraPos,
+	newCameraFocus;
 
 // CONTROLS VARIABLES
 var controls;
@@ -402,6 +404,9 @@ $(document).ready(function() {
 
 			singlePlanet.rotation.y = ( time / 48 ) * singlePlanet.rotation_period;
 		}
+		// scene.traverse(function ( object ) {
+		// 	console.log( object );
+		// });
 
 		// FIND INTERSECTIONS
 		if ( planetsLoaded ) {
@@ -499,7 +504,9 @@ $(document).ready(function() {
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
-		controls.handleResize();
+		if ( controls ) {
+			controls.handleResize();
+		}
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 	}
@@ -517,11 +524,36 @@ $(document).ready(function() {
 	// HANDLER - MOUSE CLICKS
 	function onDocumentClick() {
 		if ( INTERSECTED ) {
-			console.log( camera.position );
-			console.log( cameraLookFocus( camera ) );
+			// TURN OFF CONTROLS
+			// controls.enabled = false;
 
+			// HIDE OTHER OBJECTS FROM SCREEN
+			galaxy.visible = false;
+			for ( planet = 0; planet < planets.length; planet ++ ) {
+				if ( planets[planet] !== INTERSECTED ) {
+					planets[planet].visible = false;
+				}
+			}
+
+			// MOVE CAMERA TO NEW POSITION
+			// console.log( camera.position );
+			// console.log( cameraLookFocus( camera ) );
 			oldCameraPos = camera.position;
 			oldCameraFocus = cameraLookFocus( camera );
+
+			newCameraPos = new THREE.Vector3(
+	            INTERSECTED.position.x,
+	            INTERSECTED.position.y,
+	            INTERSECTED.position.z + (3 * gridMultiplier)
+			);
+			newCameraFocus = new THREE.Vector3(
+				INTERSECTED.position.x,
+	            INTERSECTED.position.y,
+	            INTERSECTED.position.z
+			);
+
+			// camera.position.set( initialCameraPos.x, initialCameraPos.y, initialCameraPos.z );
+			// camera.lookAt( focalPoint );
 		}
 	}
 
