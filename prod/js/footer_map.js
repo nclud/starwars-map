@@ -15,6 +15,8 @@ var gridMultiplier = 150;
 var camera,
 	initialCameraPos,
 	focalPoint;
+var oldCameraPos,
+	oldCameraFocus;
 
 // CONTROLS VARIABLES
 var controls;
@@ -59,7 +61,6 @@ $(document).ready(function() {
 
 		// SCENE SETUP AND VARIABLES
 		scene = new THREE.Scene();
-		// scene.fog = new THREE.FogExp2( 0x000000, 0.0001 );
 
 
 		// INITIAL CAMERA POSITIONING
@@ -505,10 +506,23 @@ $(document).ready(function() {
 	// HANDLER - MOUSE CLICKS
 	function onDocumentClick() {
 		if ( INTERSECTED ) {
-			console.log( INTERSECTED );
+			console.log( camera.position );
+			console.log( cameraLook( camera ) );
+
+			oldCameraPos = camera.position;
+			oldCameraFocus = cameraLookFocus( camera );
 		}
 	}
 
+
+
+	// GENERAL FUNCTION TO GET CAMERA LOOK DIRECTION
+	function cameraLookFocus( camera ) {
+        var vector = new THREE.Vector3(0, 0, -1);
+        vector.applyEuler( camera.rotation, camera.rotation.order );
+        return vector;
+    }
+	
 
 
 	// GENERAL FUNCTION TO GENERATE RANDOM NUMBER
