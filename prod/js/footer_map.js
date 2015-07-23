@@ -506,11 +506,9 @@ $(document).ready(function() {
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
-		if ( controls ) {
-			controls.handleResize();
-		}
-
 		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		render();
 	}
 
 
@@ -530,8 +528,7 @@ $(document).ready(function() {
 
 			// MOVE CAMERA TO NEW POSITION
 			oldCameraPos = camera.position;
-			oldCameraFocus = cameraLookFocus( camera );
-			oldControlsFocus = controls.target;
+			oldCameraFocus = controls.target;
 
 			var camDistance = (INTERSECTED.geometry.parameters.radius / 25) * gridMultiplier,
 				camHeight = (INTERSECTED.geometry.parameters.radius / 92) * gridMultiplier;
@@ -548,7 +545,6 @@ $(document).ready(function() {
 			);
 
 			camera.position.set( newCameraPos.x, newCameraPos.y, newCameraPos.z );
-			camera.lookAt( newCameraFocus );
 			controls.target = newCameraFocus;
 			camera.updateProjectionMatrix();
 
@@ -587,15 +583,6 @@ $(document).ready(function() {
 			planets[planet].visible = true;
 		}
 	}
-
-
-
-	// GENERAL FUNCTION TO GET CAMERA LOOK DIRECTION
-	function cameraLookFocus( camera ) {
-        var vector = new THREE.Vector3(0, 0, -1);
-        vector.applyEuler( camera.rotation, camera.rotation.order );
-        return vector;
-    }
 	
 
 
