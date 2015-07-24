@@ -1,68 +1,30 @@
 /* TEXT SETTINGS */
 
-* {
+h1,
+h2,
+h3 {
     text-rendering: optimizeLegibility;
     -webkit-font-feature-settings: "kern";
     -moz-font-feature-settings: "kern";
     -moz-font-feature-settings: "kern=1";
     font-feature-settings: "kern" 1;
     font-kerning: normal;
-}
 
-h2 {
 	font-family: "freight-display-pro", georgia, sans-serif;
 	font-weight: 600;
 
-	// font-family: "acta-display",sans-serif;
-	// font-weight: 700;
-}
-
-h2 {
-	display: block;
-	background: $gold-dark;
-	padding: 0.3em 1rem 0.4em;
-	border-bottom: 1px solid $gold;
-
-	font-size: 2.25em;
-
-	color: $gray-dark;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 h3 {
-	display: block;
-	padding-bottom: 1.3rem;
+	font-family: "freight-display-pro", georgia, sans-serif;
+	font-weight: 600;
+	font-size: 2.75em;
 
-	text-transform: uppercase;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 900;
-	font-size: 0.75em;
-	letter-spacing: 0.05em;
+	color: $gold;
 
-	color: $gold-darkest;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-label {
-	text-transform: uppercase;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	font-size: 0.9em;
-	letter-spacing: 0.025em;
-
-	color: rgba(white,0.5);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-
-	@include transition(color 0.1s);
-
-	&:hover {
-		color: rgba(white,0.65);
-	}
-
-	input[type=checkbox]:checked + & {
-		color: white;
-	}
+	text-shadow: 0 0 10px black;
 }
 
 .load-text {
@@ -97,6 +59,42 @@ label {
 }
 
 
+.filter-title {
+	display: block;
+	padding-bottom: 1.3rem;
+
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 0.75em;
+	letter-spacing: 0.05em;
+
+	color: $gold-darkest;
+}
+
+label {
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: 0.9em;
+	letter-spacing: 0.025em;
+
+	color: rgba(white,0.5);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@include transition(color 0.1s);
+
+	&:hover {
+		color: rgba(white,0.65);
+	}
+
+	input[type=checkbox]:checked + & {
+		color: white;
+	}
+}
+
+
 .site-credits {
 	display: block;
 	padding-top: 5rem;
@@ -121,28 +119,3 @@ label {
 	}
 }
 
-
-.planet-title-text {
-	display: none;
-	position: absolute;
-	left: 50%;
-	bottom: 2.25rem;
-	padding: 0.875em 1.25em 0.9em 1.75em;
-
-	text-transform: uppercase;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 900;
-	font-size: 0.9em;
-	letter-spacing: 0.5em;
-	text-align: center;
-
-	background: rgba(black, 0.5);
-	color: rgba(white,0.9);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-
-	border: 2px solid $gold-dark;
-	border-radius: 8px;
-
-	@include transform(translateX(-50%));
-}

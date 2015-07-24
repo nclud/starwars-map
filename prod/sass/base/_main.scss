@@ -43,3 +43,14 @@ main {
 		content: "";
 	}
 }
+
+#planet-title {
+	display: none;
+	position: absolute;
+	left: 50%;
+	bottom: 2.25rem;
+
+	text-align: center;
+
+	@include transform(translateX(-50%));
+}
