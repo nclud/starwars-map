@@ -51,7 +51,8 @@ var time,
 
 // WORKERS
 var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
-	workerLocalPlanets = new Worker('/js/workers/worker_planets.js');
+	workerPlanets = new Worker('/js/workers/worker_planets.js'),
+	workerFilms = new Worker('/js/workers/worker_films.js');
 
 
 
@@ -328,11 +329,11 @@ $(document).ready(function() {
 
 	// GET PLANET DATA & MAKE PLANETS
 	function getPlanets() {
-		workerLocalPlanets.postMessage({
+		workerPlanets.postMessage({
 			'cmd': 'start',
 			'pages': 7
 		});
-		workerLocalPlanets.addEventListener( 'message', function(e) {
+		workerPlanets.addEventListener( 'message', function(e) {
 			planetData = e.data;
 
 			makePlanets();
