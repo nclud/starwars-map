@@ -35,7 +35,8 @@ var intersections = true;
 var globalLight;
 
 // OBJECT VARIABLES
-var planetData = [];
+var planetData = [],
+	filmData = [];
 var starfield = [],
 	planets = [];
 var galaxy;
@@ -96,10 +97,6 @@ $(document).ready(function() {
 		globalLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.85 );
 		scene.add( globalLight );
 
-		// light = new THREE.DirectionalLight( 0x3d3d3d );
-		// light.position.set( -0.25, 1, 0.5 );
-		// scene.add(light);
-
 
 		// ADDING GRID FOR REFERENCE
 		// var gridGeometry = new THREE.PlaneGeometry(
@@ -155,6 +152,10 @@ $(document).ready(function() {
 
 		// GET & MAKE PLANETS
 		getPlanets();
+
+
+		// GET FILM DATA
+		getFilms();
 
 
 		// PROJECTOR FOR WORLD/SCREEN INTERACTION
@@ -375,6 +376,17 @@ $(document).ready(function() {
 
 
 
+	// GET FILM DATA
+	function getFilms() {
+		workerFilms.postMessage({	'cmd': 'start' });
+
+		workerFilms.addEventListener( 'message', function(e) {
+			filmData = e.data;
+		}, false);
+	}
+
+
+
 	// RENDERING
 	function animate() {
 		requestAnimationFrame( animate );
@@ -587,11 +599,6 @@ $(document).ready(function() {
             INTERSECTED.position.z
 		);
 
-		// camera.position.set( newCameraPos.x, newCameraPos.y, newCameraPos.z );
-		// controls.target = newCameraFocus;
-		// camera.updateProjectionMatrix();
-
-		// console.log('click');
 		TweenMax.to( currentCameraFocus, duration, {
 			x: newCameraFocus.x,
 			y: newCameraFocus.y,

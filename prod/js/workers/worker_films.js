@@ -13,7 +13,9 @@ function getFilmData() {
 
 			return oboe.drop;
 		})
-		.done(function(){})
+		.done(function(){
+			postMessage( workerFilms );
+		})
 		.fail(function(){
 			console.log('Remote SWAPI JSON error with films.');
 		});
