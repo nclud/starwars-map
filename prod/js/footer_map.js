@@ -16,8 +16,9 @@ var camera,
 	initialCameraPos,
 	focalPoint;
 var oldCameraPos,
-	oldCameraFocus,
-	oldControlsFocus;
+	oldCameraFocus;
+var currentCameraPos,
+	currentCameraFocus;
 var newCameraPos,
 	newCameraFocus;
 
@@ -526,29 +527,7 @@ $(document).ready(function() {
 		if ( INTERSECTED ) {
 			hideEverything( INTERSECTED );
 
-			// MOVE CAMERA TO NEW POSITION
-			oldCameraPos = camera.position;
-			oldCameraFocus = controls.target;
-
-			var camDistance = (INTERSECTED.geometry.parameters.radius / 25) * gridMultiplier,
-				camHeight = (INTERSECTED.geometry.parameters.radius / 92) * gridMultiplier;
-
-			newCameraPos = new THREE.Vector3(
-	            INTERSECTED.position.x,
-	            INTERSECTED.position.y - camHeight,
-	            INTERSECTED.position.z + camDistance
-			);
-			newCameraFocus = new THREE.Vector3(
-				INTERSECTED.position.x,
-	            INTERSECTED.position.y - camHeight,
-	            INTERSECTED.position.z
-			);
-
-			camera.position.set( newCameraPos.x, newCameraPos.y, newCameraPos.z );
-			controls.target = newCameraFocus;
-			camera.updateProjectionMatrix();
-
-			// console.log('click');
+			zoomIntoPlanet( INTERSECTED, 3.25 );
 		}
 	}
 	function hideEverything( object ) {
@@ -582,6 +561,57 @@ $(document).ready(function() {
 		for ( planet = 0; planet < planets.length; planet ++ ) {
 			planets[planet].visible = true;
 		}
+	}
+
+	function zoomIntoPlanet( planet, duration ) {
+		// MOVE CAMERA TO NEW POSITION
+		oldCameraPos = camera.position;
+		oldCameraFocus = controls.target;
+
+		currentCameraPos = camera.position;
+		currentCameraFocus = controls.target;
+
+		var camDistance = (INTERSECTED.geometry.parameters.radius / 25) * gridMultiplier,
+			camOffset = (INTERSECTED.geometry.parameters.radius / 92) * gridMultiplier;
+
+		newCameraPos = new THREE.Vector3(
+            INTERSECTED.position.x,
+            INTERSECTED.position.y - camOffset,
+            INTERSECTED.position.z + camDistance
+		);
+		newCameraFocus = new THREE.Vector3(
+			INTERSECTED.position.x,
+            INTERSECTED.position.y - camOffset,
+            INTERSECTED.position.z
+		);
+
+		// camera.position.set( newCameraPos.x, newCameraPos.y, newCameraPos.z );
+		// controls.target = newCameraFocus;
+		// camera.updateProjectionMatrix();
+
+		// console.log('click');
+		TweenMax.to( currentCameraFocus, duration, {
+			x: newCameraFocus.x,
+			y: newCameraFocus.y,
+			z: newCameraFocus.z,
+			ease: Strong.easeOut
+		});
+		TweenMax.to( currentCameraPos, duration, {
+			x: newCameraPos.x,
+			y: newCameraPos.y,
+			z: newCameraPos.z,
+			ease: Strong.easeOut,
+			onUpdate: function() {
+				camera.updateProjectionMatrix();
+			},
+			onComplete: function() {
+				camera.updateProjectionMatrix();
+				console.log('zoom complete');
+			}
+		});
+	}
+	function zoomOutPlanet() {
+
 	}
 	
 
