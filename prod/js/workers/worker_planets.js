@@ -24,6 +24,11 @@ function getFilmData() {
 	oboe( '//swapi.co/api/films/?page=1' )
 		.node('results.*', function( film ){
 			workerFilms.push( film );
+
+			workerFilms.sort(function(a, b) {
+			    return parseFloat(a.episode_id) - parseFloat(b.episode_id);
+			});
+
 			return oboe.drop;
 		})
 		.done(function(){})
