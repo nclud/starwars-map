@@ -3,8 +3,12 @@ importScripts('oboe.js');
 var pages;
 
 var workerLocalPlanets = [],
-	workerRemotePlanets = [],
-	workerFilms = [];
+	workerFilms = [],
+	workerRemotePlanets = [];
+
+var localPlanetSwitch = false,
+	remoteFilmSwitch = false,
+	remotePlanetSwitch = false;
 
 var completed = [];
 
@@ -14,7 +18,11 @@ function getLocalPlanetData() {
 			workerLocalPlanets.push( planet );
 			return oboe.drop;
 		})
-		.done(function(){})
+		.done(function(){
+			localPlanetSwitch = true;
+
+			planetRequestComplete();
+		})
 		.fail(function(){
 			console.log('Local JSON error.');
 		});
@@ -31,7 +39,11 @@ function getFilmData() {
 
 			return oboe.drop;
 		})
-		.done(function(){})
+		.done(function(){
+			remoteFilmSwitch = true;
+
+			planetRequestComplete();
+		})
 		.fail(function(){
 			console.log('Remote SWAPI JSON error with films.');
 		});
@@ -47,6 +59,8 @@ function getRemotePlanetData() {
 			.done(function(){
 				completed.push(0);
 
+				remotePlanetSwitch = true;
+
 				if ( completed.length == pages ) {
 					planetRequestComplete();
 				}
@@ -58,44 +72,45 @@ function getRemotePlanetData() {
 }
 
 function planetRequestComplete() {
-	for ( i = 0; i < workerRemotePlanets.length; i ++ ) {
-		// console.log(i);
+	if ( localPlanetSwitch && remoteFilmSwitch && remotePlanetSwitch ) {
+		for ( i = 0; i < workerRemotePlanets.length; i ++ ) {
+			// console.log(i);
 
-		// GIVE GENERAL DIAMETER & ROTATION IF MISSING
-		if ( workerRemotePlanets[i].diameter === 'unknown' || workerRemotePlanets[i].diameter === '0' ) {
-			workerRemotePlanets[i].diameter = 10000;
-		}
-		if ( workerRemotePlanets[i].rotation_period === 'unknown' || workerRemotePlanets[i].rotation_period === '0' ) {
-			workerRemotePlanets[i].rotation_period = 24;
-		}
+			// GIVE GENERAL DIAMETER & ROTATION IF MISSING
+			if ( workerRemotePlanets[i].diameter === 'unknown' || workerRemotePlanets[i].diameter === '0' ) {
+				workerRemotePlanets[i].diameter = 10000;
+			}
+			if ( workerRemotePlanets[i].rotation_period === 'unknown' || workerRemotePlanets[i].rotation_period === '0' ) {
+				workerRemotePlanets[i].rotation_period = 24;
+			}
 
-		// CHANGE DIAMETER & ORBIT TO NUMBERS FROM STRINGS
-		var numberDiameter = parseInt( workerRemotePlanets[i].diameter ),
-			numberOrbit = parseInt(workerRemotePlanets[i].rotation_period);
+			// CHANGE DIAMETER & ORBIT TO NUMBERS FROM STRINGS
+			var numberDiameter = parseInt( workerRemotePlanets[i].diameter ),
+				numberOrbit = parseInt(workerRemotePlanets[i].rotation_period);
 
-		workerRemotePlanets[i].diameter = numberDiameter;
-		workerRemotePlanets[i].rotation_period = numberOrbit;
+			workerRemotePlanets[i].diameter = numberDiameter;
+			workerRemotePlanets[i].rotation_period = numberOrbit;
 
-		// SHRINK LARGE PLANETS
-		if ( workerRemotePlanets[i].diameter > 100000 ) {
-			workerRemotePlanets[i].diameter = numberDiameter / 5;
-		}
+			// SHRINK LARGE PLANETS
+			if ( workerRemotePlanets[i].diameter > 100000 ) {
+				workerRemotePlanets[i].diameter = numberDiameter / 5;
+			}
 
-		// MATCHING DATA SETS
-		for ( x = 0; x < workerLocalPlanets.length; x ++ ) {
-			if ( workerLocalPlanets[x].name == workerRemotePlanets[i].name ) {
-				// ADD X & Z POSITION TO PLANET DATA
-				workerRemotePlanets[i].xpos = workerLocalPlanets[x].xpos;
-				workerRemotePlanets[i].zpos = workerLocalPlanets[x].zpos;
+			// MATCHING DATA SETS
+			for ( x = 0; x < workerLocalPlanets.length; x ++ ) {
+				if ( workerLocalPlanets[x].name == workerRemotePlanets[i].name ) {
+					// ADD X & Z POSITION TO PLANET DATA
+					workerRemotePlanets[i].xpos = workerLocalPlanets[x].xpos;
+					workerRemotePlanets[i].zpos = workerLocalPlanets[x].zpos;
 
-				// ADD TEXTURES
-				workerRemotePlanets[i].texture = workerLocalPlanets[x].terrain
+					// ADD TEXTURES
+					workerRemotePlanets[i].texture = workerLocalPlanets[x].terrain
+				}
 			}
 		}
-	}
 
-	// console.log(workerRemotePlanets);
-	postMessage( workerRemotePlanets );
+		postMessage( workerRemotePlanets );
+	}
 }
 
 
