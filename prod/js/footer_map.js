@@ -21,6 +21,7 @@ var currentCameraPos,
 	currentCameraFocus;
 var newCameraPos,
 	newCameraFocus;
+var zoomedIn = false;
 
 // CONTROLS VARIABLES
 var controls;
@@ -606,6 +607,8 @@ $(document).ready(function() {
 			},
 			onComplete: function() {
 				camera.updateProjectionMatrix();
+
+				zoomedIn = true;
 				console.log('zoom complete');
 			}
 		});

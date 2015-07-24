@@ -3,7 +3,8 @@ importScripts('oboe.js');
 var pages;
 
 var workerLocalPlanets = [],
-	workerRemotePlanets = [];
+	workerRemotePlanets = [],
+	workerFilms = [];
 
 var completed = [];
 
@@ -16,6 +17,18 @@ function getLocalPlanetData() {
 		.done(function(){})
 		.fail(function(){
 			console.log('Local JSON error.');
+		});
+}
+
+function getFilmData() {
+	oboe( '//swapi.co/api/films/?page=1' )
+		.node('results.*', function( film ){
+			workerFilms.push( film );
+			return oboe.drop;
+		})
+		.done(function(){})
+		.fail(function(){
+			console.log('Remote SWAPI JSON error with films.');
 		});
 }
 
@@ -34,7 +47,7 @@ function getRemotePlanetData() {
 				}
 			})
 			.fail(function(){
-				console.log('Remote SWAPI JSON error.');
+				console.log('Remote SWAPI JSON error with planets.');
 			});
 	}
 }
@@ -90,6 +103,7 @@ self.addEventListener( 'message', function( e ) {
 			pages = data.pages;
 
 			getLocalPlanetData();
+			getFilmData();
 			getRemotePlanetData();
 
 			break;
