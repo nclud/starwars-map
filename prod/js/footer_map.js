@@ -485,8 +485,6 @@ $(document).ready(function() {
 
 				document.body.style.cursor = 'pointer';
 
-				// console.log(INTERSECTED.position);
-
 				// ADD OUTLINE TO PLANETS
 				scene.remove( outlineMesh );
 				outlineMesh = new THREE.Mesh( INTERSECTED.geometry, outlineMaterial );
