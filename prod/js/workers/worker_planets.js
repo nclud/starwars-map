@@ -96,7 +96,7 @@ function planetRequestComplete() {
 				workerRemotePlanets[i].diameter = numberDiameter / 5;
 			}
 
-			// MATCHING DATA SETS
+			// MATCHING PLANET DATA SETS
 			for ( x = 0; x < workerLocalPlanets.length; x ++ ) {
 				if ( workerLocalPlanets[x].name == workerRemotePlanets[i].name ) {
 					// ADD X & Z POSITION TO PLANET DATA
@@ -107,9 +107,35 @@ function planetRequestComplete() {
 					workerRemotePlanets[i].texture = workerLocalPlanets[x].terrain
 				}
 			}
+
+			// MATCHING FILM DATA SETS
+			for ( y = 0; y < workerRemotePlanets[i].films.length; y ++ ) {
+				// console.log( workerRemotePlanets[i].name );
+				for ( z = 0; z < workerFilms.length; z ++ ) {
+					if ( workerFilms[z].url  == workerRemotePlanets[i].films[y] ) {
+						// console.log( workerRemotePlanets[i].name, workerFilms[z].url, workerRemotePlanets[i].films[y] );
+
+						var film_titles = {},
+							episodes = {};
+
+						workerRemotePlanets[i].film_titles = film_titles;
+						workerRemotePlanets[i].episodes = episodes;
+						// console.log(film_titles);
+						workerRemotePlanets[i].film_titles.film_title = workerFilms[z].title;
+						workerRemotePlanets[i].episodes.episode = workerFilms[z].episode_id;
+					}
+				}
+				// if ( workerFilms[y].url == workerRemotePlanets[i].films ) {
+				// 	// console.log( workerFilms[y].url );
+				// 	// workerRemotePlanets[i].film_title = workerFilms[y].title;
+				// 	// workerRemotePlanets[i].episode_id = workerFilms[y].episode_id;
+				// 	console.log( workerRemotePlanets[i].name );
+				// }
+			}
 		}
 
-		postMessage( workerRemotePlanets );
+		console.log( workerRemotePlanets );
+		// postMessage( workerRemotePlanets );
 	}
 }
 
