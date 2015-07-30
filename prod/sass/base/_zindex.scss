@@ -13,7 +13,12 @@
 }
 
 
-#button-nav,
+#button-nav {
+	z-index: 150;
+}
+#planet-data {
+	z-index: 125;
+}
 #planet-title {
 	z-index: 100;
 }
