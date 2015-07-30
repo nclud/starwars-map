@@ -115,9 +115,42 @@ label {
 }
 
 
+.social-share {
+	display: block;
+	margin-bottom: 1.25em;
+	padding: 0.875em 0;
+
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	text-transform: uppercase;
+	font-size: 0.875em;
+	letter-spacing: 0.1em;
+
+	color: $gold-dark;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	text-decoration: none;
+
+	border: 2px solid rgba($gold-darkest, 0.75);
+	border-radius: 0.5rem;
+
+	@include transition(0.2s);
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&:hover {
+		color: $gold;
+		border-color: $gold-dark;
+	}
+}
+
+
 .site-credits {
 	display: block;
-	padding: 5rem 1.5rem 1.5rem 1.5rem;
+	padding: 3.5rem 1.5rem 1.5rem 1.5rem;
 
 	text-transform: uppercase;
 	font-family: 'Roboto', sans-serif;

@@ -20,7 +20,6 @@ nav {
 }
 
 .filter-list {
-	margin-bottom: 3.5rem;
 	padding: 0 1.5rem;
 
 	&:last-of-type {
@@ -86,4 +85,9 @@ label {
 	
 	display: block;
 	padding: 1.4rem 0 1.4rem 2em;
+}
+
+
+.share-buttons {
+	padding: 2.5rem 1.5rem 0;
 }
