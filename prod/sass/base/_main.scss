@@ -30,15 +30,14 @@ main {
 	&:before {
 		position: absolute;
 		display: block;
-		width: 1rem;
+		width: 0.75rem;
 		height: 100%;
 		top: 0;
 		right: 100%;
 
-		background: url('/img/grad-black-right.png') repeat-y;
-		background-size: 100% auto;
+		@include background(linear-gradient(to right, rgba(black, 0) 0%, rgba(black,0.35) 60%, rgba(black, 1) 100%));
 
-		opacity: 0.15;
+		opacity: 0.3;
 
 		content: "";
 	}

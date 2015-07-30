@@ -4,13 +4,24 @@ nav {
 	position: relative;
 	width: 23rem;
 	height: 100%;
-	padding: 1.5rem;
+	// padding: 1.5rem;
 
 	font-size: 1rem;
 }
 
+.page-title {
+	padding: 1.5rem 1.5rem 1.75rem 1.5rem;
+	margin-bottom: 2.25rem;
+
+	background: $gold;
+	@include background(linear-gradient(to bottom, $gold-dark 0%, $gold 75%));
+
+	border-bottom: 1px solid rgba(white, 0.15);
+}
+
 .filter-list {
 	margin-bottom: 3.5rem;
+	padding: 0 1.5rem;
 
 	&:last-of-type {
 		margin-bottom: 0;
@@ -20,7 +31,7 @@ nav {
 	position: relative;
 	border-bottom: 1px solid rgba($gold,0.15);
 
-	&:first-child {
+	&:first-of-type {
 		border-top: 1px solid $gold-darkest;
 	}
 	&:last-child {

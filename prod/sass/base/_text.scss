@@ -17,9 +17,13 @@ h3 {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+	font-size: 3.5em;
+
+	color: white;
+}
+
 h3 {
-	font-family: "freight-display-pro", georgia, sans-serif;
-	font-weight: 600;
 	font-size: 2.75em;
 
 	color: $gold;
@@ -59,9 +63,25 @@ h3 {
 }
 
 
+.description {
+	display: block;
+
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 0.9em;
+	letter-spacing: 0.2em;
+	line-height: 1.2;
+
+	color: $gold-darkest;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
 .filter-title {
 	display: block;
-	padding-bottom: 1.3rem;
+	padding-bottom: 1.1rem;
 
 	text-transform: uppercase;
 	font-family: 'Roboto', sans-serif;
@@ -97,8 +117,7 @@ label {
 
 .site-credits {
 	display: block;
-	padding-top: 5rem;
-	padding-bottom: 1.5rem;
+	padding: 5rem 1.5rem 1.5rem 1.5rem;
 
 	text-transform: uppercase;
 	font-family: 'Roboto', sans-serif;
