@@ -41,7 +41,8 @@ var starfield = [],
 	planets = [];
 var galaxy;
 var planetsLoaded = false;
-var planetText;
+var planetText,
+	planetOverlay;
 var outlineMaterial,
 	outlineMesh;
 
@@ -67,6 +68,11 @@ $(document).ready(function() {
 		// CONTAINER SETUP
 		container = document.getElementById('star-map');
 		planetText = document.getElementById('planet-title');
+		planetOverlay = document.getElementById('planet-data-overlay');
+
+
+		// HIDE OVERLAY
+		hideOverlay();
 
 
 		// SCENE SETUP AND VARIABLES
@@ -540,6 +546,8 @@ $(document).ready(function() {
 			hideEverything( INTERSECTED );
 
 			zoomIntoPlanet( INTERSECTED, 3.25 );
+
+			showOverlay( INTERSECTED );
 		}
 	}
 	function hideEverything( object ) {
@@ -623,6 +631,33 @@ $(document).ready(function() {
 
 	}
 	
+
+
+	// HIDE OVERLAY
+	function hideOverlay() {
+		$('#planet-data-overlay').velocity({
+		    translateZ: 0,
+		    translateX: '-50%',
+		    translateY: '150%'
+		}, {
+		    duration: 400
+		});
+	}
+
+
+
+	// SHOW OVERLAY
+	function showOverlay( planet ) {
+		$('#planet-data-overlay').velocity({
+		    translateZ: 0,
+		    translateX: '-50%',
+		    translateY: '0'
+		}, {
+			delay: 1300,
+		    duration: 1350,
+		    easing: 'easeOutQuart'
+		});
+	}
 
 
 	// GENERAL FUNCTION TO GENERATE RANDOM NUMBER
