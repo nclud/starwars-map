@@ -643,8 +643,6 @@ $(document).ready(function() {
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
 
-		console.log(oldCameraFocus);
-
 		TweenMax.to( currentCameraFocus, duration, {
 			x: oldCameraFocus.x,
 			y: oldCameraFocus.y,
@@ -666,7 +664,7 @@ $(document).ready(function() {
 
 				setTimeout(function(){
 					showEverything();
-				}, 250);
+				}, 150);
 			}
 		});
 	}
