@@ -15,8 +15,8 @@ var gridMultiplier = 150;
 var camera,
 	initialCameraPos,
 	focalPoint;
-var oldCameraPos,
-	oldCameraFocus;
+var oldCameraPos = new THREE.Vector3(),
+	oldCameraFocus = new THREE.Vector3();
 var currentCameraPos,
 	currentCameraFocus;
 var newCameraPos,
@@ -550,6 +550,14 @@ $(document).ready(function() {
 			showOverlay( INTERSECTED );
 		}
 	}
+	$('#button-close').on('click', function(){
+		zoomOutPlanet( 3.25 );
+
+		hideOverlay();
+
+		return false;
+	});
+
 	function hideEverything( object ) {
 		// REMOVE EVENT LISTENER
 		window.removeEventListener( 'click', onDocumentClick, false );
@@ -584,10 +592,15 @@ $(document).ready(function() {
 	}
 
 	function zoomIntoPlanet( planet, duration ) {
-		// MOVE CAMERA TO NEW POSITION
-		oldCameraPos = camera.position;
-		oldCameraFocus = controls.target;
+		// CAPTURE ORIGINAL VALUES
+		oldCameraPos.x = camera.position.x;
+		oldCameraPos.y = camera.position.y;
+		oldCameraPos.z = camera.position.z;
+		oldCameraFocus.x = controls.target.x;
+		oldCameraFocus.y = controls.target.y;
+		oldCameraFocus.z = controls.target.z;
 
+		// MOVE CAMERA TO NEW POSITION
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
 
@@ -623,12 +636,39 @@ $(document).ready(function() {
 				camera.updateProjectionMatrix();
 
 				zoomedIn = true;
-				console.log('zoom complete');
 			}
 		});
 	}
-	function zoomOutPlanet() {
+	function zoomOutPlanet( duration ) {
+		currentCameraPos = camera.position;
+		currentCameraFocus = controls.target;
 
+		console.log(oldCameraFocus);
+
+		TweenMax.to( currentCameraFocus, duration, {
+			x: oldCameraFocus.x,
+			y: oldCameraFocus.y,
+			z: oldCameraFocus.z,
+			ease: Strong.easeIn
+		});
+		TweenMax.to( currentCameraPos, duration, {
+			x: oldCameraPos.x,
+			y: oldCameraPos.y,
+			z: oldCameraPos.z,
+			ease: Strong.easeIn,
+			onUpdate: function() {
+				camera.updateProjectionMatrix();
+			},
+			onComplete: function() {
+				camera.updateProjectionMatrix();
+
+				zoomedIn = false;
+
+				setTimeout(function(){
+					showEverything();
+				}, 250);
+			}
+		});
 	}
 	
 
@@ -640,7 +680,9 @@ $(document).ready(function() {
 		    translateX: '-50%',
 		    translateY: '150%'
 		}, {
-		    duration: 400
+			delay: 350,
+		    duration: 750,
+		    easing: 'easeInQuart'
 		});
 	}
 

@@ -15,7 +15,7 @@ main {
 }
 
 
-#star-map-container {
+#star-map {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -23,6 +23,8 @@ main {
 	bottom: 0;
 	width: 100%;
 	height: 100%;
+
+	overflow: hidden;
 
 	background: url('/img/stars-bright.jpg'), black;
 	background-size: 550px auto;
@@ -41,15 +43,6 @@ main {
 
 		content: "";
 	}
-}
-#star-map {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
 }
 
 #planet-title {
@@ -75,7 +68,7 @@ main {
 	background: white;
 	border-radius: 0.6rem 0.6rem 0.5rem 0.5rem;
 
-	@include transform(translateX(-50%));
+	@include transform(translate(-50%, 150%));
 
 	&:before {
 		position: absolute;
