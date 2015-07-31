@@ -29,8 +29,6 @@ function getRemotePlanetData() {
 			.done(function(){
 				completed.push(0);
 
-				remotePlanetSwitch = true;
-
 				if ( completed.length == pages ) {
 					planetRequestComplete();
 				}
