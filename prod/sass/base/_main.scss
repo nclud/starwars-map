@@ -105,7 +105,7 @@ main {
 	float: left;
 	width: 15%;
 	margin-right: 2%;
-	margin-bottom: 1.25rem;
+	margin-bottom: 2%;
 
 	&.disabled {
 		opacity: 0.25;
@@ -113,6 +113,7 @@ main {
 
 	&:last-child {
 		margin-right: 0;
+		margin-bottom: 1.25rem;
 	}
 
 	&:not(.disabled):before {
