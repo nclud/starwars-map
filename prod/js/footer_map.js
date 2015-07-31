@@ -692,6 +692,7 @@ $(document).ready(function() {
 		    easing: 'easeInQuart',
 		    complete: function() {
 		    	$('#planet-data-name, #planet-data-size, #planet-data-pop, #planet-data-orbit, #planet-data-rotation, #planet-data-climate, #planet-data-terrain').empty();
+		    	$('.planet-film').removeClass('disabled');
 		    }
 		});
 	}
