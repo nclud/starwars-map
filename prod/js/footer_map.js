@@ -379,6 +379,7 @@ $(document).ready(function() {
 			object.climate = planetData[i].climate;
 			object.orbital_period = planetData[i].orbital_period;
 			object.terrain = planetData[i].terrain;
+			object.films = planetData[i].films;
 
 			scene.add( object );
 			planets.push( object );
@@ -692,7 +693,7 @@ $(document).ready(function() {
 		    easing: 'easeInQuart',
 		    complete: function() {
 		    	$('#planet-data-name, #planet-data-size, #planet-data-pop, #planet-data-orbit, #planet-data-rotation, #planet-data-climate, #planet-data-terrain').empty();
-		    	$('.planet-film').removeClass('disabled');
+		    	$('.planet-film').addClass('disabled');
 		    }
 		});
 	}
@@ -726,6 +727,21 @@ $(document).ready(function() {
 				$('#planet-data-rotation').text( planet.rotation_period );
 				$('#planet-data-climate').text( planet.climate );
 				$('#planet-data-terrain').text( planet.terrain );
+
+
+				for ( i = 0; i < planet.films.length; i ++ ) {
+					for ( x = 0; x < filmData.length; x ++ ) {
+						if ( planet.films[i] == filmData[x].url ) {
+							$('.planet-film').each(function(){
+								var episode = $(this).data( 'episode' );
+
+								if ( filmData[x].episode_id === episode ) {
+									$(this).removeClass('disabled');
+								}
+							});
+						}
+					}
+				}
 		    }
 		});
 	}
