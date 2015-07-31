@@ -709,9 +709,18 @@ $(document).ready(function() {
 		    duration: 1350,
 		    easing: 'easeOutQuart',
 		    begin: function() {
+		    	var populationNumber;
+
+		    	if ( planet.population === 'unknown' ) {
+		    		populationNumber = planet.population;
+		    	}
+		    	else {
+		    		populationNumber = parseInt(planet.population).toLocaleString();
+		    	}
+
 				$('#planet-data-name').text( planet.name );
-				$('#planet-data-size').text( planet.diameter );
-				$('#planet-data-pop').text( planet.population );
+				$('#planet-data-size').text( planet.diameter.toLocaleString() );
+				$('#planet-data-pop').text( populationNumber );
 				$('#planet-data-orbit').text( planet.orbital_period );
 				$('#planet-data-rotation').text( planet.rotation_period );
 				$('#planet-data-climate').text( planet.climate );
