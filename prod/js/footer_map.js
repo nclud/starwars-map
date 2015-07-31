@@ -370,8 +370,15 @@ $(document).ready(function() {
 			object.position.set( planetX, 0, planetZ );
 			object.castShadow = true;
 			object.receiveShadow = true;
+
+			// STORE PLANET DATA
 			object.name = planetName;
 			object.rotation_period = planetRotation;
+			object.diameter = planetData[i].diameter;
+			object.population = planetData[i].population;
+			object.climate = planetData[i].climate;
+			object.orbital_period = planetData[i].orbital_period;
+			object.terrain = planetData[i].terrain;
 
 			scene.add( object );
 			planets.push( object );
@@ -673,14 +680,19 @@ $(document).ready(function() {
 
 	// HIDE OVERLAY
 	function hideOverlay() {
+		var yDistance = '165%'
+
 		$('#planet-data-overlay').velocity({
 		    translateZ: 0,
 		    translateX: '-50%',
-		    translateY: '150%'
+		    translateY: yDistance
 		}, {
 			delay: 350,
 		    duration: 750,
-		    easing: 'easeInQuart'
+		    easing: 'easeInQuart',
+		    complete: function() {
+		    	$('#planet-data-name, #planet-data-size, #planet-data-pop, #planet-data-orbit, #planet-data-rotation, #planet-data-climate, #planet-data-terrain').empty();
+		    }
 		});
 	}
 
@@ -695,7 +707,16 @@ $(document).ready(function() {
 		}, {
 			delay: 1300,
 		    duration: 1350,
-		    easing: 'easeOutQuart'
+		    easing: 'easeOutQuart',
+		    begin: function() {
+				$('#planet-data-name').text( planet.name );
+				$('#planet-data-size').text( planet.diameter );
+				$('#planet-data-pop').text( planet.population );
+				$('#planet-data-orbit').text( planet.orbital_period );
+				$('#planet-data-rotation').text( planet.rotation_period );
+				$('#planet-data-climate').text( planet.climate );
+				$('#planet-data-terrain').text( planet.terrain );
+		    }
 		});
 	}
 

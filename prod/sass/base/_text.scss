@@ -217,6 +217,11 @@ label {
 		font-weight: 900;
 	}
 
+	&:nth-child(5) {
+		clear: both;
+		float: none;
+		width: 100%;
+	}
 	&:last-child {
 		clear: both;
 		float: none;

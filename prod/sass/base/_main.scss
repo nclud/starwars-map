@@ -106,11 +106,15 @@ main {
 	width: 15%;
 	margin-right: 2%;
 
+	&.disabled {
+		opacity: 0.25;
+	}
+
 	&:last-child {
 		margin-right: 0;
 	}
 
-	&:before {
+	&:not(.disabled):before {
 		position: absolute;
 		display: block;
 		top: 0;
