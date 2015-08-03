@@ -40,44 +40,15 @@ nav {
 
 
 input[type=checkbox] {
-	@include appearance(none);
-	outline: none;
-	cursor: pointer;
-	pointer-events: none;
-
 	position: absolute;
 	left: 0;
 	top: 50%;
+	z-index: 1;
 
-	display: block;
-	width: 0.8rem;
-	height: 0.8rem;
-	margin-top: -0.5rem;
-
-	border-radius: 100%;
-	border: 2px solid white;
-
-	&:before {
-		width: 100%;
-		height: 100%;
-		display: block;
-
-		background: none;
-
-		border: 2px solid black;
-		border-radius: 100%;
-
-		@include transition(background 0.1s);
-		
-		content: "";
-	}
-
-
-	&:checked {
-		&:before {
-			background: $gold;
-		}
-	}
+	@include appearance(none);
+	opacity: 0;
+	outline: none;
+	cursor: pointer;
 }
 
 label {
@@ -85,6 +56,49 @@ label {
 	
 	display: block;
 	padding: 1.4rem 0 1.4rem 2em;
+
+	&:before {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		z-index: 5;
+
+		display: block;
+		width: 0.8rem;
+		height: 0.8rem;
+		margin-top: -0.45rem;
+
+		border-radius: 100%;
+		border: 2px solid white;
+
+		content: '';
+	}
+	&:after {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		z-index: 3;
+
+		display: block;
+		width: 0.8rem;
+		height: 0.8rem;
+		margin-top: -0.45rem;
+
+		background: black;
+
+		border: 4px solid black;
+		border-radius: 100%;
+
+		@include transition(background 0.1s);
+
+		content: '';
+	}
+
+	input[type=checkbox]:checked + & {
+		&:after {
+			background: $gold;
+		}
+	}
 }
 
 
