@@ -20,7 +20,8 @@
 	@include transform(translate3d(-50%,-50%,0) rotate(0deg));
 	@include transition(opacity 0.1s, transform 0.125s);
 
-	&:hover {
+	&:hover,
+	&:active {
 		opacity: 1;
 	}
 
@@ -69,7 +70,8 @@
 	}
 
 
-	&:hover {
+	&:hover,
+	&:active {
 		opacity: 0.875;
 	}
 }
