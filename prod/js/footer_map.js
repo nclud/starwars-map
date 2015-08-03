@@ -588,7 +588,6 @@ $(document).ready(function() {
 		planetText.style.display = 'none';
 
 		// HIDE OTHER OBJECTS FROM SCREEN
-		galaxy.visible = false;
 		for ( planet = 0; planet < planets.length; planet ++ ) {
 			if ( planets[planet].visible = true ) {
 				visiblePlanets.push( planets[planet] );
@@ -598,19 +597,24 @@ $(document).ready(function() {
 			}
 		}
 
-		// console.log( visiblePlanets );
+		// HIDE GALAXY HALFWAY IN
+		setTimeout(function(){
+			galaxy.visible = false;
+		}, 1000 );
 	}
 	function showEverything() {
 		window.addEventListener( 'click', onDocumentClick, false );
 		intersections = true;
 		controls.enabled = true;
 
-		galaxy.visible = true;
 		for ( planet = 0; planet < visiblePlanets.length; planet ++ ) {
 			visiblePlanets[planet].visible = true;
 		}
-
 		visiblePlanets = [];
+
+		// // setTimeout(function(){
+		// 	galaxy.visible = true;
+		// // }, 500 );
 	}
 
 	function zoomIntoPlanet( planet, duration ) {
@@ -689,6 +693,10 @@ $(document).ready(function() {
 				}, 150);
 			}
 		});
+
+		setTimeout(function(){
+			galaxy.visible = true;
+		}, 1250 );
 	}
 	
 
