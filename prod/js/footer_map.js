@@ -45,6 +45,7 @@ var planetText,
 	planetOverlay;
 var outlineMaterial,
 	outlineMesh;
+var visiblePlanets = [];
 
 // MOTION VARIABLES
 var clock = new THREE.Clock();
@@ -583,10 +584,15 @@ $(document).ready(function() {
 		// HIDE OTHER OBJECTS FROM SCREEN
 		galaxy.visible = false;
 		for ( planet = 0; planet < planets.length; planet ++ ) {
+			if ( planets[planet].visible = true ) {
+				visiblePlanets.push( planets[planet] );
+			}
 			if ( planets[planet] !== object ) {
 				planets[planet].visible = false;
 			}
 		}
+
+		// console.log( visiblePlanets );
 	}
 	function showEverything() {
 		window.addEventListener( 'click', onDocumentClick, false );
@@ -594,9 +600,11 @@ $(document).ready(function() {
 		controls.enabled = true;
 
 		galaxy.visible = true;
-		for ( planet = 0; planet < planets.length; planet ++ ) {
-			planets[planet].visible = true;
+		for ( planet = 0; planet < visiblePlanets.length; planet ++ ) {
+			visiblePlanets[planet].visible = true;
 		}
+
+		visiblePlanets = [];
 	}
 
 	function zoomIntoPlanet( planet, duration ) {
