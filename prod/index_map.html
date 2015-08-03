@@ -35,34 +35,6 @@
 <body>
 
 <main>
-	<section id="star-map">
-		<button id="button-nav"><img src="/img/icon-menu.svg" alt="MENU"></button>
-
-		<div id="planet-data-overlay">
-			<a href="#" id="button-close"></a>
-			
-			<h2 id="planet-data-name"></h2>
-			<div class="planet-data-column">
-				<span class="planet-data-text">Size: <span class="planet-data-value" id="planet-data-size"></span></span>
-				<span class="planet-data-text">Population: <span class="planet-data-value" id="planet-data-pop"></span></span>
-				<span class="planet-data-text">Orbital Period: <span class="planet-data-value" id="planet-data-orbit"></span></span>
-				<span class="planet-data-text">Rotation Period: <span class="planet-data-value" id="planet-data-rotation"></span></span>
-				<span class="planet-data-text">Climate: <span class="planet-data-value" id="planet-data-climate"></span></span>
-				<span class="planet-data-text">Terrain: <span class="planet-data-value" id="planet-data-terrain"></span></span>
-			</div>
-			<div class="planet-films-column">
-				<div class="planet-film disabled" id="episode1" data-episode="1"><img src="/img/movie-episode1.jpg"></div>
-				<div class="planet-film disabled" id="episode2" data-episode="2"><img src="/img/movie-episode2.jpg"></div>
-				<div class="planet-film disabled" id="episode3" data-episode="3"><img src="/img/movie-episode3.jpg"></div>
-				<div class="planet-film disabled" id="episode4" data-episode="4"><img src="/img/movie-episode4.jpg"></div>
-				<div class="planet-film disabled" id="episode5" data-episode="5"><img src="/img/movie-episode5.jpg"></div>
-				<div class="planet-film disabled" id="episode6" data-episode="6"><img src="/img/movie-episode6.jpg"></div>
-			</div>
-		</div>
-
-		<h3 id="planet-title"></span>
-	</section>
-
 	<nav>
 		<div class="page-title">
 			<h1>Star Wars</h1>
@@ -106,6 +78,34 @@
 			Designed and developed by <a href="http://nclud.com" target="_blank">nclud</a>. All information, characters, locations, and story © <a href="http://lucasfilm.com/" target="_blank">Lucasfilm</a> and <a href="http://disney.com/" target="_blank">Disney</a>. Star Wars: An Interactive Galactic Experience uses data from the <a href="http://swapi.co/" target="_blank">Star Wars API</a>. Source available on <a href="https://github.com/nclud/starwars-map" target="_blank">Github</a>.
 		</span>
 	</nav>
+	
+	<section id="star-map">
+		<button id="button-nav"><img src="/img/icon-menu.svg" alt="MENU"></button>
+
+		<div id="planet-data-overlay">
+			<a href="#" id="button-close"></a>
+			
+			<h2 id="planet-data-name"></h2>
+			<div class="planet-data-column">
+				<span class="planet-data-text">Size: <span class="planet-data-value" id="planet-data-size"></span></span>
+				<span class="planet-data-text">Population: <span class="planet-data-value" id="planet-data-pop"></span></span>
+				<span class="planet-data-text">Orbital Period: <span class="planet-data-value" id="planet-data-orbit"></span></span>
+				<span class="planet-data-text">Rotation Period: <span class="planet-data-value" id="planet-data-rotation"></span></span>
+				<span class="planet-data-text">Climate: <span class="planet-data-value" id="planet-data-climate"></span></span>
+				<span class="planet-data-text">Terrain: <span class="planet-data-value" id="planet-data-terrain"></span></span>
+			</div>
+			<div class="planet-films-column">
+				<div class="planet-film disabled" id="episode1" data-episode="1"><img src="/img/movie-episode1.jpg"></div>
+				<div class="planet-film disabled" id="episode2" data-episode="2"><img src="/img/movie-episode2.jpg"></div>
+				<div class="planet-film disabled" id="episode3" data-episode="3"><img src="/img/movie-episode3.jpg"></div>
+				<div class="planet-film disabled" id="episode4" data-episode="4"><img src="/img/movie-episode4.jpg"></div>
+				<div class="planet-film disabled" id="episode5" data-episode="5"><img src="/img/movie-episode5.jpg"></div>
+				<div class="planet-film disabled" id="episode6" data-episode="6"><img src="/img/movie-episode6.jpg"></div>
+			</div>
+		</div>
+
+		<h3 id="planet-title"></span>
+	</section>
 </main>
 
 <script type="x-shader/x-vertex" id="galaxyvertex">
