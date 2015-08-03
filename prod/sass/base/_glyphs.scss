@@ -41,7 +41,7 @@
 	height: 1.5rem;
 	display: block;
 
-	z-index: 15;
+	pointer-events: auto;
 
 	opacity: 0.4;
 	@include transition(opacity 0.15s);

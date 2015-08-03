@@ -67,7 +67,7 @@ main {
 	background: white;
 	border-radius: 0.6rem 0.6rem 0.5rem 0.5rem;
 
-	@include transform(translate(-50%, 150%));
+	@include transform(translate(-50%, 165%));
 
 	&:before {
 		position: absolute;
@@ -97,6 +97,14 @@ main {
 
 			content: '';
 		}
+	}
+
+	@include breakpoint(large) {
+		font-size: 1.2rem;
+		width: 40rem;
+	}
+	@include breakpoint(portrait) {
+		@include transform(translate(-50%, 200%));
 	}
 }
 
@@ -147,7 +155,7 @@ main {
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 
-		@include transform(translate(-50%,-50%));
+		@include transform(translate3d(-50%,-50%,0));
 
 		content: '';
 	}

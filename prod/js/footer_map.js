@@ -2,6 +2,9 @@
 var stats;
 
 
+// WINDOW VARIABLES
+var windowWidth = $(window).width(),
+	windowHeight = $(window).height();
 
 // GENERAL VARIABLES
 var container;
@@ -531,6 +534,9 @@ $(document).ready(function() {
 
 	// HANDLER - RESIZE
 	function onWindowResize() {
+		windowWidth = $(window).width(),
+		windowHeight = $(window).height();
+
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 
@@ -689,7 +695,10 @@ $(document).ready(function() {
 
 	// HIDE OVERLAY
 	function hideOverlay() {
-		var yDistance = '165%'
+		var yDistance = '165%';
+		if ( windowHeight > 900 ) {
+			yDistance = '190%';
+		}
 
 		$('#planet-data-overlay').velocity({
 		    translateZ: 0,
@@ -713,7 +722,7 @@ $(document).ready(function() {
 		$('#planet-data-overlay').velocity({
 		    translateZ: 0,
 		    translateX: '-50%',
-		    translateY: '0'
+		    translateY: 0
 		}, {
 			delay: 1300,
 		    duration: 1350,
