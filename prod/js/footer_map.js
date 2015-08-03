@@ -611,10 +611,6 @@ $(document).ready(function() {
 			visiblePlanets[planet].visible = true;
 		}
 		visiblePlanets = [];
-
-		// // setTimeout(function(){
-		// 	galaxy.visible = true;
-		// // }, 500 );
 	}
 
 	function zoomIntoPlanet( planet, duration ) {
@@ -690,7 +686,7 @@ $(document).ready(function() {
 
 				setTimeout(function(){
 					showEverything();
-				}, 150);
+				}, 50);
 			}
 		});
 
