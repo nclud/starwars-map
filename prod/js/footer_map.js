@@ -785,6 +785,7 @@ $(document).ready(function() {
 			// nav open
 			$('main').removeClass('nav-open');
 
+			intersections = true;
 			controls.enabled = true;
 
 			$('#star-map').velocity({
@@ -799,6 +800,7 @@ $(document).ready(function() {
 			// nav closed
 			$('main').addClass('nav-open');
 
+			intersections = false;
 			controls.enabled = false;
 
 			$('#star-map').velocity({
