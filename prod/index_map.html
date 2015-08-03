@@ -35,12 +35,9 @@
 <body>
 
 <main>
-	<nav>
-	</nav>
-
 	<section id="star-map">
 		<button id="button-nav"><img src="/img/icon-menu.svg" alt="MENU"></button>
-		
+
 		<div id="planet-data-overlay">
 			<a href="#" id="button-close"></a>
 			
@@ -65,6 +62,50 @@
 
 		<h3 id="planet-title"></span>
 	</section>
+
+	<nav>
+		<div class="page-title">
+			<h1>Star Wars</h1>
+			<span class="description">An Interactive Galactic Experience</span>
+		</div>
+
+		<ul class="filter-list">
+			<span class="filter-title">Filter By Movie</span>
+			<li class="filter-list-single">
+				<input type="checkbox" id="episode1" name="episode1" value="episode1" checked />
+				<label for="episode1">Episode I: The Phantom Menace</label>
+			</li>
+			<li class="filter-list-single">
+				<input type="checkbox" id="episode2" name="episode2" value="episode2" checked />
+				<label for="episode2">Episode II: Attack of the Clones</label>
+			</li>
+			<li class="filter-list-single">
+				<input type="checkbox" id="episode3" name="episode3" value="episode3" checked />
+				<label for="episode3">Episode III: Revenge of the Sith</label>
+			</li>
+			<li class="filter-list-single">
+				<input type="checkbox" id="episode4" name="episode4" value="episode4" checked />
+				<label for="episode4">Episode IV: A New Hope</label>
+			</li>
+			<li class="filter-list-single">
+				<input type="checkbox" id="episode5" name="episode5" value="episode5" checked />
+				<label for="episode5">Episode V: The Empire Strikes Back</label>
+			</li>
+			<li class="filter-list-single">
+				<input type="checkbox" id="episode6" name="episode6" value="episode6" checked />
+				<label for="episode6">Episode VI: Return of the Jedi</label>
+			</li>
+		</ul>
+
+		<div class="share-buttons">
+			<a href="#" class="social-share">Share On Twitter</a>
+			<a href="#" class="social-share">Share On Facebook</a>
+		</div>
+
+		<span class="site-credits">
+			Designed and developed by <a href="http://nclud.com" target="_blank">nclud</a>. All information, characters, locations, and story © <a href="http://lucasfilm.com/" target="_blank">Lucasfilm</a> and <a href="http://disney.com/" target="_blank">Disney</a>. Star Wars: An Interactive Galactic Experience uses data from the <a href="http://swapi.co/" target="_blank">Star Wars API</a>. Source available on <a href="https://github.com/nclud/starwars-map" target="_blank">Github</a>.
+		</span>
+	</nav>
 </main>
 
 <script type="x-shader/x-vertex" id="galaxyvertex">

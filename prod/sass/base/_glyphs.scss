@@ -26,7 +26,7 @@
 	}
 
 
-	&.nav-open {
+	.nav-open & {
 		opacity: 1;
 
 		@include transform(translate3d(-50%,-50%,0) rotate(-90deg));

@@ -1,15 +1,12 @@
 /* NAV FUNCTION */
 
-main {
-	#star-map {
-		@include transform(translate3d(0,0,0));
-		@include transition(transform 0.25s ease-in-out);
-	}
+#star-canvas {
+	opacity: 1;
 
+	@include transition(opacity 0.15s cubic-bezier(0.47, 0, 0.745, 0.715));
+	@include transition-delay(0.1s);
 
-	&.nav-open {
-		#star-map {
-			@include transform(translate3d(23rem,0,0));
-		}
+	.nav-open & {
+		opacity: 0.5;
 	}
 }

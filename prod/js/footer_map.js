@@ -188,6 +188,7 @@ $(document).ready(function() {
 		renderer.setClearColor( 0x000000 );
 		renderer.shadowMapEnabled = true;
 		renderer.setSize( window.innerWidth, window.innerHeight );
+		renderer.domElement.id = 'star-canvas';
 
 
 		// CONTAINER BUUILD
@@ -768,9 +769,47 @@ $(document).ready(function() {
 	}
 
 
+
 	// GENERAL FUNCTION TO GENERATE RANDOM NUMBER
 	function randomRange( min, max ) {
 		return Math.random() * (max - min) + min;
 	}
 
+
+
+	// NAV FUNCTIONALITY
+	$('#button-nav').on('click', function(){
+		var xDistance = '23rem';
+
+		if ( $('main').hasClass('nav-open') ) {
+			// nav open
+			$('main').removeClass('nav-open');
+
+			controls.enabled = true;
+
+			$('#star-map').velocity({
+			    translateZ: 0,
+			    translateX: 0
+			}, {
+			    duration: 250,
+			    easing: 'easeInSine'
+			});
+		}
+		else {
+			// nav closed
+			$('main').addClass('nav-open');
+
+			controls.enabled = false;
+
+			$('#star-map').velocity({
+			    translateZ: 0,
+			    translateX: xDistance
+			}, {
+			    duration: 250,
+			    easing: 'easeInSine'
+			});
+		}
+
+		return false;
+	});
 });
