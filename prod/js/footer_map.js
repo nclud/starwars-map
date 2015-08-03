@@ -696,7 +696,7 @@ $(document).ready(function() {
 
 		setTimeout(function(){
 			galaxy.visible = true;
-		}, 1250 );
+		}, 1650 );
 	}
 	
 
