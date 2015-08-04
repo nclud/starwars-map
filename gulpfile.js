@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
 
 	// Server and sync
+	php  = require('gulp-connect-php'),
 	browserSync = require('browser-sync'),
 
 	// Other plugins
@@ -15,12 +16,19 @@ var gulp = require('gulp'),
 
 
 // Server initiation and livereload, opens server in browser
-gulp.task('serve', function() {
-	browserSync.init(null, {
-		server: {
-			baseDir: './prod'
-		},
-		host: 'localhost'
+gulp.task('php', function() {
+    php.server({
+    	base: 'prod',
+    	port: 8010,
+    	keepalive: true
+    });
+});
+gulp.task('serve', ['php'], function() {
+    browserSync({
+        proxy: '127.0.0.1:8010',
+        port: 3000,
+        open: true,
+        notify: false
     });
 });
 
@@ -122,6 +130,14 @@ gulp.task('watch-html', function() {
 	    }));
 });
 
+gulp.task('watch-php', function() {
+	gulp.src('./prod/**/*.php')
+	    .pipe(browserSync.reload({
+	    	stream: true,
+	    	once: true
+	    }));
+});
+
 
 
 
@@ -131,6 +147,7 @@ gulp.task('default', ['serve', 'sass'], function(){
 	gulp.watch('./prod/img/**/*', ['watch-img']);
 	gulp.watch('./prod/js/**/*.js', ['watch-js']);
 	gulp.watch('./prod/**/*.html', ['watch-html']);
+	gulp.watch('./prod/**/*.php', ['watch-php']);
 });
 
 // Build functionality with cleaning, moving, compiling, etc.
