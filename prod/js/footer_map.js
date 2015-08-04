@@ -809,7 +809,7 @@ $(document).ready(function() {
 		}
 
 		if ( $('main').hasClass('nav-open') ) {
-			// nav open
+			// NAV CLOSING
 			$('body, main').removeClass('nav-open');
 
 			r2navclose.play();
@@ -826,7 +826,7 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			// nav closed
+			// NAV OPENING
 			$('body, main').addClass('nav-open');
 
 			r2navopen.play();
@@ -853,8 +853,31 @@ $(document).ready(function() {
 		var filterEpisode = $(this).attr('value'),
 			filterURL;
 
-		console.log( filterEpisode );
+		for ( i = 0; i < filmData.length; i ++ ) {
+			if ( filterEpisode == filmData[i].episode_id ) {
+				filterURL = filmData[i].url;
+			}
+		}
 
-
+		if ( $(this).is(':checked') ) {
+			// TURNING CHECK ON
+			for ( planet = 0; planet < planets.length; planet ++ ) {
+				for ( film = 0; film < planets[planet].films.length; film ++ ) {
+					if ( filterURL == planets[planet].films[film] ) {
+						planets[planet].visible = true;
+					}
+				}
+			}
+		}
+		else {
+			// TURNING CHECK OFF
+			for ( planet = 0; planet < planets.length; planet ++ ) {
+				for ( film = 0; film < planets[planet].films.length; film ++ ) {
+					if ( filterURL == planets[planet].films[film] ) {
+						planets[planet].visible = false;
+					}
+				}
+			}
+		}
 	});
 });
