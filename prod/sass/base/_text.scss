@@ -47,6 +47,12 @@ h2 {
 
 		content: '';
 	}
+
+
+	@include breakpoint(mobile) {
+		padding: 0.65rem 1rem 0.75rem;
+		margin-bottom: 1rem;
+	}
 }
 
 h3 {
@@ -230,9 +236,21 @@ label {
 		float: none;
 		width: 100%;
 
-		padding-bottom: 1.1rem;
+		padding-bottom: 1.25rem;
 		border-bottom: 1px solid $gold-dark;
 		margin-bottom: 1.25rem;
+
+
+		@include breakpoint(mobile) {
+			padding-bottom: 1rem;
+			margin-bottom: 1rem;
+		}
+	}
+
+
+	@include breakpoint(mobile) {
+		float: none;
+		width: 100%;
 	}
 }
 

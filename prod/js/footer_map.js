@@ -787,6 +787,9 @@ $(document).ready(function() {
 	// NAV FUNCTIONALITY
 	$('#button-nav').on('click', function(){
 		var xDistance = '23rem';
+		if ( windowWidth <= 640 ) {
+			xDistance = '81%';
+		}
 
 		if ( $('main').hasClass('nav-open') ) {
 			// nav open
