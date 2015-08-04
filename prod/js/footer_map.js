@@ -335,7 +335,8 @@ $(document).ready(function() {
 	function getPlanets() {
 		workerPlanets.postMessage({
 			'cmd': 'start',
-			'pages': 7
+			'pages': 7,
+			'protocol': window.location.protocol
 		});
 		workerPlanets.addEventListener( 'message', function(e) {
 			planetData = e.data;
@@ -389,7 +390,10 @@ $(document).ready(function() {
 
 	// GET FILM DATA
 	function getFilms() {
-		workerFilms.postMessage({	'cmd': 'start' });
+		workerFilms.postMessage({
+			'cmd': 'start',
+			'protocol': window.location.protocol
+		});
 
 		workerFilms.addEventListener( 'message', function(e) {
 			filmData = e.data;

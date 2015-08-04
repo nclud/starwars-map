@@ -1,9 +1,12 @@
 importScripts('oboe.js');
 
 var workerFilms = [];
+var protocol;
 
 function getFilmData() {
-	oboe( '//swapi.co/api/films/?page=1' )
+	var url = protocol + '//swapi.co/api/films/?page=1';
+
+	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400' )
 		.node('results.*', function( film ){
 			workerFilms.push( film );
 
@@ -28,6 +31,8 @@ self.addEventListener( 'message', function( e ) {
 
 	switch (data.cmd) {
 		case 'start':
+			protocol = data.protocol;
+
 			getFilmData();
 
 			break;

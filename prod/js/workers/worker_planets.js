@@ -1,6 +1,7 @@
 importScripts('oboe.js');
 
 var pages;
+var protocol;
 
 var workerLocalPlanets = [],
 	workerRemotePlanets = [];
@@ -87,6 +88,7 @@ self.addEventListener( 'message', function( e ) {
 	switch (data.cmd) {
 		case 'start':
 			pages = data.pages;
+			protocol = data.protocol;
 
 			getLocalPlanetData();
 			getRemotePlanetData();
