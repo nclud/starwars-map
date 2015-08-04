@@ -532,7 +532,7 @@ $(document).ready(function() {
 		var intersects = raycaster.intersectObjects( planets );
 
 		if ( intersects.length > 0 ) {
-			if ( INTERSECTED != intersects[ 0 ].object ) {
+			if ( INTERSECTED != intersects[ 0 ].object && intersects[ 0 ].object.visible ) {
 				INTERSECTED = intersects[ 0 ].object;
 
 				hideEverything( INTERSECTED );
@@ -853,8 +853,23 @@ $(document).ready(function() {
 		var filterEpisode = $(this).attr('value'),
 			filterURL;
 
-		if ( filterEpisode === 0 ) {
-
+		if ( filterEpisode == 0 ) {
+			if ( $(this).is(':checked') ) {
+				// TURNING CHECK ON
+				for ( planet = 0; planet < planets.length; planet ++ ) {
+					if ( planets[planet].films.length == 0 ) {
+						planets[planet].visible = true;
+					}
+				}
+			}
+			else {
+				// TURNING CHECK OFF
+				for ( planet = 0; planet < planets.length; planet ++ ) {
+					if ( planets[planet].films.length == 0 ) {
+						planets[planet].visible = false;
+					}
+				}
+			}
 		}
 		else {
 			for ( i = 0; i < filmData.length; i ++ ) {
