@@ -6,6 +6,9 @@ var stats;
 var windowWidth = $(window).width(),
 	windowHeight = $(window).height();
 
+// DETERMINE IF MOBILE
+var isMobile = navigator.userAgent.match(/mobile/i);
+
 // GENERAL VARIABLES
 var container;
 var scene,
@@ -106,26 +109,6 @@ $(document).ready(function() {
 
 		globalLight = new THREE.HemisphereLight( 0xffffff, 0x000000, 0.85 );
 		scene.add( globalLight );
-
-
-		// ADDING GRID FOR REFERENCE
-		// var gridGeometry = new THREE.PlaneGeometry(
-	 //           3000,
-	 //           3000,
-	 //           Math.round(2000 / 150),
-	 //           Math.round(2000 / 150)
-  //          );
-		// var gridMaterial = new THREE.MeshBasicMaterial({
-		// 		wireframe: true,
-		// 		opacity: 0.15,
-		// 		transparent: true,
-		// 		side: THREE.DoubleSide
-		// 	});
-		// var grid = new THREE.Mesh( gridGeometry, gridMaterial );
-		// grid.rotation.order = 'YXZ';
-		// grid.rotation.y = - Math.PI / 2;
-		// grid.rotation.x = - Math.PI / 2;
-		// scene.add( grid );
 
 
 		// ADDING CONTROLS & LIMITS
@@ -440,9 +423,6 @@ $(document).ready(function() {
 
 			singlePlanet.rotation.y = ( time / 48 ) * singlePlanet.rotation_period;
 		}
-		// scene.traverse(function ( object ) {
-		// 	console.log( object );
-		// });
 
 		// FIND INTERSECTIONS
 		if ( planetsLoaded && intersections ) {
