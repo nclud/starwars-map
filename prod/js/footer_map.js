@@ -783,7 +783,7 @@ $(document).ready(function() {
 
 		if ( $('main').hasClass('nav-open') ) {
 			// nav open
-			$('main').removeClass('nav-open');
+			$('body, main').removeClass('nav-open');
 
 			intersections = true;
 			controls.enabled = true;
@@ -798,7 +798,7 @@ $(document).ready(function() {
 		}
 		else {
 			// nav closed
-			$('main').addClass('nav-open');
+			$('body, main').addClass('nav-open');
 
 			intersections = false;
 			controls.enabled = false;
@@ -824,6 +824,6 @@ $(document).ready(function() {
 
 		console.log( filterEpisode );
 
-		
+
 	});
 });
