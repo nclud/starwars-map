@@ -12,38 +12,41 @@ function getLocalPlanetData() {
 	oboe( '/data/planets.json' )
 		.node('planets.*', function( planet ){
 			workerLocalPlanets.push( planet );
+
 			return oboe.drop;
 		})
-		.done(function(){})
+		.done(function(){
+			getRemotePlanetData();
+		})
 		.fail(function(){
 			console.log('Local JSON error.');
 		});
 }
 
 function getRemotePlanetData() {
-	for ( i = 1; i < (pages + 1); i ++ ) {
-		oboe( '//swapi.co/api/planets/?page=' + i )
-			.node('results.*', function( planet ){
-				workerRemotePlanets.push( planet );
-				return oboe.drop;
-			})
-			.done(function(){
-				completed.push(0);
+	var url = '';
 
-				if ( completed.length == pages ) {
-					planetRequestComplete();
-				}
-			})
-			.fail(function(){
-				console.log('Remote SWAPI JSON error with planets.');
-			});
+	for ( i = 1; i < pages; i ++ ) {
+		url += protocol + '//swapi.co/api/planets/?page=' + i + ',';
 	}
+	url += protocol + '//swapi.co/api/planets/?page=' + pages;
+
+	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400&json' )
+		.node('results.*', function( planet ){
+			workerRemotePlanets.push( planet );
+
+			return oboe.drop;
+		})
+		.done(function(){
+			planetRequestComplete();
+		})
+		.fail(function(){
+			console.log('Remote SWAPI JSON error with planets.');
+		});
 }
 
 function planetRequestComplete() {
 	for ( i = 0; i < workerRemotePlanets.length; i ++ ) {
-		// console.log(i);
-
 		// GIVE GENERAL DIAMETER & ROTATION IF MISSING
 		if ( workerRemotePlanets[i].diameter === 'unknown' || workerRemotePlanets[i].diameter === '0' ) {
 			workerRemotePlanets[i].diameter = 10000;
@@ -91,7 +94,6 @@ self.addEventListener( 'message', function( e ) {
 			protocol = data.protocol;
 
 			getLocalPlanetData();
-			getRemotePlanetData();
 
 			break;
 
