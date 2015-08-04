@@ -608,7 +608,7 @@ $(document).ready(function() {
 
 		// HIDE OTHER OBJECTS FROM SCREEN
 		for ( planet = 0; planet < planets.length; planet ++ ) {
-			if ( planets[planet].visible = true ) {
+			if ( planets[planet].visible ) {
 				visiblePlanets.push( planets[planet] );
 			}
 			if ( planets[planet] !== object ) {
