@@ -254,4 +254,43 @@ label {
 	}
 }
 
+.sound-text {
+	display: block;
+	text-align: right;
 
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	font-size: 0.85em;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 0.075em;
+
+	line-height: 1.2;
+
+	color: $gold-dark;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	opacity: 0.75;
+	@include transition(opacity 0.1s);
+
+	&:after {
+		margin-left: 0.5em;
+
+		font-weight: 900;
+
+		color: $gold;
+
+		content: 'On';
+	}
+
+	&:hover {
+		opacity: 1;
+	}
+
+	&.off {
+		&:after {
+			content: 'Off';
+		}
+	}
+}

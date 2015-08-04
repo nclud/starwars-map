@@ -900,4 +900,26 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+
+
+	// AUDIO MUTING
+	$('#button-sfx').on('click', function(){
+		if ( $(this).hasClass('off') ) {
+			$(this).removeClass('off');
+
+			$.each( soundFXArray, function( i, audio ) {
+				audio.muted = false;
+			});
+		}
+		else {
+			$(this).addClass('off');
+
+			$.each( soundFXArray, function( i, audio ) {
+				audio.muted = true;
+			});
+		}
+
+		return false;
+	});
 });

@@ -33,6 +33,21 @@
 	}
 }
 
+#button-sounds {
+	position: absolute;
+	top: 1.25rem;
+	right: 1.5rem;
+
+	opacity: 0.75;
+
+	@include transition(opacity 0.1s);
+
+	&:hover,
+	&:active {
+		opacity: 1;
+	}
+}
+
 #button-close {
 	position: absolute;
 	top: 0.5rem;
