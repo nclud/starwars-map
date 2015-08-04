@@ -133,6 +133,7 @@ $(document).ready(function() {
 		window.addEventListener( 'resize', onWindowResize, false );
 		window.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		window.addEventListener( 'click', onDocumentClick, false );
+		window.addEventListener( 'touchend', onTouchEnd, false );
 
 
 		// CREATE STARFIELD
@@ -532,6 +533,10 @@ $(document).ready(function() {
 	function onDocumentMouseMove( event ) {
 		mousePos.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mousePos.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	}
+	function onTouchEnd( event ) {
+		mousePos.x = + ( event.changedTouches[0].pageX / window.innerWidth ) * 2 +-1;
+		mousePos.y = - ( event.changedTouches[0].pageY / window.innerHeight ) * 2 + 1;
 	}
 
 
