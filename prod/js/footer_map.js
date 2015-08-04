@@ -814,4 +814,16 @@ $(document).ready(function() {
 
 		return false;
 	});
+
+
+
+	// FILTER FUNCTIONALITY
+	$('input').on('click', function(){
+		var filterEpisode = $(this).attr('value'),
+			filterURL;
+
+		console.log( filterEpisode );
+
+		
+	});
 });
