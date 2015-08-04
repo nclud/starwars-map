@@ -428,7 +428,13 @@ $(document).ready(function() {
 		// FIND INTERSECTIONS
 		if ( planetsLoaded && intersections ) {
 			raycaster.setFromCamera( mousePos, camera );
-			findIntersection();
+
+			if ( !isMobile ) {
+				findIntersection();
+			}
+			else if ( isMobile ) {
+				findIntersectionTouch();
+			}
 		}
 
 		// UPDATE CAMERA POSITION FOR GLOW POSITIONING
@@ -509,6 +515,22 @@ $(document).ready(function() {
 
 			planetText.innerHTML = '';
 			planetText.style.display = 'none';
+		}
+	}
+	function findIntersectionTouch() {
+		var intersects = raycaster.intersectObjects( planets );
+
+		if ( intersects.length > 0 ) {
+			if ( INTERSECTED != intersects[ 0 ].object ) {
+				INTERSECTED = intersects[ 0 ].object;
+
+				hideEverything( INTERSECTED );
+				zoomIntoPlanet( INTERSECTED, 3.25 );
+				showOverlay( INTERSECTED );
+			}
+		}
+		else {
+			INTERSECTED = null;
 		}
 	}
 
