@@ -494,7 +494,7 @@ $(document).ready(function() {
 		if ( intersects.length > 0 ) {
 			objectHover = true;
 
-			if ( INTERSECTED != intersects[ 0 ].object ) {
+			if ( INTERSECTED != intersects[ 0 ].object && intersects[ 0 ].object.visible ) {
 				INTERSECTED = intersects[ 0 ].object;
 
 				document.body.style.cursor = 'pointer';
@@ -853,28 +853,33 @@ $(document).ready(function() {
 		var filterEpisode = $(this).attr('value'),
 			filterURL;
 
-		for ( i = 0; i < filmData.length; i ++ ) {
-			if ( filterEpisode == filmData[i].episode_id ) {
-				filterURL = filmData[i].url;
-			}
-		}
+		if ( filterEpisode === 0 ) {
 
-		if ( $(this).is(':checked') ) {
-			// TURNING CHECK ON
-			for ( planet = 0; planet < planets.length; planet ++ ) {
-				for ( film = 0; film < planets[planet].films.length; film ++ ) {
-					if ( filterURL == planets[planet].films[film] ) {
-						planets[planet].visible = true;
+		}
+		else {
+			for ( i = 0; i < filmData.length; i ++ ) {
+				if ( filterEpisode == filmData[i].episode_id ) {
+					filterURL = filmData[i].url;
+				}
+			}
+
+			if ( $(this).is(':checked') ) {
+				// TURNING CHECK ON
+				for ( planet = 0; planet < planets.length; planet ++ ) {
+					for ( film = 0; film < planets[planet].films.length; film ++ ) {
+						if ( filterURL == planets[planet].films[film] ) {
+							planets[planet].visible = true;
+						}
 					}
 				}
 			}
-		}
-		else {
-			// TURNING CHECK OFF
-			for ( planet = 0; planet < planets.length; planet ++ ) {
-				for ( film = 0; film < planets[planet].films.length; film ++ ) {
-					if ( filterURL == planets[planet].films[film] ) {
-						planets[planet].visible = false;
+			else {
+				// TURNING CHECK OFF
+				for ( planet = 0; planet < planets.length; planet ++ ) {
+					for ( film = 0; film < planets[planet].films.length; film ++ ) {
+						if ( filterURL == planets[planet].films[film] ) {
+							planets[planet].visible = false;
+						}
 					}
 				}
 			}
