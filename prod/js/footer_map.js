@@ -69,7 +69,7 @@ var r2hover = new Audio('/audio/r2-hover.mp3'),
 	r2navopen = new Audio('/audio/r2-navopen.mp3'),
 	r2zoomin = new Audio('/audio/r2-zoomin.mp3'),
 	r2zoomout = new Audio('/audio/r2-zoomout.mp3');
-var soundsArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
+var soundFXArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
 
 
 
