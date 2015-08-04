@@ -63,6 +63,14 @@ var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
 	workerPlanets = new Worker('/js/workers/worker_planets.js'),
 	workerFilms = new Worker('/js/workers/worker_films.js');
 
+// AUDIO
+var r2hover = new Audio('/audio/r2-hover.mp3'),
+	r2navclose = new Audio('/audio/r2-navclose.mp3'),
+	r2navopen = new Audio('/audio/r2-navopen.mp3'),
+	r2zoomin = new Audio('/audio/r2-zoomin.mp3'),
+	r2zoomout = new Audio('/audio/r2-zoomout.mp3');
+var soundsArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
+
 
 
 $(document).ready(function() {
@@ -82,7 +90,7 @@ $(document).ready(function() {
 		hideOverlay();
 
 
-		// SCENE SETUP AND VARIABLES
+		// SCENE SETUP, AUDIO AND VARIABLES
 		scene = new THREE.Scene();
 
 
@@ -491,6 +499,9 @@ $(document).ready(function() {
 
 				document.body.style.cursor = 'pointer';
 
+				// PLAY SOUND
+				r2hover.play();
+
 				// ADD OUTLINE TO PLANETS
 				scene.remove( outlineMesh );
 				outlineMesh = new THREE.Mesh( INTERSECTED.geometry, outlineMaterial );
@@ -622,6 +633,9 @@ $(document).ready(function() {
 	}
 
 	function zoomIntoPlanet( planet, duration ) {
+		// PLAY AUDIO
+		r2zoomin.play();
+
 		// CAPTURE ORIGINAL VALUES
 		oldCameraPos.x = camera.position.x;
 		oldCameraPos.y = camera.position.y;
@@ -670,6 +684,9 @@ $(document).ready(function() {
 		});
 	}
 	function zoomOutPlanet( duration ) {
+		// PLAY AUDIO
+		r2zoomout.play();
+
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
 
@@ -795,6 +812,8 @@ $(document).ready(function() {
 			// nav open
 			$('body, main').removeClass('nav-open');
 
+			r2navclose.play();
+
 			intersections = true;
 			controls.enabled = true;
 
@@ -809,6 +828,8 @@ $(document).ready(function() {
 		else {
 			// nav closed
 			$('body, main').addClass('nav-open');
+
+			r2navopen.play();
 
 			intersections = false;
 			controls.enabled = false;
