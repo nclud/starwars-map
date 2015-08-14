@@ -7,6 +7,9 @@ nav {
 
 	font-size: 1rem;
 
+	.mobile & {
+		overflow-y: auto;
+	}
 
 	@include breakpoint(mobile) {
 		width: 81%;

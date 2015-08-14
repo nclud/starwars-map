@@ -83,6 +83,13 @@ $(document).ready(function() {
 	// FASTCLICK
 	FastClick.attach(document.body);
 
+	// FEATURES DESKTOP/MOBILE
+	if (isMobile) {
+		$('body').addClass('mobile');
+	} else {
+		$('body').addClass('desktop');
+	}
+
 
 
 	// INITIATE OVERALL THREE.JS SCENE
@@ -836,9 +843,9 @@ $(document).ready(function() {
 			xDistance = '81%';
 		}
 
-		if ( $('main').hasClass('nav-open') ) {
+		if ( $('body').hasClass('nav-open') ) {
 			// NAV CLOSING
-			$('body, main').removeClass('nav-open');
+			$('body').removeClass('nav-open');
 
 			r2navclose.play();
 
@@ -855,7 +862,7 @@ $(document).ready(function() {
 		}
 		else {
 			// NAV OPENING
-			$('body, main').addClass('nav-open');
+			$('body').addClass('nav-open');
 
 			r2navopen.play();
 
