@@ -89,7 +89,8 @@ h3 {
 		@include transition(border-color 0.1s);
 
 		&:hover,
-		&:active {
+		&:active,
+		&:focus {
 			border-color: $gold-darkest;
 		}
 	}
@@ -139,7 +140,8 @@ label {
 	@include transition(color 0.1s);
 
 	&:hover,
-	&:active {
+	&:active,
+	&:focus {
 		color: rgba(white,0.65);
 	}
 
@@ -176,7 +178,8 @@ label {
 	}
 
 	&:hover,
-	&:active {
+	&:active,
+	&:focus {
 		color: $gold;
 		border-color: $gold-dark;
 	}
@@ -284,7 +287,9 @@ label {
 		content: 'On';
 	}
 
-	&:hover {
+	&:hover,
+	&:active,
+	&:focus {
 		opacity: 1;
 	}
 

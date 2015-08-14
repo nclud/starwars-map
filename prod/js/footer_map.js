@@ -74,6 +74,10 @@ var soundFXArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
 
 
 $(document).ready(function() {
+	// FASTCLICK
+	FastClick.attach(document.body);
+
+
 
 	// INITIATE OVERALL THREE.JS SCENE
 	init();
@@ -355,13 +359,13 @@ $(document).ready(function() {
 				planetTexture = planetData[i].texture;
 
 			object = new THREE.Mesh(
-				new THREE.SphereGeometry( planetSize, 36, 36 ),
+				new THREE.SphereGeometry( planetSize, 22, 22 ),
 				new THREE.MeshPhongMaterial({
 					map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
 					bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
 					bumpScale: 	3,
 					metal: 		false,
-					shininess: 	20,
+					// shininess: 	20,
 					depthTest: 	true
 				})
 			);
