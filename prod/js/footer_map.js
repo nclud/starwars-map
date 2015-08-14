@@ -64,11 +64,17 @@ var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
 	workerFilms = new Worker('/js/workers/worker_films.js');
 
 // AUDIO
-var r2hover = new Audio('/audio/r2-hover.mp3'),
-	r2navclose = new Audio('/audio/r2-navclose.mp3'),
-	r2navopen = new Audio('/audio/r2-navopen.mp3'),
-	r2zoomin = new Audio('/audio/r2-zoomin.mp3'),
-	r2zoomout = new Audio('/audio/r2-zoomout.mp3');
+// var r2hover = new Audio('/audio/r2-hover.mp3'),
+// 	r2navclose = new Audio('/audio/r2-navclose.mp3'),
+// 	r2navopen = new Audio('/audio/r2-navopen.mp3'),
+// 	r2zoomin = new Audio('/audio/r2-zoomin.mp3'),
+// 	r2zoomout = new Audio('/audio/r2-zoomout.mp3');
+
+var r2hover = new Howl({ urls: ['/audio/r2-hover.mp3'] }),
+	r2navclose = new Howl({ urls: ['/audio/r2-navclose.mp3'] }),
+	r2navopen = new Howl({ urls: ['/audio/r2-navopen.mp3'] }),
+	r2zoomin = new Howl({ urls: ['/audio/r2-zoomin.mp3'] }),
+	r2zoomout = new Howl({ urls: ['/audio/r2-zoomout.mp3'] });
 var soundFXArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
 
 
@@ -932,6 +938,9 @@ $(document).ready(function() {
 
 			$.each( soundFXArray, function( i, audio ) {
 				audio.muted = false;
+				audio.volume(1);
+
+				console.log( audio );
 			});
 		}
 		else {
@@ -939,6 +948,9 @@ $(document).ready(function() {
 
 			$.each( soundFXArray, function( i, audio ) {
 				audio.muted = true;
+				audio.stop().volume(0);
+
+				console.log( audio );
 			});
 		}
 
