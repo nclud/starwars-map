@@ -358,17 +358,31 @@ $(document).ready(function() {
 				planetRotation = planetData[i].rotation_period,
 				planetTexture = planetData[i].texture;
 
-			object = new THREE.Mesh(
-				new THREE.SphereGeometry( planetSize, 22, 22 ),
-				new THREE.MeshPhongMaterial({
-					map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
-					bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
-					bumpScale: 	3,
-					metal: 		false,
-					// shininess: 	20,
-					depthTest: 	true
-				})
-			);
+			if (!isMobile) {
+				object = new THREE.Mesh(
+					new THREE.SphereGeometry( planetSize, 26, 26 ),
+					new THREE.MeshPhongMaterial({
+						map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
+						bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
+						bumpScale: 	3,
+						metal: 		false,
+						// shininess: 	20,
+						depthTest: 	true
+					})
+				);
+			}
+			else {
+				object = new THREE.Mesh(
+					new THREE.SphereGeometry( planetSize, 20, 20 ),
+					new THREE.MeshLambertMaterial({
+						map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
+						depthTest: 	true,
+						reflectivity: 1,
+						shading: THREE.SmoothShading
+					})
+				);
+			}
+
 			object.position.set( planetX, 0, planetZ );
 			object.castShadow = true;
 			object.receiveShadow = true;
