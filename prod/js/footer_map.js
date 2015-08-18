@@ -373,7 +373,7 @@ $(document).ready(function() {
 
 			if (!isMobile) {
 				object = new THREE.Mesh(
-					new THREE.SphereGeometry( planetSize, 26, 26 ),
+					new THREE.SphereGeometry( planetSize, 22, 22 ),
 					new THREE.MeshPhongMaterial({
 						map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
 						bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
@@ -539,7 +539,10 @@ $(document).ready(function() {
 
 				// ADD OUTLINE TO PLANETS
 				scene.remove( outlineMesh );
-				outlineMesh = new THREE.Mesh( INTERSECTED.geometry, outlineMaterial );
+
+				var outlineShape = new THREE.SphereGeometry( INTERSECTED.geometry.boundingSphere.radius, 30, 30 );
+				outlineMesh = new THREE.Mesh( outlineShape, outlineMaterial );
+
 				outlineMesh.position.set( INTERSECTED.position.x, INTERSECTED.position.y, INTERSECTED.position.z );
 				outlineMesh.scale.multiplyScalar(1.35);
 				scene.add( outlineMesh );
