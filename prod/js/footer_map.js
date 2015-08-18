@@ -70,11 +70,11 @@ var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
 // 	r2zoomin = new Audio('/audio/r2-zoomin.mp3'),
 // 	r2zoomout = new Audio('/audio/r2-zoomout.mp3');
 
-var r2hover = new Howl({ urls: ['/audio/r2-hover.mp3'] }),
-	r2navclose = new Howl({ urls: ['/audio/r2-navclose.mp3'] }),
-	r2navopen = new Howl({ urls: ['/audio/r2-navopen.mp3'] }),
-	r2zoomin = new Howl({ urls: ['/audio/r2-zoomin.mp3'] }),
-	r2zoomout = new Howl({ urls: ['/audio/r2-zoomout.mp3'] });
+var r2hover = new Howl({ src: ['/audio/r2-hover.mp3'] }),
+	r2navclose = new Howl({ src: ['/audio/r2-navclose.mp3'] }),
+	r2navopen = new Howl({ src: ['/audio/r2-navopen.mp3'] }),
+	r2zoomin = new Howl({ src: ['/audio/r2-zoomin.mp3'] }),
+	r2zoomout = new Howl({ src: ['/audio/r2-zoomout.mp3'] });
 var soundFXArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
 
 
