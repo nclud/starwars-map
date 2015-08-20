@@ -1,12 +1,42 @@
 /* NAV FUNCTION */
 
-#star-canvas {
-	opacity: 1;
+#star-map {
+	// opacity: 1;
 
-	@include transition(opacity 0.15s cubic-bezier(0.47, 0, 0.745, 0.715));
-	@include transition-delay(0.1s);
+	// @include perspective(1000);
+	// @include transition(opacity 0.15s cubic-bezier(0.47, 0, 0.745, 0.715));
+
+	// .nav-open & {
+	// 	opacity: 0.5;
+
+	// 	@include transition-delay(0.1s);
+	// }
+
+	&:after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: block;
+
+		pointer-events: none;
+
+		background: black;
+
+		opacity: 0;
+
+		@include transform(translate3d(0,0,0));
+		@include transition(opacity 0.15s cubic-bezier(0.47, 0, 0.745, 0.715));
+
+		content: '';
+	}
 
 	.nav-open & {
-		opacity: 0.5;
+		&:after {
+			pointer-events: auto;
+
+			opacity: 0.5;
+		}
 	}
 }

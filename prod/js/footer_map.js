@@ -70,12 +70,13 @@ var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
 // 	r2zoomin = new Audio('/audio/r2-zoomin.mp3'),
 // 	r2zoomout = new Audio('/audio/r2-zoomout.mp3');
 
+var sfxMute = false;
 var r2hover = new Howl({ src: ['/audio/r2-hover.mp3'] }),
 	r2navclose = new Howl({ src: ['/audio/r2-navclose.mp3'] }),
 	r2navopen = new Howl({ src: ['/audio/r2-navopen.mp3'] }),
 	r2zoomin = new Howl({ src: ['/audio/r2-zoomin.mp3'] }),
 	r2zoomout = new Howl({ src: ['/audio/r2-zoomout.mp3'] });
-var soundFXArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
+var sfxArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
 
 
 
@@ -535,7 +536,9 @@ $(document).ready(function() {
 				document.body.style.cursor = 'pointer';
 
 				// PLAY SOUND
-				r2hover.play();
+				if ( !sfxMute ) {
+					r2hover.play();
+				}
 
 				// ADD OUTLINE TO PLANETS
 				scene.remove( outlineMesh );
@@ -672,7 +675,9 @@ $(document).ready(function() {
 
 	function zoomIntoPlanet( planet, duration ) {
 		// PLAY AUDIO
-		r2zoomin.play();
+		if ( !sfxMute ) {
+			r2zoomin.play();
+		}
 
 		// CAPTURE ORIGINAL VALUES
 		oldCameraPos.x = camera.position.x;
@@ -723,7 +728,9 @@ $(document).ready(function() {
 	}
 	function zoomOutPlanet( duration ) {
 		// PLAY AUDIO
-		r2zoomout.play();
+		if ( !sfxMute ) {
+			r2zoomout.play();
+		}
 
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
@@ -841,16 +848,15 @@ $(document).ready(function() {
 
 	// NAV FUNCTIONALITY
 	$('#button-nav').on('click', function(){
-		var xDistance = '23rem';
-		if ( windowWidth <= 640 ) {
-			xDistance = '81%';
-		}
+		var xDistance = $('nav').width();
 
 		if ( $('body').hasClass('nav-open') ) {
 			// NAV CLOSING
 			$('body').removeClass('nav-open');
 
-			r2navclose.play();
+			if ( !sfxMute ) {
+				r2navclose.play();
+			}
 
 			intersections = true;
 			controls.enabled = true;
@@ -862,12 +868,25 @@ $(document).ready(function() {
 			    duration: 250,
 			    easing: 'easeInSine'
 			});
+
+			if ( windowWidth < 641 ) {
+				$('#button-sounds').velocity({
+				    translateZ: 0,
+				    opacity: 1
+				}, {
+				    duration: 300,
+				    easing: 'easeInSine',
+				    display: 'block'
+				});
+			}
 		}
 		else {
 			// NAV OPENING
 			$('body').addClass('nav-open');
 
-			r2navopen.play();
+			if ( !sfxMute ) {
+				r2navopen.play();
+			}
 
 			intersections = false;
 			controls.enabled = false;
@@ -879,6 +898,17 @@ $(document).ready(function() {
 			    duration: 250,
 			    easing: 'easeInSine'
 			});
+
+			if ( windowWidth < 641 ) {
+				$('#button-sounds').velocity({
+				    translateZ: 0,
+				    opacity: 0
+				}, {
+				    duration: 150,
+				    easing: 'easeInSine',
+				    display: 'none'
+				});
+			}
 		}
 
 		return false;
@@ -946,22 +976,26 @@ $(document).ready(function() {
 		if ( $(this).hasClass('off') ) {
 			$(this).removeClass('off');
 
-			$.each( soundFXArray, function( i, audio ) {
-				audio.muted = false;
-				audio.volume(1);
-
-				console.log( audio );
-			});
+			sfxMute = false;
 		}
 		else {
 			$(this).addClass('off');
 
-			$.each( soundFXArray, function( i, audio ) {
-				audio.muted = true;
-				audio.stop().volume(0);
+			sfxMute = true;
 
-				console.log( audio );
+			$.each( sfxArray, function( i, audio ) {
+				audio.stop();
 			});
+		}
+
+		return false;
+	});
+	$('#button-music').on('click', function(){
+		if ( $(this).hasClass('off') ) {
+			$(this).removeClass('off');
+		}
+		else {
+			$(this).addClass('off');
 		}
 
 		return false;
