@@ -1,17 +1,6 @@
 /* NAV FUNCTION */
 
 #star-map {
-	// opacity: 1;
-
-	// @include perspective(1000);
-	// @include transition(opacity 0.15s cubic-bezier(0.47, 0, 0.745, 0.715));
-
-	// .nav-open & {
-	// 	opacity: 0.5;
-
-	// 	@include transition-delay(0.1s);
-	// }
-
 	&:after {
 		position: absolute;
 		top: 0;
