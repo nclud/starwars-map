@@ -96,6 +96,14 @@
     <script type="text/javascript" src="/js/lib/06_howler.js"></script>
     <script type="text/javascript" src="/js/lib/07_detector.js"></script>
 
+    <script type="text/javascript" src="/js/shaders/01_copyshader.js"></script>
+    <script type="text/javascript" src="/js/shaders/02_bokehshader.js"></script>
+    <script type="text/javascript" src="/js/shaders/03_effectcomposer.js"></script>
+    <script type="text/javascript" src="/js/shaders/04_renderpass.js"></script>
+    <script type="text/javascript" src="/js/shaders/05_shaderpass.js"></script>
+    <script type="text/javascript" src="/js/shaders/06_maskpass.js"></script>
+    <script type="text/javascript" src="/js/shaders/07_bokehpass.js"></script>
+
     <script type="text/javascript" src="/js/stats.js"></script>
 </head>
 
