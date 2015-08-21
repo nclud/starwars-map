@@ -46,7 +46,7 @@
 
 #load-text-container {
 	position: absolute;
-	top: 57.5%;
+	top: 56%;
 	width: 100%;
 
 	text-align: center;
@@ -63,11 +63,11 @@ $scale-number: 0.185;
 #logo-stroke {
 	fill: none;
 	stroke: $gold-dark;
-	stroke-width: 10px;
+	stroke-width: 8px;
 	// stroke-dasharray: 4500;
 	// stroke-dashoffset: 4500;
 
-	// @include transform(scale($scale-number));
+	@include transform(scale($scale-number));
 	// @include animation(logo-stroke-animate 5s linear);
 	// @include animation-fill-mode(forwards);
 }
