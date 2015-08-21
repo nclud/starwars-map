@@ -14,6 +14,9 @@ var container;
 var scene,
 	renderer;
 var postprocessing = {};
+var postprocessingFocus = 1.0,
+	postprocessingAperture = 0.0035,
+	postprocessingBlur = 0.025;
 
 // MAP VARIABLES
 var gridMultiplier = 150;
@@ -215,9 +218,9 @@ $(document).ready(function() {
 		if ( !isMobile ) {
 			initPostprocessing();
 			var effectController  = {
-				focus: 		1.0,
-				aperture:	0.0035,
-				maxblur:	0.025
+				focus: 		postprocessingFocus,
+				aperture:	postprocessingAperture,
+				maxblur:	postprocessingBlur
 			};
 			var matChanger = function( ) {
 				postprocessing.bokeh.uniforms[ 'focus' ].value = effectController.focus;
@@ -527,9 +530,9 @@ $(document).ready(function() {
 		var renderPass = new THREE.RenderPass( scene, camera );
 
 		var bokehPass = new THREE.BokehPass( scene, camera, {
-			focus: 		1.0,
-			aperture:	0.0035,
-			maxblur:	0.025,
+			focus: 		postprocessingFocus,
+			aperture:	postprocessingAperture,
+			maxblur:	postprocessingBlur,
 
 			width: windowWidth,
 			height: windowHeight
