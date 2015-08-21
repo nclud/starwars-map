@@ -67,51 +67,6 @@ var workerGalaxy = new Worker('/js/workers/worker_galaxy.js'),
 	workerPlanets = new Worker('/js/workers/worker_planets.js'),
 	workerFilms = new Worker('/js/workers/worker_films.js');
 
-// AUDIO
-// var r2hover = new Audio('/audio/r2-hover.mp3'),
-// 	r2navclose = new Audio('/audio/r2-navclose.mp3'),
-// 	r2navopen = new Audio('/audio/r2-navopen.mp3'),
-// 	r2zoomin = new Audio('/audio/r2-zoomin.mp3'),
-// 	r2zoomout = new Audio('/audio/r2-zoomout.mp3');
-
-var sfxMute = false;
-var r2hover = new Howl({ src: ['/audio/r2-hover.mp3'] }),
-	r2navclose = new Howl({ src: ['/audio/r2-navclose.mp3'] }),
-	r2navopen = new Howl({ src: ['/audio/r2-navopen.mp3'] }),
-	r2zoomin = new Howl({ src: ['/audio/r2-zoomin.mp3'] }),
-	r2zoomout = new Howl({ src: ['/audio/r2-zoomout.mp3'] });
-var sfxArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
-
-var musicMute = false,
-	crossfade = 5650,
-	musicVolume = 0.85,
-	loopDuration;
-var musicloop1 = new Howl({
-		src: ['/audio/music-loop.mp3'],
-		onplay: function() {
-			if ( !loopDuration ) {
-				loopDuration = Math.floor( musicloop1._duration * 1000 );
-			}
-			
-			setTimeout(function() {
-				console.log( 'fade 1 starts now');
-
-				musicloop1.fade(musicVolume, 0, crossfade);
-				musicloop2.play().fade(0, musicVolume, crossfade);
-			}, (loopDuration - crossfade));
-		}
-	}),
-	musicloop2 = new Howl({
-		src: ['/audio/music-loop.mp3'],
-		onplay: function() {
-			setTimeout(function() {
-				console.log( 'fade 2 starts now');
-
-				musicloop2.fade(musicVolume, 0, crossfade);
-				musicloop1.play().fade(0, musicVolume, crossfade);
-			}, (loopDuration - crossfade));
-		}
-	});
 
 
 $(document).ready(function() {
@@ -1050,8 +1005,55 @@ $(document).ready(function() {
 
 
 	
+	// AUDIO
+	var sfxMute = false;
+	var r2hover = new Howl({ src: ['/audio/r2-hover.mp3'] }),
+		r2navclose = new Howl({ src: ['/audio/r2-navclose.mp3'] }),
+		r2navopen = new Howl({ src: ['/audio/r2-navopen.mp3'] }),
+		r2zoomin = new Howl({ src: ['/audio/r2-zoomin.mp3'] }),
+		r2zoomout = new Howl({ src: ['/audio/r2-zoomout.mp3'] });
+	var sfxArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
+
+	var musicMute = false,
+		crossfade = 5750,
+		musicVolume = 0.85,
+		loopDuration;
+	var musicloop1 = new Howl({
+			src: ['/audio/music-loop.mp3'],
+			onplay: function() {
+				if ( !loopDuration ) {
+					loopDuration = Math.floor( musicloop1._duration * 1000 );
+				}
+				
+				setTimeout(function() {
+					loopMusic( musicloop1, musicloop2 );
+				}, (loopDuration - crossfade));
+			}
+		}),
+		musicloop2 = new Howl({
+			src: ['/audio/music-loop.mp3'],
+			onplay: function() {
+				setTimeout(function() {
+					loopMusic( musicloop2, musicloop1 );
+				}, (loopDuration - crossfade));
+			}
+		});
+
+
 	// MUSIC LOOPING
-	musicloop1.play();
+	// musicloop1.play();
+
+	function loopMusic( first, last ) {
+		console.log( 'fade starts now');
+
+		first.fade(musicVolume, 0, crossfade);
+
+		if ( !musicMute ) {
+			last.volume(0);
+			last.play();
+			last.fade(0, musicVolume, crossfade);
+		}
+	}
 
 
 	// AUDIO MUTING
