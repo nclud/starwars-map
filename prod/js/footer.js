@@ -1044,8 +1044,6 @@ $(document).ready(function() {
 	// musicloop1.play();
 
 	function loopMusic( first, last ) {
-		console.log( 'fade starts now');
-
 		first.fade(musicVolume, 0, crossfade);
 
 		if ( !musicMute ) {
