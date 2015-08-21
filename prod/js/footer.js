@@ -24,7 +24,8 @@ var gridMultiplier = 150;
 // CAMERA VARIABLES
 var camera,
 	initialCameraPos,
-	focalPoint;
+	focalPointInitial,
+	focalPointLoaded;
 var oldCameraPos = new THREE.Vector3(),
 	oldCameraFocus = new THREE.Vector3();
 var currentCameraPos,
@@ -110,7 +111,12 @@ $(document).ready(function() {
 		var aspect = window.innerWidth / window.innerHeight,
 			d = 500;
 		camera = new THREE.PerspectiveCamera( 60, aspect, 1, 2500 );
-		focalPoint = new THREE.Vector3(
+		focalPointInitial = new THREE.Vector3(
+			0.65 * gridMultiplier,
+			(0 * gridMultiplier) + 1000,
+			-1.5 * gridMultiplier
+		);
+		focalPointLoaded = new THREE.Vector3(
 			0.65 * gridMultiplier,
 			0 * gridMultiplier,
 			-1.5 * gridMultiplier
@@ -121,7 +127,7 @@ $(document).ready(function() {
 			d - gridMultiplier
 		);
 		camera.position.set( initialCameraPos.x, initialCameraPos.y, initialCameraPos.z );
-		camera.lookAt( focalPoint );
+		camera.lookAt( focalPointInitial );
 
 
 		// ADDING LIGHTS
@@ -133,7 +139,7 @@ $(document).ready(function() {
 
 		// ADDING CONTROLS & LIMITS
 		controls = new THREE.OrbitControls( camera );
-		controls.target = focalPoint;
+		controls.target = focalPointInitial;
 		controls.noKeys = true;
 		controls.rotateSpeed = 1;
 		controls.zoomSpeed = 1.5;
@@ -426,6 +432,8 @@ $(document).ready(function() {
 			planets.push( object );
 
 			planetsLoaded = true;
+
+			longago( 2.5 );
 		}
 	}
 
@@ -1093,4 +1101,42 @@ $(document).ready(function() {
 
 		return false;
 	});
+
+
+
+	// INTRO ANIMATIONS
+	function longago( duration ) {
+		$('#long-ago').velocity({
+		    translateZ: 0,
+		    opacity: 0
+		}, {
+			delay: 3000,
+		    duration: 750,
+		    display: 'none',
+		    complete: function() {
+				$('#long-ago').remove();
+
+				TweenMax.to( camera.position, duration, {
+					x: initialCameraPos.x,
+					y: initialCameraPos.y,
+					z: initialCameraPos.z,
+					ease: Circ.easeOut
+				});
+				TweenMax.to( controls.target, duration, {
+					x: focalPointLoaded.x,
+					y: focalPointLoaded.y,
+					z: focalPointLoaded.z,
+					ease: Circ.easeOut,
+					onUpdate: function() {
+						camera.updateProjectionMatrix();
+					},
+					onComplete: function() {
+						camera.updateProjectionMatrix();
+
+						controls.enabled = true;
+					}
+				});
+		    }
+		});
+	}
 });

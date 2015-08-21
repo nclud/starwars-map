@@ -192,6 +192,8 @@
 	</section>
 </main>
 
+<section id="long-ago"><img src="/img/long-ago.png" alt="A long time ago in a galaxy far, far away..."></section>
+
 <script type="x-shader/x-vertex" id="galaxyvertex">
 	uniform vec3 color;
 

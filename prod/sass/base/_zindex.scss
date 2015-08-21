@@ -1,10 +1,5 @@
 /* Z-INDEX & LAYERS */
 
-#long-ago {
-	z-index: 999;
-}
-
-
 #logo-fill {
 	z-index: 501;
 }
@@ -15,16 +10,19 @@
 
 #button-nav,
 #button-sounds {
+	z-index: 175;
+}
+#long-ago {
 	z-index: 150;
 }
 #button-close {
-	z-index: 140;
-}
-#planet-data {
 	z-index: 125;
 }
-#planet-title {
+#planet-data {
 	z-index: 100;
+}
+#planet-title {
+	z-index: 75;
 }
 #star-map {
 	z-index: 50;
