@@ -91,6 +91,9 @@ $(document).ready(function() {
 		animate();
 	}
 
+	// BEGIN TRACE ANIMATION
+	$('#load-overlay').addClass('begin-animation');
+
 
 	function init() {
 		// CONTAINER SETUP
@@ -434,7 +437,7 @@ $(document).ready(function() {
 
 			planetsLoaded = true;
 
-			// longago( 2.5 );
+			// longago();
 		}
 	}
 
@@ -1106,7 +1109,7 @@ $(document).ready(function() {
 
 
 	// INTRO ANIMATIONS
-	function longago( duration ) {
+	function longago() {
 		$('#long-ago').velocity({
 		    translateZ: 0,
 		    opacity: 0
@@ -1116,35 +1119,38 @@ $(document).ready(function() {
 		    display: 'none',
 		    complete: function() {
 				$('#long-ago').remove();
+
+				setTimeout(function(){
+					longagoPan( 3.5 );
+				}, 10);
 		    }
 		});
-
+	}
+	function longagoPan( duration ) {
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
 
-		setTimeout(function() {
-			TweenMax.to( currentCameraPos, duration, {
-				x: initialCameraPos.x,
-				y: initialCameraPos.y,
-				z: initialCameraPos.z,
-				ease: Power0.easeNone
-			});
-			TweenMax.to( currentCameraFocus, duration, {
-				x: focalPointLoaded.x,
-				y: focalPointLoaded.y,
-				z: focalPointLoaded.z,
-				ease: Power0.easeNone,
-				onUpdate: function() {
-					camera.updateProjectionMatrix();
-				},
-				onComplete: function() {
-					camera.updateProjectionMatrix();
+		TweenMax.to( currentCameraPos, duration, {
+			x: initialCameraPos.x,
+			y: initialCameraPos.y,
+			z: initialCameraPos.z,
+			ease: Power0.easeNone
+		});
+		TweenMax.to( currentCameraFocus, duration, {
+			x: focalPointLoaded.x,
+			y: focalPointLoaded.y,
+			z: focalPointLoaded.z,
+			ease: Power0.easeNone,
+			onUpdate: function() {
+				camera.updateProjectionMatrix();
+			},
+			onComplete: function() {
+				camera.updateProjectionMatrix();
 
-					controls.enabled = true;
+				controls.enabled = true;
 
-					$('#star-map').addClass('loaded');
-				}
-			});
-		}, 3255);
+				$('#star-map').addClass('loaded');
+			}
+		});
 	}
 });

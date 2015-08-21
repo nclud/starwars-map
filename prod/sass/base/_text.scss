@@ -139,6 +139,21 @@ h3 {
 	}
 }
 
+#load-button {
+	text-align: center;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 1.15em;
+	letter-spacing: 0.2em;
+	line-height: 1;
+	text-decoration: none;
+
+	color: rgba($gold-darkest, 0.5);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 
 .description {
 	display: block;

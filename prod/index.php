@@ -119,6 +119,8 @@
 		<span class="load-text">An Interactive Galactic Experience</span>
 		<span class="load-text-credit">Built By <a href="http://nclud.com/" target="_blank">nclud</a></span>
 	</div>
+
+	<a href="#" id="load-button"></a>
 </section>
 <section id="long-ago"><img src="/img/long-ago.png" alt="A long time ago in a galaxy far, far away..."></section>
 
