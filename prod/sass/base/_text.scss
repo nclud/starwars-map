@@ -152,6 +152,10 @@ h3 {
 	color: rgba($gold-darkest, 0.5);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	&.loaded {
+		color: white;
+	}
 }
 
 

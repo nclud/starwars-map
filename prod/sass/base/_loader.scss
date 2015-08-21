@@ -60,24 +60,66 @@
 	padding: 1em 1.25em 1em 1.45em;
 	min-width: 24rem;
 
-	background: $gold-dark;
+	background: rgba($gold-dark, 0.25);
 
 	border: 2px solid rgba($gold-darkest, 0.25);
 	border-radius: 0.5rem;
+	overflow: hidden;
+
+	cursor: default;
 
 	@include transform(translate(-50%, 0));
+	@include transition(border 0.2s color 0.2s);
 
 	&:before {
+		position: relative;
+		z-index: 5;
+
 		content: 'Loading...';
 	}
 	&:after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 0;
+		display: block;
+		z-index: 3;
 
+		background: rgba($gold, 0.5);
+
+		content: '';
+	}
+
+	.begin-animation & {
+		&:after {
+			@include animation(loading-button 10s ease-in-out);
+			@include animation-fill-mode(forwards);
+		}
+	}
+
+	&.loaded {
+		border-color: $gold-dark;
+
+		cursor: auto;
+
+		&:before {
+			content: 'Explore The Galaxy';
+		}
+	}
+}
+@include keyframes(loading-button) {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
 	}
 }
 
 
 
-$scale-number: 0.185;
+$scale-number: 0.2;
 
 #logo-stroke,
 #logo-fill {
@@ -93,15 +135,14 @@ $scale-number: 0.185;
 	@include transform(scale($scale-number));
 
 	.begin-animation & {
-		@include animation(logo-stroke-animate 5s linear);
-		@include animation-delay(1.25s);
+		@include animation(logo-stroke-animate 2.5s linear);
 		@include animation-fill-mode(forwards);
 	}
 }
 #logo-fill {
-	fill: none;
-	// fill: white;
-	// opacity: 0;
+	// fill: none;
+	fill: white;
+	opacity: 0;
 	// @include transform(scale(1.5));
 
 	// &.loaded {

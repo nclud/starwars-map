@@ -92,7 +92,9 @@ $(document).ready(function() {
 	}
 
 	// BEGIN TRACE ANIMATION
-	$('#load-overlay').addClass('begin-animation');
+	setTimeout(function(){
+		$('#load-overlay').addClass('begin-animation');
+	}, 1250);
 
 
 	function init() {
@@ -437,7 +439,7 @@ $(document).ready(function() {
 
 			planetsLoaded = true;
 
-			// longago();
+			beginLoaded();
 		}
 	}
 
@@ -1109,6 +1111,9 @@ $(document).ready(function() {
 
 
 	// INTRO ANIMATIONS
+	function beginLoaded() {
+		$('#load-button').addClass('loaded');
+	}
 	function longago() {
 		$('#long-ago').velocity({
 		    translateZ: 0,
