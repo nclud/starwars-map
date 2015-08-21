@@ -13,6 +13,7 @@ var isMobile = navigator.userAgent.match(/mobile/i);
 var container;
 var scene,
 	renderer;
+var postprocessing = {};
 
 // MAP VARIABLES
 var gridMultiplier = 150;
@@ -206,8 +207,24 @@ $(document).ready(function() {
 		renderer.domElement.id = 'star-canvas';
 
 
-		// CONTAINER BUUILD
+		// CONTAINER BUILD
 		container.appendChild( renderer.domElement );
+
+
+		// POSTPROCESSING - DEPTH OF FIELD
+		if ( !isMobile ) {
+			initPostprocessing();
+			var effectController  = {
+				focus: 		1.0,
+				aperture:	0.0035,
+				maxblur:	0.025
+			};
+			var matChanger = function( ) {
+				postprocessing.bokeh.uniforms[ 'focus' ].value = effectController.focus;
+				postprocessing.bokeh.uniforms[ 'aperture' ].value = effectController.aperture;
+				postprocessing.bokeh.uniforms[ 'maxblur' ].value = effectController.maxblur;
+			};
+		}
 	}
 
 
@@ -453,6 +470,11 @@ $(document).ready(function() {
 		clockDelta = clock.getDelta();
 		time = Date.now() * 0.00005;
 
+		// POST PROCESSING - DEPTH OF FIELD
+		if ( !isMobile ) {
+			postprocessing.composer.render( 0.1 );
+		}
+
 		// STARFIELD ROTATION
 		for ( field = 0; field < starfield.length; field ++ ) {
 			var divisor = (field + 1),
@@ -494,16 +516,34 @@ $(document).ready(function() {
 		// CONTROLS UPDATE / PAUSE ON HOVER
 		controls.update( clock.getDelta() );
 
-		// if ( objectHover ) {
-		// 	controls.enabled = false;
-		// }
-		// else {
-		// 	controls.enabled = true;
-		// }
-
-
 		// STATS
 		stats.update();
+	}
+
+
+
+	// POST PROCESSING - DEPTH OF FIELD
+	function initPostprocessing() {
+		var renderPass = new THREE.RenderPass( scene, camera );
+
+		var bokehPass = new THREE.BokehPass( scene, camera, {
+			focus: 		1.0,
+			aperture:	0.0035,
+			maxblur:	0.025,
+
+			width: windowWidth,
+			height: windowHeight
+		} );
+
+		bokehPass.renderToScreen = true;
+
+		var composer = new THREE.EffectComposer( renderer );
+
+		composer.addPass( renderPass );
+		composer.addPass( bokehPass );
+
+		postprocessing.composer = composer;
+		postprocessing.bokeh = bokehPass;
 	}
 
 
