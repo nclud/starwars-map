@@ -94,6 +94,7 @@
     <script type="text/javascript" src="/js/lib/04_velocity.js"></script>
     <script type="text/javascript" src="/js/lib/05_fastclick.js"></script>
     <script type="text/javascript" src="/js/lib/06_howler.js"></script>
+    <script type="text/javascript" src="/js/lib/07_detector.js"></script>
 
     <script type="text/javascript" src="/js/stats.js"></script>
 </head>
@@ -239,7 +240,7 @@
 	    gl_FragColor = vec4( glow, 1.0 );
 	}
 </script>
-<script type="text/javascript" src="/js/footer_map.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
 
 <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
