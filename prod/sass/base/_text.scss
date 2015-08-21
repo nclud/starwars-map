@@ -6,13 +6,13 @@ h3 {
 	position: relative;
 
     text-rendering: optimizeLegibility;
-    -webkit-font-feature-settings: "kern";
-    -moz-font-feature-settings: "kern";
-    -moz-font-feature-settings: "kern=1";
-    font-feature-settings: "kern" 1;
+    -webkit-font-feature-settings: 'kern';
+    -moz-font-feature-settings: 'kern';
+    -moz-font-feature-settings: 'kern=1';
+    font-feature-settings: 'kern' 1;
     font-kerning: normal;
 
-	font-family: "freight-display-pro", georgia, sans-serif;
+	font-family: 'freight-display-pro', georgia, sans-serif;
 	font-weight: 600;
 
 	-webkit-font-smoothing: antialiased;
@@ -38,7 +38,7 @@ h2 {
 	border-radius: 0.5rem 0.5rem 0 0;
 
 	background: $gold-dark;
-	@include background(linear-gradient(to bottom, $gold-darkest 0%, $gold 75%));
+	@include background(linear-gradient(to bottom, $gold-darkest 0%, $gold-dark 75%));
 
 	&:before {
 		position: absolute;
@@ -50,7 +50,7 @@ h2 {
 
 		z-index: 2;
 
-		background: url('/img/texture_noise.png');
+		background: url('/img/texture-noise.png');
 		background-size: 100px auto;
 
 		opacity: 0.75;
@@ -213,7 +213,7 @@ label {
 
 .site-credits {
 	display: block;
-	padding: 3.5rem 1.5rem 1.5rem 1.5rem;
+	padding: 3.5rem 1.5rem 0 1.5rem;
 
 	text-transform: uppercase;
 	font-family: 'Roboto', sans-serif;
@@ -323,4 +323,22 @@ label {
 			content: 'Off';
 		}
 	}
+}
+
+.built-by-text {
+	display: block;
+	padding: 1.75rem 0 0.75rem 0.5em;
+	
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 0.75em;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 0.5em;
+
+	color: rgba($gold-darkest, 0.75);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	border-top: 1px solid rgba($gold,0.25);
 }

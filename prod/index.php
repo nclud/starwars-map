@@ -24,7 +24,7 @@
     <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" href="http://www.starwarsgalaxy.co/ipadLandscapeRetina.jpg" />
     <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="http://www.starwarsgalaxy.co/ipadPortraitRetina.jpg" />
 
-    <title>Star Wars - An Interactive Galactic Experience</title>
+    <title>Star Wars: An Interactive Galactic Experience</title>
 	<meta name="description" content="Explore the worlds and systems of Star Wars, from the icy tundra of Hoth to the deserts of Tattooine, in this interactive experience built by nclud.">
     <link rel="canonical" href="http://www.starwarsgalaxy.co/">
     <link rel="author" href="humans.txt" />
@@ -64,17 +64,17 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@nclud">
-    <meta name="twitter:title" content="Star Wars - An Interactive Galactic Experience">
+    <meta name="twitter:title" content="Star Wars: An Interactive Galactic Experience">
     <meta name="twitter:description" content="Explore the worlds and systems of Star Wars, from the icy tundra of Hoth to the deserts of Tattooine, in this interactive experience built by nclud.">
     <meta name="twitter:image:src" content="http://www.starwarsgalaxy.co/social.jpg">
 
-    <meta itemprop="name" content="Star Wars - An Interactive Galactic Experience" />
+    <meta itemprop="name" content="Star Wars: An Interactive Galactic Experience" />
     <meta itemprop="description" content="Explore the worlds and systems of Star Wars, from the icy tundra of Hoth to the deserts of Tattooine, in this interactive experience built by nclud." />
     <meta itemprop="image" content="http://www.starwarsgalaxy.co/social.jpg" />
 
-    <meta property="og:title" content="Star Wars - An Interactive Galactic Experience" />
+    <meta property="og:title" content="Star Wars: An Interactive Galactic Experience" />
     <meta property="og:url" content="http://www.starwarsgalaxy.co/"/>
-    <meta property="og:site_name" content="Star Wars - An Interactive Galactic Experience" />
+    <meta property="og:site_name" content="Star Wars: An Interactive Galactic Experience" />
     <meta property="og:description" content="Explore the worlds and systems of Star Wars, from the icy tundra of Hoth to the deserts of Tattooine, in this interactive experience built by nclud." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="http://www.starwarsgalaxy.co/social.jpg" />
@@ -108,11 +108,6 @@
 	</div>
 	
 	<nav>
-		<div class="page-title">
-			<h1>Star Wars</h1>
-			<span class="description">An Interactive <br/>Galactic Experience</span>
-		</div>
-
 		<ul class="filter-list">
 			<span class="filter-title">Filter By Movie</span>
 			<li class="filter-list-single">
@@ -151,8 +146,13 @@
 		</div>
 
 		<span class="site-credits">
-			Designed and developed by <a href="http://nclud.com" target="_blank">nclud</a>. All information, characters, locations, and story © <a href="http://lucasfilm.com/" target="_blank">Lucasfilm</a> and <a href="http://disney.com/" target="_blank">Disney</a>. Star Wars: An Interactive Galactic Experience uses data from the <a href="http://swapi.co/" target="_blank">Star Wars API</a>. Source available on <a href="https://github.com/nclud/starwars-map" target="_blank">Github</a>.
+			All information, characters, locations, and story © <a href="http://lucasfilm.com/" target="_blank">Lucasfilm</a> and <a href="http://disney.com/" target="_blank">Disney</a>. Star Wars: An Interactive Galactic Experience uses data from the <a href="http://swapi.co/" target="_blank">Star Wars API</a>. Source available on <a href="https://github.com/nclud/starwars-map" target="_blank">Github</a>.
 		</span>
+
+		<div class="built-by">
+			<span class="built-by-text">Built By</span>
+			<a href="http://nclud.com/" target="_blank" class="built-link"><img src="/img/logo-nclud.svg"></a>
+		</div>
 	</nav>
 	
 	<section id="star-map">

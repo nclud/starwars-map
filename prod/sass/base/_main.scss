@@ -103,7 +103,7 @@ main {
 		background: $gold-darkest;
 	}
 	&:after {
-		background: url('/img/texture_noise.png');
+		background: url('/img/texture-noise.png');
 		background-size: 100px auto;
 
 		opacity: 0.875;
@@ -176,7 +176,7 @@ main {
 
 		z-index: 10;
 
-		background: url('/img/texture_noise.png'), rgba($gold-dark, 0.75);
+		background: url('/img/texture-noise.png'), rgba($gold-dark, 0.75);
 		background-size: 100px auto;
 
 		border-radius: 100%;
@@ -193,7 +193,7 @@ main {
 		top: 50%;
 		z-index: 15;
 
-		font-family: "freight-display-pro", georgia, sans-serif;
+		font-family: 'freight-display-pro', georgia, sans-serif;
 		font-weight: 900;
 		font-size: 1.25em;
 

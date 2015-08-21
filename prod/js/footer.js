@@ -91,11 +91,16 @@ $(document).ready(function() {
 		$('body').addClass('desktop');
 	}
 
+	// DETECT WEBGL
+	if ( !Detector.webgl ) {
+		// NO TO WEBGL - NEED TO PASS MESSAGE ON INTRO SAYING NOT SUPPORTED
+	}
+	else {
+		// YES TO WEBGL - INITIATE OVERALL THREE.JS SCENE
+		init();
+		animate();
+	}
 
-
-	// INITIATE OVERALL THREE.JS SCENE
-	init();
-	animate();
 
 	function init() {
 		// CONTAINER SETUP
