@@ -1118,18 +1118,21 @@ $(document).ready(function() {
 		    }
 		});
 
+		currentCameraPos = camera.position;
+		currentCameraFocus = controls.target;
+
 		setTimeout(function() {
-			TweenMax.to( camera.position, duration, {
+			TweenMax.to( currentCameraPos, duration, {
 				x: initialCameraPos.x,
 				y: initialCameraPos.y,
 				z: initialCameraPos.z,
-				ease: Circ.easeOut
+				ease: Power0.easeNone
 			});
-			TweenMax.to( controls.target, duration, {
+			TweenMax.to( currentCameraFocus, duration, {
 				x: focalPointLoaded.x,
 				y: focalPointLoaded.y,
 				z: focalPointLoaded.z,
-				ease: Circ.easeOut,
+				ease: Power0.easeNone,
 				onUpdate: function() {
 					camera.updateProjectionMatrix();
 				},
