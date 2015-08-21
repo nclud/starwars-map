@@ -87,7 +87,7 @@
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.polyfill.io/v1/polyfill.min.js"></script>
-
+    <!-- build:remove -->
     <script type="text/javascript" src="/js/lib/01_three.js"></script>
     <script type="text/javascript" src="/js/lib/02_controls.js"></script>
     <script type="text/javascript" src="/js/lib/03_tweenmax.js"></script>
@@ -105,6 +105,9 @@
     <script type="text/javascript" src="/js/shaders/07_bokehpass.js"></script>
 
     <script type="text/javascript" src="/js/stats.js"></script>
+    <!-- endbuild -->
+    <!-- lib:js --><!-- endinject -->
+	<!-- shaders:js --><!-- endinject -->
 </head>
 
 <body>
