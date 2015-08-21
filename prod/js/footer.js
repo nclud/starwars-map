@@ -82,6 +82,36 @@ var r2hover = new Howl({ src: ['/audio/r2-hover.mp3'] }),
 	r2zoomout = new Howl({ src: ['/audio/r2-zoomout.mp3'] });
 var sfxArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
 
+var musicMute = false,
+	crossfade = 5650,
+	musicVolume = 0.85,
+	loopDuration;
+var musicloop1 = new Howl({
+		src: ['/audio/music-loop.mp3'],
+		onplay: function() {
+			if ( !loopDuration ) {
+				loopDuration = Math.floor( musicloop1._duration * 1000 );
+			}
+			
+			setTimeout(function() {
+				console.log( 'fade 1 starts now');
+
+				musicloop1.fade(musicVolume, 0, crossfade);
+				musicloop2.play().fade(0, musicVolume, crossfade);
+			}, (loopDuration - crossfade));
+		}
+	}),
+	musicloop2 = new Howl({
+		src: ['/audio/music-loop.mp3'],
+		onplay: function() {
+			setTimeout(function() {
+				console.log( 'fade 2 starts now');
+
+				musicloop2.fade(musicVolume, 0, crossfade);
+				musicloop1.play().fade(0, musicVolume, crossfade);
+			}, (loopDuration - crossfade));
+		}
+	});
 
 
 $(document).ready(function() {
@@ -1019,6 +1049,10 @@ $(document).ready(function() {
 	});
 
 
+	
+	// MUSIC LOOPING
+	musicloop1.play();
+
 
 	// AUDIO MUTING
 	$('#button-sfx').on('click', function(){
@@ -1042,9 +1076,19 @@ $(document).ready(function() {
 	$('#button-music').on('click', function(){
 		if ( $(this).hasClass('off') ) {
 			$(this).removeClass('off');
+
+			musicMute = false;
+
+			musicloop1.mute(false);
+			musicloop2.mute(false);
 		}
 		else {
 			$(this).addClass('off');
+
+			musicMute = true;
+
+			musicloop1.mute(true);
+			musicloop2.mute(true);
 		}
 
 		return false;
