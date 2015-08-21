@@ -79,7 +79,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="http://www.starwarsgalaxy.co/social.jpg" />
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:500,700,900' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Roboto:500,700,900' rel='stylesheet' type='text/css'>
 	<script src="//use.typekit.net/ltv6yfq.js"></script>
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 
