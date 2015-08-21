@@ -28,8 +28,8 @@
 		background: darken($gold-darkest, 15%);
 
 		border-radius: 0 0 0 0.5rem;
-		border-left: 2px solid $gold-dark;
-		border-bottom: 2px solid $gold-dark;
+		border-left: 3px solid $gold-dark;
+		border-bottom: 3px solid $gold-dark;
 
 		content: '';
 	}
@@ -76,7 +76,7 @@
 	position: absolute;
 	left: 50%;
 	bottom: 6rem;
-	padding: 1em 1.25em 1em 1.45em;
+	padding: 1.25em 1.25em 1.25em 1.45em;
 	min-width: 24rem;
 
 	background: rgba($gold-dark, 0.25);
@@ -124,6 +124,9 @@
 
 		&:before {
 			content: 'Explore The Galaxy';
+		}
+		&:after {
+			width: 100%;
 		}
 
 		&:hover,

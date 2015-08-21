@@ -154,7 +154,12 @@ h3 {
 	-moz-osx-font-smoothing: grayscale;
 
 	&.loaded {
-		color: white;
+		color: rgba(white, 0.85);
+
+		&:hover,
+		&:active {
+			color: white;
+		}
 	}
 }
 
