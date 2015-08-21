@@ -153,6 +153,7 @@ $(document).ready(function() {
 		controls.maxDistance = 1000;
 		controls.minPolarAngle = 0;
 		controls.maxPolarAngle = Math.PI/2;
+		controls.enabled = false;
 
 
 		// EVENT LISTENERS
