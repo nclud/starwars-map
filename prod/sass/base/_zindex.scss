@@ -1,17 +1,14 @@
 /* Z-INDEX & LAYERS */
 
-#logo-fill {
-	z-index: 501;
-}
-#load-overlay {
-	z-index: 500;
-}
-
-
 #button-nav,
 #button-sounds {
+	z-index: 1000;
+}
+
+#load-overlay {
 	z-index: 175;
 }
+
 #long-ago {
 	z-index: 150;
 }

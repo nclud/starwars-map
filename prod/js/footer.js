@@ -434,7 +434,7 @@ $(document).ready(function() {
 
 			planetsLoaded = true;
 
-			longago( 2.5 );
+			// longago( 2.5 );
 		}
 	}
 

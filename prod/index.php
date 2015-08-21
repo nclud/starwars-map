@@ -195,6 +195,14 @@
 	</section>
 </main>
 
+<section id="load-overlay">
+	<?php echo file_get_contents("img/logo-1977.svg"); ?>
+
+	<div id="load-text-container">
+		<span class="load-text">An Interactive Galactic Experience</span>
+		<span class="load-text-credit">Built By <a href="http://nclud.com/" target="_blank">nclud</a></span>
+	</div>
+</section>
 <section id="long-ago"><img src="/img/long-ago.png" alt="A long time ago in a galaxy far, far away..."></section>
 
 <script type="x-shader/x-vertex" id="galaxyvertex">

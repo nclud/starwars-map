@@ -11,7 +11,7 @@
 
 	background: url('/img/load-bkg.jpg') no-repeat, $gold;
 	background-size: cover;
-	background-position: center center;
+	background-position: right center;
 
 	font-size: 1rem;
 
@@ -36,8 +36,8 @@
 #load-logo {
 	position: absolute;
 	left: 50%;
-	top: 50%;
-	height: 100%;
+	top: 42.5%;
+	height: 105%;
 	width: auto;
 	@include transform(translate3d(-50%, -50%, 0));
 
@@ -46,15 +46,10 @@
 
 #load-text-container {
 	position: absolute;
-	bottom: 7.5%;
+	top: 57.5%;
 	width: 100%;
-	opacity: 0;
-	@include transition(opacity 1s);
-	@include transition-delay(5s);
 
-	&.loaded {
-		opacity: 1;
-	}
+	text-align: center;
 }
 
 
@@ -63,31 +58,30 @@ $scale-number: 0.185;
 
 #logo-stroke,
 #logo-fill {
-	@include transform-origin(897px 429px);
+	@include transform-origin(1489px 400px);
 }
 #logo-stroke {
-	stroke: $gold-dark;
-	stroke-width: 20px;
-	stroke-dasharray: 4500;
-	stroke-dashoffset: 4500;
 	fill: none;
+	stroke: $gold-dark;
+	stroke-width: 10px;
+	// stroke-dasharray: 4500;
+	// stroke-dashoffset: 4500;
 
-	&.loaded {
-		@include transform(scale($scale-number));
-		@include animation(logo-stroke-animate 2.25s linear);
-		@include animation-fill-mode(forwards);
-	}
+	// @include transform(scale($scale-number));
+	// @include animation(logo-stroke-animate 5s linear);
+	// @include animation-fill-mode(forwards);
 }
 #logo-fill {
-	fill: white;
-	opacity: 0;
-	@include transform(scale(1.5));
+	fill: none;
+	// fill: white;
+	// opacity: 0;
+	// @include transform(scale(1.5));
 
-	&.loaded {
-		@include animation(logo-fill-animate 2.25s cubic-bezier(.23,.61,.68,.97));
-		@include animation-fill-mode(forwards);
-		@include animation-delay(1.25s);
-	}
+	// &.loaded {
+	// 	@include animation(logo-fill-animate 2.25s cubic-bezier(.23,.61,.68,.97));
+	// 	@include animation-fill-mode(forwards);
+	// 	@include animation-delay(1.25s);
+	// }
 }
 
 
