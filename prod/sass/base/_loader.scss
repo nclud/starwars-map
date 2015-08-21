@@ -69,7 +69,7 @@
 	cursor: default;
 
 	@include transform(translate(-50%, 0));
-	@include transition(border 0.2s color 0.2s);
+	@include transition(0.15s);
 
 	&:before {
 		position: relative;
@@ -93,18 +93,23 @@
 
 	.begin-animation & {
 		&:after {
-			@include animation(loading-button 10s ease-in-out);
+			@include animation(loading-button 7.25s ease-in-out);
 			@include animation-fill-mode(forwards);
 		}
 	}
 
 	&.loaded {
-		border-color: $gold-dark;
+		border-color: rgba($gold-darkest, 0.5);
 
 		cursor: auto;
 
 		&:before {
 			content: 'Explore The Galaxy';
+		}
+
+		&:hover,
+		&:active {
+			background: rgba($gold-dark, 0.75);
 		}
 	}
 }
