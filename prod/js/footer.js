@@ -1110,33 +1110,35 @@ $(document).ready(function() {
 		    translateZ: 0,
 		    opacity: 0
 		}, {
-			delay: 3000,
+			delay: 2500,
 		    duration: 750,
 		    display: 'none',
 		    complete: function() {
 				$('#long-ago').remove();
-
-				TweenMax.to( camera.position, duration, {
-					x: initialCameraPos.x,
-					y: initialCameraPos.y,
-					z: initialCameraPos.z,
-					ease: Circ.easeOut
-				});
-				TweenMax.to( controls.target, duration, {
-					x: focalPointLoaded.x,
-					y: focalPointLoaded.y,
-					z: focalPointLoaded.z,
-					ease: Circ.easeOut,
-					onUpdate: function() {
-						camera.updateProjectionMatrix();
-					},
-					onComplete: function() {
-						camera.updateProjectionMatrix();
-
-						controls.enabled = true;
-					}
-				});
 		    }
 		});
+
+		setTimeout(function() {
+			TweenMax.to( camera.position, duration, {
+				x: initialCameraPos.x,
+				y: initialCameraPos.y,
+				z: initialCameraPos.z,
+				ease: Circ.easeOut
+			});
+			TweenMax.to( controls.target, duration, {
+				x: focalPointLoaded.x,
+				y: focalPointLoaded.y,
+				z: focalPointLoaded.z,
+				ease: Circ.easeOut,
+				onUpdate: function() {
+					camera.updateProjectionMatrix();
+				},
+				onComplete: function() {
+					camera.updateProjectionMatrix();
+
+					controls.enabled = true;
+				}
+			});
+		}, 3255);
 	}
 });
