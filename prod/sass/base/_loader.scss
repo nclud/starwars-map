@@ -15,6 +15,23 @@
 
 	font-size: 1rem;
 
+	&:before {
+		position: absolute;
+		display: block;
+		top: 0;
+		right: 0;
+		width: 7.65rem;
+		height: 4.5rem;
+		z-index: 10;
+
+		background: $gray-dark;
+
+		border-radius: 0 0 0 0.5rem;
+		border-left: 2px solid $gold-dark;
+		border-bottom: 2px solid $gold-dark;
+
+		content: '';
+	}
 	&:after {
 		position: absolute;
 		display: block;
@@ -22,13 +39,14 @@
 		right: 1.5em;
 		left: 1.5em;
 		bottom: 1.5em;
+		z-index: 5;
 		
 		pointer-events: none;
 
 		border: 6px double $gold-dark;
 		border-radius: 1.5em;
 
-		content: "";
+		content: '';
 	}
 }
 
