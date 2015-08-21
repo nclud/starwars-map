@@ -1140,6 +1140,8 @@ $(document).ready(function() {
 					camera.updateProjectionMatrix();
 
 					controls.enabled = true;
+
+					$('#star-map').addClass('loaded');
 				}
 			});
 		}, 3255);

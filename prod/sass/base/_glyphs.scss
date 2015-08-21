@@ -15,15 +15,23 @@
 	border: 0;
 	outline: none;
 
-	opacity: 0.5;
+	opacity: 0;
+	pointer-events: none;
 
 	@include transform(translate3d(-50%,-50%,0) rotate(0deg));
-	@include transition(opacity 0.1s, transform 0.125s);
+	@include transition(opacity 1s, transform 0.125s);
 
-	&:hover,
-	&:active,
-	&:focus {
-		opacity: 1;
+	.loaded & {
+		opacity: 0.5;
+		pointer-events: auto;
+
+		@include transition(opacity 0.1s, transform 0.125s);
+
+		&:hover,
+		&:active,
+		&:focus {
+			opacity: 1;
+		}
 	}
 
 
