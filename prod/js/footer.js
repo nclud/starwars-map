@@ -270,8 +270,10 @@ $(document).ready(function() {
 				starMaterial[outer] = new THREE.PointCloudMaterial({
 					map: THREE.ImageUtils.loadTexture( '/img/sprite-star.png' ),
 					blending: THREE.AdditiveBlending,
-					size: ((outer * 6) + 12),
-					opacity: ((outer + 1) / 3) - 0.1,
+					// size: ((outer * 6) + 12),
+					// opacity: ((outer + 1) / 3) - 0.1,
+					size: (outer * 8),
+					opacity: 1.75,
 					alphaTest: 0.5,
 					transparent: true,
 					fog: false
@@ -286,7 +288,6 @@ $(document).ready(function() {
 	    	}
 
 	        scene.add( starfield[fields] );
-
 	    }
 	}
 
