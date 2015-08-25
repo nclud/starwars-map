@@ -155,10 +155,22 @@ h3 {
 
 	&.loaded {
 		color: rgba(white, 0.85);
+		text-shadow: 	1px 1px $gold-dark,
+						-1px -1px $gold-dark,
+						0px 1px $gold-dark,
+						1px 0px $gold-dark,
+						-1px 0px $gold-dark,
+						0px -1px $gold-dark;
 
 		&:hover,
 		&:active {
 			color: white;
+			text-shadow: 	1px 1px rgba($gold-darkest, 0.5),
+							-1px -1px rgba($gold-darkest, 0.5),
+							0px 1px rgba($gold-darkest, 0.5),
+							1px 0px rgba($gold-darkest, 0.5),
+							-1px 0px rgba($gold-darkest, 0.5),
+							0px -1px rgba($gold-darkest, 0.5);
 		}
 	}
 }

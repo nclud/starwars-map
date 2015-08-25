@@ -88,7 +88,7 @@
 	cursor: default;
 
 	@include transform(translate(-50%, 0));
-	@include transition(0.15s);
+	@include transition(0.2s);
 
 	&:before {
 		position: relative;
@@ -118,7 +118,9 @@
 	}
 
 	&.loaded {
-		border-color: rgba($gold-darkest, 0.5);
+		// border-color: rgba($gold-darkest, 0.5);
+		border-color: rgba(white, 0.75);
+		background: rgba($gold-darkest, 0.5);
 
 		cursor: auto;
 
@@ -131,7 +133,8 @@
 
 		&:hover,
 		&:active {
-			background: rgba($gold-dark, 0.75);
+			background: rgba($gold-darkest, 0.75);
+			border-color: white;
 		}
 	}
 }
