@@ -153,6 +153,10 @@ h3 {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
+	@include breakpoint(mobile) {
+		font-size: 1em;
+	}
+
 	&.loaded {
 		color: rgba(white, 0.85);
 		text-shadow: 	1px 1px $gold-dark,

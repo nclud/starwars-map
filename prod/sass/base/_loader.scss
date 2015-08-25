@@ -90,6 +90,11 @@
 	@include transform(translate(-50%, 0));
 	@include transition(0.2s);
 
+	@include breakpoint(mobile) {
+		width: 72%;
+		min-width: auto;
+	}
+
 	&:before {
 		position: relative;
 		z-index: 5;
@@ -149,8 +154,6 @@
 
 
 
-$scale-number: 0.2;
-
 #logo-stroke,
 #logo-fill {
 	@include transform-origin(1489px 400px);
@@ -162,7 +165,11 @@ $scale-number: 0.2;
 	stroke-dasharray: 4500;
 	stroke-dashoffset: 4500;
 
-	@include transform(scale($scale-number));
+	@include transform(scale(0.2));
+
+	@include breakpoint(mobile) {
+		@include transform(scale(0.135));
+	}
 
 	.begin-animation & {
 		@include animation(logo-stroke-animate 2.5s linear);
@@ -194,6 +201,6 @@ $scale-number: 0.2;
 @include keyframes(logo-fill-animate) {
 	to {
 		opacity: 1;
-		@include transform(scale($scale-number));
+		// @include transform(scale($scale-number));
 	}
 }
