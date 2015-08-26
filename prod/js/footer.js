@@ -1193,7 +1193,7 @@ $(document).ready(function() {
 			translateZ: 0,
 			opacity: 0
 		}, {
-			duration: 1000,
+			duration: 1250,
 			display: 'none',
 			complete: function() {
 				$('#classic-wipe').remove();
@@ -1207,15 +1207,14 @@ $(document).ready(function() {
 		    translateZ: 0,
 		    opacity: 0
 		}, {
-			delay: 3500,
-		    duration: 750,
+			delay: 2500,
+		    duration: 1750,
 		    display: 'none',
+		    begin: function() {
+				longagoPan( 5.5 );
+		    },
 		    complete: function() {
 				$('#long-ago').remove();
-
-				setTimeout(function(){
-					longagoPan( 5 );
-				}, 10);
 		    }
 		});
 	}
