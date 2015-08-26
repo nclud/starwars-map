@@ -120,15 +120,15 @@
 		<span class="load-text-credit">Built By <a href="http://nclud.com/" target="_blank">nclud</a></span>
 	</div>
 
-	<a href="#" id="load-button"></a>
+	<button id="load-button"></button>
 </div>
 <div id="classic-wipe"></div>
 <div id="long-ago"><img src="/img/long-ago.png" alt="A long time ago in a galaxy far, far away..."></div>
 
 <main>
 	<div id="button-sounds">
-		<a href="#" id="button-music" class="sound-text">Music</a>
-		<a href="#" id="button-sfx" class="sound-text">SFX</a>
+		<button id="button-music" class="sound-text">Music</button>
+		<button id="button-sfx" class="sound-text">SFX</button>
 	</div>
 	
 	<nav>
@@ -182,8 +182,11 @@
 	<section id="star-map">
 		<button id="button-nav"><img src="/img/icon-menu.svg" alt="MENU"></button>
 
+		<button class="planet-nav-arrow" id="planet-left"></button>
+		<button class="planet-nav-arrow" id="planet-right"></button>
+
 		<div id="planet-data-overlay">
-			<a href="#" id="button-close"></a>
+			<button id="button-close"></button>
 			
 			<h2 id="planet-data-name"></h2>
 			<div class="planet-data-column">

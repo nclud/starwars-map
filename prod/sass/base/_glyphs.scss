@@ -46,6 +46,8 @@
 	top: 1.25rem;
 	right: 1.5rem;
 
+	max-width: 1rem;
+
 	opacity: 0.75;
 
 	@include transition(opacity 0.1s);
@@ -58,12 +60,18 @@
 }
 
 #button-close {
+	cursor: pointer;
+
 	position: absolute;
 	top: 0.5rem;
 	right: 0.5rem;
 	width: 1.5rem;
 	height: 1.5rem;
 	display: block;
+
+	background: none;
+	border: 0;
+	outline: none;
 
 	pointer-events: auto;
 
@@ -98,5 +106,54 @@
 	&:active,
 	&:focus {
 		opacity: 0.875;
+	}
+}
+
+
+.planet-nav-arrow {
+	cursor: pointer;
+
+	position: absolute;
+	top: 50%;
+	width: 4rem;
+	height: 4rem;
+
+	background: none;
+	border: 0;
+	outline: none;
+
+	opacity: 0;
+
+	@include transition(1s);
+
+	&#planet-left {
+		left: 2.25rem;
+
+		border-radius: 0.25em 0 0.25em 0.5em;
+		border-left: 3px solid $gold;
+		border-bottom: 3px solid $gold;
+
+		@include transform(translate3d(0, -40%, 0) rotate(45deg));
+	}
+	&#planet-right {
+		right: 2.25rem;
+
+		border-radius: 0 0.25em 0.5em 0.25em;
+		border-right: 3px solid $gold;
+		border-bottom: 3px solid $gold;
+
+		@include transform(translate3d(0, -40%, 0) rotate(-45deg));
+	}
+
+	&.zoomed {
+		opacity: 0.5;
+
+		@include transition(0.1s);
+	}
+
+
+	&:hover,
+	&:active {
+		opacity: 1;
 	}
 }

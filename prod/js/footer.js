@@ -802,6 +802,7 @@ $(document).ready(function() {
 				zoomedIn = true;
 
 				// console.log( findPlanet( planets, 'name', planet.name ) );
+				$('.planet-nav-arrow').addClass('zoomed');
 			}
 		});
 	}
@@ -825,6 +826,9 @@ $(document).ready(function() {
 			y: oldCameraPos.y,
 			z: oldCameraPos.z,
 			ease: Strong.easeIn,
+			onStart: function() {
+				$('.planet-nav-arrow').removeClass('zoomed');
+			},
 			onUpdate: function() {
 				camera.updateProjectionMatrix();
 			},
