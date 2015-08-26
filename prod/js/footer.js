@@ -394,53 +394,27 @@ $(document).ready(function() {
 				planetRotation = planetData[i].rotation_period,
 				planetTexture = planetData[i].texture;
 
-			if (!isMobile) {
-				object = new THREE.Mesh(
-					new THREE.SphereGeometry( planetSize, 22, 22 ),
-					new THREE.MeshPhongMaterial({
-						map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
-						bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
-						bumpScale: 	3,
-						metal: 		false,
-						// shininess: 	20,
-						depthTest: 	true
-					})
-				);
-			} else {
-				object = new THREE.Mesh(
-					new THREE.SphereGeometry( planetSize, 20, 20 ),
-					new THREE.MeshLambertMaterial({
-						map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
-						depthTest: 	true,
-						reflectivity: 1,
-						shading: THREE.SmoothShading
-					})
-				);
-			}
-
-			object.position.set( planetX, 0, planetZ );
-			object.castShadow = true;
-			object.receiveShadow = true;
-
-			// ADD DEATH STAR TO ALDERAAN
-			if ( planetName == 'Alderaan' ) {
-				if (!isMobile) {
-					deathstar = new THREE.Mesh(
-						new THREE.SphereGeometry( (planetSize / 4.5), 16, 16 ),
+			// if ( !planetData[i].xpos && !planetData[i].zpos ) {
+			// 	console.log( planetData[i].name );
+			// }
+			if ( planetData[i].xpos && planetData[i].zpos ) {
+				if ( !isMobile ) {
+					object = new THREE.Mesh(
+						new THREE.SphereGeometry( planetSize, 22, 22 ),
 						new THREE.MeshPhongMaterial({
-							map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
-							bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/deathstar-bumpmap.jpg' ),
-							bumpScale: 	1.5,
+							map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
+							bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '-bumpmap.jpg' ),
+							bumpScale: 	3,
 							metal: 		false,
-							shininess: 	25,
+							// shininess: 	20,
 							depthTest: 	true
 						})
 					);
 				} else {
-					deathstar = new THREE.Mesh(
-						new THREE.SphereGeometry( (planetSize / 4.5), 12, 12 ),
+					object = new THREE.Mesh(
+						new THREE.SphereGeometry( planetSize, 20, 20 ),
 						new THREE.MeshLambertMaterial({
-							map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
+							map: 		THREE.ImageUtils.loadTexture( '/img/texture/' + planetTexture + '.jpg' ),
 							depthTest: 	true,
 							reflectivity: 1,
 							shading: THREE.SmoothShading
@@ -448,26 +422,57 @@ $(document).ready(function() {
 					);
 				}
 
-				deathstar.position.set( planetSize, (planetSize / 2), planetSize );
-				deathstar.rotation.y = 9.5;
-				deathstar.castShadow = true;
-				deathstar.receiveShadow = true;
+				object.position.set( planetX, 0, planetZ );
+				object.castShadow = true;
+				object.receiveShadow = true;
 
-				object.add( deathstar );
+				// ADD DEATH STAR TO ALDERAAN
+				if ( planetName == 'Alderaan' ) {
+					if (!isMobile) {
+						deathstar = new THREE.Mesh(
+							new THREE.SphereGeometry( (planetSize / 4.5), 16, 16 ),
+							new THREE.MeshPhongMaterial({
+								map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
+								bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/deathstar-bumpmap.jpg' ),
+								bumpScale: 	1.5,
+								metal: 		false,
+								shininess: 	25,
+								depthTest: 	true
+							})
+						);
+					} else {
+						deathstar = new THREE.Mesh(
+							new THREE.SphereGeometry( (planetSize / 4.5), 12, 12 ),
+							new THREE.MeshLambertMaterial({
+								map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
+								depthTest: 	true,
+								reflectivity: 1,
+								shading: THREE.SmoothShading
+							})
+						);
+					}
+
+					deathstar.position.set( planetSize, (planetSize / 2), planetSize );
+					deathstar.rotation.y = 9.5;
+					deathstar.castShadow = true;
+					deathstar.receiveShadow = true;
+
+					object.add( deathstar );
+				}
+
+				// STORE PLANET DATA
+				object.name = planetName;
+				object.rotation_period = planetRotation;
+				object.diameter = planetData[i].diameter;
+				object.population = planetData[i].population;
+				object.climate = planetData[i].climate;
+				object.orbital_period = planetData[i].orbital_period;
+				object.terrain = planetData[i].terrain;
+				object.films = planetData[i].films;
+
+				scene.add( object );
+				planets.push( object );
 			}
-
-			// STORE PLANET DATA
-			object.name = planetName;
-			object.rotation_period = planetRotation;
-			object.diameter = planetData[i].diameter;
-			object.population = planetData[i].population;
-			object.climate = planetData[i].climate;
-			object.orbital_period = planetData[i].orbital_period;
-			object.terrain = planetData[i].terrain;
-			object.films = planetData[i].films;
-
-			scene.add( object );
-			planets.push( object );
 
 			planetsLoaded = true;
 
