@@ -84,8 +84,7 @@ $(document).ready(function() {
 	// DETECT WEBGL
 	if ( !Detector.webgl ) {
 		// NO TO WEBGL - NEED TO PASS MESSAGE ON INTRO SAYING NOT SUPPORTED
-	}
-	else {
+	} else {
 		// YES TO WEBGL - INITIATE OVERALL THREE.JS SCENE
 		init();
 		animate();
@@ -407,8 +406,7 @@ $(document).ready(function() {
 						depthTest: 	true
 					})
 				);
-			}
-			else {
+			} else {
 				object = new THREE.Mesh(
 					new THREE.SphereGeometry( planetSize, 20, 20 ),
 					new THREE.MeshLambertMaterial({
@@ -424,9 +422,12 @@ $(document).ready(function() {
 			object.castShadow = true;
 			object.receiveShadow = true;
 
-			// ADD DEATH STAR
+			// ADD DEATH STAR TO ALDERAAN
 			if ( planetName == 'Alderaan' ) {
-				console.log( 'add death star' );
+				if (!isMobile) {
+				} else {
+
+				}
 			}
 
 			// STORE PLANET DATA
@@ -510,8 +511,7 @@ $(document).ready(function() {
 
 			if ( !isMobile ) {
 				findIntersection();
-			}
-			else if ( isMobile ) {
+			} else if ( isMobile ) {
 				findIntersectionTouch();
 			}
 		}
@@ -608,8 +608,7 @@ $(document).ready(function() {
 				planetText.innerHTML = INTERSECTED.name;
 				planetText.style.display = 'block';
 			}
-		}
-		else {
+		} else {
 			objectHover = false;
 			INTERSECTED = null;
 
@@ -633,8 +632,7 @@ $(document).ready(function() {
 				zoomIntoPlanet( INTERSECTED, 3.25 );
 				showOverlay( INTERSECTED );
 			}
-		}
-		else {
+		} else {
 			INTERSECTED = null;
 		}
 	}
@@ -859,8 +857,7 @@ $(document).ready(function() {
 
 		    	if ( planet.population === 'unknown' ) {
 		    		populationNumber = planet.population;
-		    	}
-		    	else {
+		    	} else {
 		    		populationNumber = parseInt(planet.population).toLocaleString();
 		    	}
 
@@ -932,8 +929,7 @@ $(document).ready(function() {
 				    display: 'block'
 				});
 			}
-		}
-		else {
+		} else {
 			// NAV OPENING
 			$('body').addClass('nav-open');
 
@@ -982,8 +978,7 @@ $(document).ready(function() {
 						planets[planet].visible = true;
 					}
 				}
-			}
-			else {
+			} else {
 				// TURNING CHECK OFF
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					if ( planets[planet].films.length == 0 ) {
@@ -991,8 +986,7 @@ $(document).ready(function() {
 					}
 				}
 			}
-		}
-		else {
+		} else {
 			for ( i = 0; i < filmData.length; i ++ ) {
 				if ( filterEpisode == filmData[i].episode_id ) {
 					filterURL = filmData[i].url;
@@ -1008,8 +1002,7 @@ $(document).ready(function() {
 						}
 					}
 				}
-			}
-			else {
+			} else {
 				// TURNING CHECK OFF
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					for ( film = 0; film < planets[planet].films.length; film ++ ) {
@@ -1079,8 +1072,7 @@ $(document).ready(function() {
 			$(this).removeClass('off');
 
 			sfxMute = false;
-		}
-		else {
+		} else {
 			$(this).addClass('off');
 
 			sfxMute = true;
@@ -1100,8 +1092,7 @@ $(document).ready(function() {
 
 			musicloop1.mute(false);
 			musicloop2.mute(false);
-		}
-		else {
+		} else {
 			$(this).addClass('off');
 
 			musicMute = true;
