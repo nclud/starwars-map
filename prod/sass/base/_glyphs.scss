@@ -127,6 +127,27 @@
 
 	@include transition(1s);
 
+	&:before {
+		position: absolute;
+		display: block;
+
+		font-family: 'Roboto', sans-serif;
+		font-weight: 900;
+		font-size: 1.25em;
+		text-transform: uppercase;
+		text-decoration: none;
+		letter-spacing: 0.1em;
+
+		color: rgba($gold, 0.75);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+
+		opacity: 0;
+
+		@include transition(0.05s);
+	}
+
+
 	&#planet-left {
 		left: 2.25rem;
 
@@ -135,6 +156,15 @@
 		border-bottom: 3px solid $gold;
 
 		@include transform(translate3d(0, -40%, 0) rotate(45deg));
+
+		&:before {
+			left: 25%;
+			top: -1%;
+
+			@include transform(rotate(-45deg));
+
+			content: 'Previous';
+		}
 	}
 	&#planet-right {
 		right: 2.25rem;
@@ -144,11 +174,20 @@
 		border-bottom: 3px solid $gold;
 
 		@include transform(translate3d(0, -40%, 0) rotate(-45deg));
+
+		&:before {
+			right: 30%;
+			top: 22%;
+
+			@include transform(rotate(45deg));
+
+			content: 'Next';
+		}
 	}
 
 	&.zoomed {
 		pointer-events: auto;
-		
+
 		opacity: 0.5;
 
 		@include transition(0.1s);
@@ -156,6 +195,10 @@
 		&:hover,
 		&:active {
 			opacity: 1;
+
+			&:before {
+				opacity: 1;
+			}
 		}
 	}
 }
