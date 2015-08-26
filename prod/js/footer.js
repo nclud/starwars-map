@@ -1113,7 +1113,7 @@ $(document).ready(function() {
 	// INTRO ANIMATIONS
 	$('#load-button').on('click', function(){
 		if ( $(this).hasClass('loaded') ) {
-			console.log('yes launch now');
+			logozoom();
 		}
 
 		return false;
@@ -1121,6 +1121,46 @@ $(document).ready(function() {
 
 	function beginLoaded() {
 		$('#load-button').addClass('loaded');
+	}
+	function logozoom() {
+		$('#load-button').addClass('launching');
+
+		$('#logo-fill').velocity({
+			translateZ: 0,
+			scale: '0.2',
+			opacity: 1
+		}, {
+			duration: 3000,
+			complete: function() {
+				classicwipe();
+			}
+		});
+	}
+	function classicwipe() {
+		$('#classic-wipe').velocity({
+			translateZ: 0,
+			translateX: '-125%'
+		}, {
+			delay: 1250,
+			duration: 750,
+			complete: function() {
+				$('#load-overlay').remove();
+
+				classicwipeFade();
+			}
+		});
+	}
+	function classicwipeFade() {
+		$('#classic-wipe').velocity({
+			translateZ: 0,
+			opacity: 0
+		}, {
+			duration: 750,
+			display: 'none',
+			complete: function() {
+				longago();
+			}
+		});
 	}
 	function longago() {
 		$('#long-ago').velocity({
