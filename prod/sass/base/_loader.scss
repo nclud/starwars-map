@@ -185,7 +185,7 @@
 	@include transform(scale(0.2));
 
 	.begin-animation & {
-		@include animation(logo-stroke-animate 2.5s linear);
+		@include animation(logo-stroke-animate 5s linear);
 		@include animation-fill-mode(forwards);
 	}
 }

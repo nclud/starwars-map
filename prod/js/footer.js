@@ -426,7 +426,7 @@ $(document).ready(function() {
 			if ( planetName == 'Alderaan' ) {
 				if (!isMobile) {
 					deathstar = new THREE.Mesh(
-						new THREE.SphereGeometry( (planetSize / 4), 16, 16 ),
+						new THREE.SphereGeometry( (planetSize / 4.5), 16, 16 ),
 						new THREE.MeshPhongMaterial({
 							map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
 							bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/deathstar-bumpmap.jpg' ),
@@ -438,7 +438,7 @@ $(document).ready(function() {
 					);
 				} else {
 					deathstar = new THREE.Mesh(
-						new THREE.SphereGeometry( planetSize, 12, 12 ),
+						new THREE.SphereGeometry( (planetSize / 4.5), 12, 12 ),
 						new THREE.MeshLambertMaterial({
 							map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
 							depthTest: 	true,
@@ -449,7 +449,7 @@ $(document).ready(function() {
 				}
 
 				deathstar.position.set( planetSize, (planetSize / 2), planetSize );
-				deathstar.rotation.y = 10;
+				deathstar.rotation.y = 9.5;
 				deathstar.castShadow = true;
 				deathstar.receiveShadow = true;
 
