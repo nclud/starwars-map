@@ -1093,6 +1093,10 @@ $(document).ready(function() {
 		musicloop2 = new Howl({
 			src: ['/audio/music-loop.mp3'],
 			onplay: function() {
+				if ( !loopDuration ) {
+					loopDuration = Math.floor( musicloop2._duration * 1000 );
+				}
+
 				setTimeout(function() {
 					loopMusic( musicloop2, musicloop1 );
 				}, (loopDuration - crossfade));
