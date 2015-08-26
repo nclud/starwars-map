@@ -61,14 +61,25 @@
 	@include transform(translate3d(-50%, -50%, 0));
 
 	pointer-events: none;
+
+	@include breakpoint(mobile) {
+		top: 40%;
+	}
 }
 
 #load-text-container {
 	position: absolute;
 	top: 56%;
+	left: 0;
 	width: 100%;
 
 	text-align: center;
+
+	@include breakpoint(mobile) {
+		width: 72%;
+		left: 14%;
+		top: 53%;
+	}
 }
 
 #load-button {
@@ -77,7 +88,7 @@
 	left: 50%;
 	bottom: 6rem;
 	padding: 1.25em 1.25em 1.25em 1.45em;
-	min-width: 24rem;
+	width: 24rem;
 
 	background: rgba($gold-dark, 0.25);
 
@@ -91,8 +102,9 @@
 	@include transition(0.2s);
 
 	@include breakpoint(mobile) {
+		padding: 1.25em 1.05em 1.25em 1.25em;
 		width: 72%;
-		min-width: auto;
+		bottom: 3.5rem;
 	}
 
 	&:before {
@@ -134,6 +146,7 @@
 		}
 		&:after {
 			width: 100%;
+			@include animation(none);
 		}
 
 		&:hover,
@@ -166,10 +179,6 @@
 	stroke-dashoffset: 4500;
 
 	@include transform(scale(0.2));
-
-	@include breakpoint(mobile) {
-		@include transform(scale(0.135));
-	}
 
 	.begin-animation & {
 		@include animation(logo-stroke-animate 2.5s linear);
