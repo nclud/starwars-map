@@ -1155,7 +1155,7 @@ $(document).ready(function() {
 			translateZ: 0,
 			opacity: 0
 		}, {
-			duration: 750,
+			duration: 1000,
 			display: 'none',
 			complete: function() {
 				$('#classic-wipe').remove();
@@ -1169,14 +1169,14 @@ $(document).ready(function() {
 		    translateZ: 0,
 		    opacity: 0
 		}, {
-			delay: 2500,
+			delay: 3500,
 		    duration: 750,
 		    display: 'none',
 		    complete: function() {
 				$('#long-ago').remove();
 
 				setTimeout(function(){
-					longagoPan( 3.5 );
+					longagoPan( 5 );
 				}, 10);
 		    }
 		});
