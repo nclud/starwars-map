@@ -28,8 +28,7 @@
 		@include transition(opacity 0.1s, transform 0.125s);
 
 		&:hover,
-		&:active,
-		&:focus {
+		&:active {
 			opacity: 1;
 		}
 	}

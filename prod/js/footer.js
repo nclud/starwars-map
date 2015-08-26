@@ -424,6 +424,11 @@ $(document).ready(function() {
 			object.castShadow = true;
 			object.receiveShadow = true;
 
+			// ADD DEATH STAR
+			if ( planetName == 'Alderaan' ) {
+				console.log( 'add death star' );
+			}
+
 			// STORE PLANET DATA
 			object.name = planetName;
 			object.rotation_period = planetRotation;
