@@ -793,6 +793,13 @@ $(document).ready(function() {
 			y: newCameraPos.y,
 			z: newCameraPos.z,
 			ease: Strong.easeOut,
+			onStart: function() {
+				var timeout = duration * 1000;
+
+				setTimeout(function(){
+					$('.planet-nav-arrow').addClass('zoomed');
+				}, (timeout - 1000) );
+			},
 			onUpdate: function() {
 				camera.updateProjectionMatrix();
 			},
@@ -802,7 +809,6 @@ $(document).ready(function() {
 				zoomedIn = true;
 
 				// console.log( findPlanet( planets, 'name', planet.name ) );
-				$('.planet-nav-arrow').addClass('zoomed');
 			}
 		});
 	}
@@ -1208,10 +1214,10 @@ $(document).ready(function() {
 		    opacity: 0
 		}, {
 			delay: 2500,
-		    duration: 1750,
+		    duration: 2500,
 		    display: 'none',
 		    begin: function() {
-				longagoPan( 5.5 );
+				longagoPan( 5 );
 		    },
 		    complete: function() {
 				$('#long-ago').remove();
