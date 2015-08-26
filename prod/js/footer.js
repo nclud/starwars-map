@@ -425,9 +425,35 @@ $(document).ready(function() {
 			// ADD DEATH STAR TO ALDERAAN
 			if ( planetName == 'Alderaan' ) {
 				if (!isMobile) {
+					deathstar = new THREE.Mesh(
+						new THREE.SphereGeometry( (planetSize / 4), 16, 16 ),
+						new THREE.MeshPhongMaterial({
+							map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
+							bumpMap: 	THREE.ImageUtils.loadTexture( '/img/texture/deathstar-bumpmap.jpg' ),
+							bumpScale: 	1.5,
+							metal: 		false,
+							shininess: 	25,
+							depthTest: 	true
+						})
+					);
 				} else {
-
+					deathstar = new THREE.Mesh(
+						new THREE.SphereGeometry( planetSize, 12, 12 ),
+						new THREE.MeshLambertMaterial({
+							map: 		THREE.ImageUtils.loadTexture( '/img/texture/deathstar.jpg' ),
+							depthTest: 	true,
+							reflectivity: 1,
+							shading: THREE.SmoothShading
+						})
+					);
 				}
+
+				deathstar.position.set( planetSize, (planetSize / 2), planetSize );
+				deathstar.rotation.y = 10;
+				deathstar.castShadow = true;
+				deathstar.receiveShadow = true;
+
+				object.add( deathstar );
 			}
 
 			// STORE PLANET DATA
