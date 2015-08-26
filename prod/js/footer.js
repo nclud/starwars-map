@@ -800,6 +800,8 @@ $(document).ready(function() {
 				camera.updateProjectionMatrix();
 
 				zoomedIn = true;
+
+				// console.log( findPlanet( planets, 'name', planet.name ) );
 			}
 		});
 	}
@@ -840,6 +842,16 @@ $(document).ready(function() {
 		setTimeout(function(){
 			galaxy.visible = true;
 		}, 1650 );
+	}
+
+	function findPlanet( array, key, value ) {
+		for ( var i = 0; i < array.length; i++ ) {
+			if (array[i][key] == value) {
+				return i;
+			}
+		}
+
+		return null;
 	}
 	
 
