@@ -1141,8 +1141,8 @@ $(document).ready(function() {
 			translateZ: 0,
 			translateX: '-125%'
 		}, {
-			delay: 1250,
-			duration: 750,
+			delay: 1500,
+			duration: 1000,
 			complete: function() {
 				$('#load-overlay').remove();
 
@@ -1158,6 +1158,8 @@ $(document).ready(function() {
 			duration: 750,
 			display: 'none',
 			complete: function() {
+				$('#classic-wipe').remove();
+
 				longago();
 			}
 		});
@@ -1203,6 +1205,8 @@ $(document).ready(function() {
 				controls.enabled = true;
 
 				$('#star-map').addClass('loaded');
+
+				$('#long-ago').remove();
 			}
 		});
 	}
