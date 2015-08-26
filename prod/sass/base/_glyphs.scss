@@ -112,6 +112,7 @@
 
 .planet-nav-arrow {
 	cursor: pointer;
+	pointer-events: none;
 
 	position: absolute;
 	top: 50%;
@@ -146,14 +147,15 @@
 	}
 
 	&.zoomed {
+		pointer-events: auto;
+		
 		opacity: 0.5;
 
 		@include transition(0.1s);
-	}
 
-
-	&:hover,
-	&:active {
-		opacity: 1;
+		&:hover,
+		&:active {
+			opacity: 1;
+		}
 	}
 }
