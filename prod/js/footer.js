@@ -1111,6 +1111,14 @@ $(document).ready(function() {
 
 
 	// INTRO ANIMATIONS
+	$('#load-button').on('click', function(){
+		if ( $(this).hasClass('loaded') ) {
+			console.log('yes launch now');
+		}
+
+		return false;
+	});
+
 	function beginLoaded() {
 		$('#load-button').addClass('loaded');
 	}

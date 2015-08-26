@@ -155,6 +155,10 @@
 			border-color: white;
 		}
 	}
+
+	&.launching {
+		opacity: 0;
+	}
 }
 @include keyframes(loading-button) {
 	from {
@@ -211,5 +215,32 @@
 	to {
 		opacity: 1;
 		// @include transform(scale($scale-number));
+	}
+}
+
+
+
+#classic-wipe {
+	position: absolute;
+	top: 0;
+	left: 130%;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+
+	background: black;
+
+	&:before {
+		position: absolute;
+		right: 100%;
+		top: 0;
+		bottom: 0;
+		width: 25%;
+		display: block;
+
+		background: url('/img/grad-right.png') repeat-y;
+		background-size: 100% 1px;
+
+		content: '';
 	}
 }

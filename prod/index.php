@@ -112,7 +112,7 @@
 
 <body>
 
-<section id="load-overlay">
+<div id="load-overlay">
 	<?php echo file_get_contents("img/logo-1977.svg"); ?>
 
 	<div id="load-text-container">
@@ -121,8 +121,9 @@
 	</div>
 
 	<a href="#" id="load-button"></a>
-</section>
-<section id="long-ago"><img src="/img/long-ago.png" alt="A long time ago in a galaxy far, far away..."></section>
+</div>
+<div id="classic-wipe"></div>
+<div id="long-ago"><img src="/img/long-ago.png" alt="A long time ago in a galaxy far, far away..."></div>
 
 <main>
 	<div id="button-sounds">
