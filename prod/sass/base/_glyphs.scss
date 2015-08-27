@@ -127,7 +127,7 @@
 
 	@include transition(1s);
 
-	&:before {
+	.desktop &:before {
 		position: absolute;
 		display: block;
 

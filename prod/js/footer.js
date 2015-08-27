@@ -34,13 +34,18 @@ var newCameraPos,
 	newCameraFocus;
 var zoomedIn = false;
 
+// PANNING VARIABLES
+var currentPlanetIndex,
+	prevPlanetIndex,
+	nextPlanetIndex;
+
 // CONTROLS VARIABLES
 var controls;
 var raycaster,
 	mousePos = new THREE.Vector2( -1000, 1000 ),
 	INTERSECTED;
 var objectHover = false;
-var intersections = true;
+var intersections = false;
 
 // LIGHT GLOBAL VARIABLES
 var globalLight;
@@ -805,11 +810,24 @@ $(document).ready(function() {
 				camera.updateProjectionMatrix();
 
 				zoomedIn = true;
-
-				// console.log( findPlanet( planets, 'name', planet.name ) );
 			}
 		});
 
+		// PLANET INDEX FOR ARRAY
+		currentPlanetIndex = findPlanet( planets, 'name', planet.name );
+
+		if ( currentPlanetIndex === 0 ) {
+			prevPlanetIndex = planets.length;
+		} else {
+			prevPlanetIndex = currentPlanetIndex - 1;
+		}
+		if ( currentPlanetIndex === planets.length ) {
+			nextPlanetIndex = 0;
+		} else {
+			nextPlanetIndex = currentPlanetIndex + 1;
+		}
+
+		// HIDE ARROWS
 		var timeoutMath = duration * 1000;
 		setTimeout(function(){
 			$('.planet-nav-arrow').addClass('zoomed');
@@ -855,6 +873,9 @@ $(document).ready(function() {
 			galaxy.visible = true;
 		}, 1650 );
 	}
+	function panToPlanet( planet, duration ) {
+
+	}
 
 	function findPlanet( array, key, value ) {
 		for ( var i = 0; i < array.length; i++ ) {
@@ -865,6 +886,20 @@ $(document).ready(function() {
 
 		return null;
 	}
+
+
+
+	// ARROW FUNCTIONS
+	$('.planet-nav-arrow').on('click', function(){
+		if ( $(this).is('#planet-left') ) {
+			console.log('left arrow');
+		}
+		if ( $(this).is('#planet-right') ) {
+			console.log('right arrow');
+		}
+
+		return false;
+	});
 	
 
 
@@ -1251,6 +1286,7 @@ $(document).ready(function() {
 			onComplete: function() {
 				camera.updateProjectionMatrix();
 
+				intersections = true;
 				controls.enabled = true;
 
 				$('#star-map').addClass('loaded');
