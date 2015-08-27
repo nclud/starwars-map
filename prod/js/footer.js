@@ -1219,8 +1219,8 @@ $(document).ready(function() {
 		    translateZ: 0,
 		    opacity: 0
 		}, {
-			delay: 2500,
-		    duration: 2500,
+			delay: 2000,
+		    duration: 3500,
 		    display: 'none',
 		    begin: function() {
 				longagoPan( 5 );
