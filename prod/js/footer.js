@@ -863,50 +863,53 @@ $(document).ready(function() {
 			galaxy.visible = true;
 		}, 1650 );
 	}
-	function panToPlanet( planet, duration ) {
+	function panToPlanet( oldplanet, newplanet, duration ) {
 		hideOverlay();
+		showOverlay( newplanet );
 
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
-		var camDistance = (planet.geometry.parameters.radius / 25) * gridMultiplier,
-			camOffset = (planet.geometry.parameters.radius / 92) * gridMultiplier;
+		var camDistance = (newplanet.geometry.parameters.radius / 25) * gridMultiplier,
+			camOffset = (newplanet.geometry.parameters.radius / 92) * gridMultiplier;
 
 		newCameraPos = new THREE.Vector3(
-            planet.position.x,
-            planet.position.y - camOffset,
-            planet.position.z + camDistance
+            newplanet.position.x,
+            newplanet.position.y - camOffset,
+            newplanet.position.z + camDistance
 		);
 		newCameraFocus = new THREE.Vector3(
-			planet.position.x,
-            planet.position.y - camOffset,
-            planet.position.z
+			newplanet.position.x,
+            newplanet.position.y - camOffset,
+            newplanet.position.z
 		);
 
 		TweenMax.to( currentCameraFocus, duration, {
 			x: newCameraFocus.x,
 			y: newCameraFocus.y,
 			z: newCameraFocus.z,
-			ease: Strong.easeOut
+			ease: Strong.easeInOut
 		});
 		TweenMax.to( currentCameraPos, duration, {
 			x: newCameraPos.x,
 			y: newCameraPos.y,
 			z: newCameraPos.z,
-			ease: Strong.easeOut,
+			ease: Strong.easeInOut,
 			onUpdate: function() {
 				camera.updateProjectionMatrix();
 			},
 			onComplete: function() {
 				camera.updateProjectionMatrix();
 
+				oldplanet.visible = false;
+
 				zoomedIn = true;
 
-				showOverlay( planet );
+				planetIndexValues( newplanet );
 			}
 		});
 
 		setTimeout(function(){
-
+			newplanet.visible = true;
 		}, (duration / 2) );
 	}
 
@@ -939,10 +942,10 @@ $(document).ready(function() {
 	// ARROW FUNCTIONS
 	$('.planet-nav-arrow').on('click', function(){
 		if ( $(this).is('#planet-left') ) {
-			console.log('left arrow');
+			panToPlanet( planets[currentPlanetIndex], planets[prevPlanetIndex], 3.5 );
 		}
 		if ( $(this).is('#planet-right') ) {
-			console.log('right arrow');
+			panToPlanet( planets[currentPlanetIndex], planets[nextPlanetIndex], 3.5 );
 		}
 
 		return false;
