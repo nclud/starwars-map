@@ -810,22 +810,10 @@ $(document).ready(function() {
 				camera.updateProjectionMatrix();
 
 				zoomedIn = true;
+
+				planetIndexValues( planet );
 			}
 		});
-
-		// PLANET INDEX FOR ARRAY
-		currentPlanetIndex = findPlanet( planets, 'name', planet.name );
-
-		if ( currentPlanetIndex === 0 ) {
-			prevPlanetIndex = planets.length;
-		} else {
-			prevPlanetIndex = currentPlanetIndex - 1;
-		}
-		if ( currentPlanetIndex === planets.length ) {
-			nextPlanetIndex = 0;
-		} else {
-			nextPlanetIndex = currentPlanetIndex + 1;
-		}
 
 		// HIDE ARROWS
 		var timeoutMath = duration * 1000;
@@ -866,6 +854,8 @@ $(document).ready(function() {
 				setTimeout(function(){
 					showEverything();
 				}, 50);
+
+				prevPlanetIndex = currentPlanetIndex = nextPlanetIndex = null;
 			}
 		});
 
@@ -891,9 +881,50 @@ $(document).ready(function() {
             planet.position.y - camOffset,
             planet.position.z
 		);
+
+		TweenMax.to( currentCameraFocus, duration, {
+			x: newCameraFocus.x,
+			y: newCameraFocus.y,
+			z: newCameraFocus.z,
+			ease: Strong.easeOut
+		});
+		TweenMax.to( currentCameraPos, duration, {
+			x: newCameraPos.x,
+			y: newCameraPos.y,
+			z: newCameraPos.z,
+			ease: Strong.easeOut,
+			onUpdate: function() {
+				camera.updateProjectionMatrix();
+			},
+			onComplete: function() {
+				camera.updateProjectionMatrix();
+
+				zoomedIn = true;
+
+				showOverlay( planet );
+			}
+		});
+
+		setTimeout(function(){
+
+		}, (duration / 2) );
 	}
 
-	function findPlanet( array, key, value ) {
+	function planetIndexValues( planet ) {
+		currentPlanetIndex = findPlanetIndex( planets, 'name', planet.name );
+
+		if ( currentPlanetIndex === 0 ) {
+			prevPlanetIndex = planets.length;
+		} else {
+			prevPlanetIndex = currentPlanetIndex - 1;
+		}
+		if ( currentPlanetIndex === planets.length ) {
+			nextPlanetIndex = 0;
+		} else {
+			nextPlanetIndex = currentPlanetIndex + 1;
+		}
+	}
+	function findPlanetIndex( array, key, value ) {
 		for ( var i = 0; i < array.length; i++ ) {
 			if (array[i][key] == value) {
 				return i;
