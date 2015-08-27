@@ -778,18 +778,18 @@ $(document).ready(function() {
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
 
-		var camDistance = (INTERSECTED.geometry.parameters.radius / 25) * gridMultiplier,
-			camOffset = (INTERSECTED.geometry.parameters.radius / 92) * gridMultiplier;
+		var camDistance = (planet.geometry.parameters.radius / 25) * gridMultiplier,
+			camOffset = (planet.geometry.parameters.radius / 92) * gridMultiplier;
 
 		newCameraPos = new THREE.Vector3(
-            INTERSECTED.position.x,
-            INTERSECTED.position.y - camOffset,
-            INTERSECTED.position.z + camDistance
+            planet.position.x,
+            planet.position.y - camOffset,
+            planet.position.z + camDistance
 		);
 		newCameraFocus = new THREE.Vector3(
-			INTERSECTED.position.x,
-            INTERSECTED.position.y - camOffset,
-            INTERSECTED.position.z
+			planet.position.x,
+            planet.position.y - camOffset,
+            planet.position.z
 		);
 
 		TweenMax.to( currentCameraFocus, duration, {
@@ -874,7 +874,23 @@ $(document).ready(function() {
 		}, 1650 );
 	}
 	function panToPlanet( planet, duration ) {
+		hideOverlay();
 
+		currentCameraPos = camera.position;
+		currentCameraFocus = controls.target;
+		var camDistance = (planet.geometry.parameters.radius / 25) * gridMultiplier,
+			camOffset = (planet.geometry.parameters.radius / 92) * gridMultiplier;
+
+		newCameraPos = new THREE.Vector3(
+            planet.position.x,
+            planet.position.y - camOffset,
+            planet.position.z + camDistance
+		);
+		newCameraFocus = new THREE.Vector3(
+			planet.position.x,
+            planet.position.y - camOffset,
+            planet.position.z
+		);
 	}
 
 	function findPlanet( array, key, value ) {
