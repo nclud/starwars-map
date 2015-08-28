@@ -2,6 +2,7 @@
 
 .node-modules/
 /dist/
+/gulp_tasks/
 /prod/img/.DS_Store
 /prod/fonts/.DS_Store
 /prod/.DS_Store

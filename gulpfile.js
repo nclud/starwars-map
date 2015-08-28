@@ -21,6 +21,9 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	rsync = require('rsyncwrapper').rsync;
 
+// Pull in outside tasks - for deployment
+var requireDir = require('require-dir');
+requireDir('./gulp_tasks');
 
 
 // Server initiation and livereload, opens server in browser
