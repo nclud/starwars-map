@@ -1172,6 +1172,21 @@ $(document).ready(function() {
 		crossfade = 5750,
 		musicVolume = 0.85,
 		loopDuration;
+	var musicintro = new Howl({
+			src: ['/audio/music-intro.mp3'],
+			onplay: function() {
+				var introDuration = Math.floor( musicintro._duration * 1000 ),
+					introCrossfade = 6500;
+
+				setTimeout(function() {
+					musicintro.fade(musicVolume, 0, introCrossfade);
+
+					musicloop1.volume(0);
+					musicloop1.play();
+					musicloop1.fade(0, musicVolume, introCrossfade);
+				}, (introDuration - introCrossfade));
+			}
+		});
 	var musicloop1 = new Howl({
 			src: ['/audio/music-loop.mp3'],
 			onplay: function() {
@@ -1199,16 +1214,12 @@ $(document).ready(function() {
 
 
 	// MUSIC LOOPING
-	// musicloop1.play();
-
 	function loopMusic( first, last ) {
 		first.fade(musicVolume, 0, crossfade);
 
-		if ( !musicMute ) {
-			last.volume(0);
-			last.play();
-			last.fade(0, musicVolume, crossfade);
-		}
+		last.volume(0);
+		last.play();
+		last.fade(0, musicVolume, crossfade);
 	}
 
 
@@ -1236,6 +1247,7 @@ $(document).ready(function() {
 
 			musicMute = false;
 
+			musicintro.mute(false);
 			musicloop1.mute(false);
 			musicloop2.mute(false);
 		} else {
@@ -1243,6 +1255,7 @@ $(document).ready(function() {
 
 			musicMute = true;
 
+			musicintro.mute(true);
 			musicloop1.mute(true);
 			musicloop2.mute(true);
 		}
@@ -1256,6 +1269,8 @@ $(document).ready(function() {
 	$('#load-button').on('click', function(){
 		if ( $(this).hasClass('loaded') ) {
 			logozoom();
+
+			musicintro.play();
 		}
 
 		return false;
