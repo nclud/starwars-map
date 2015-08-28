@@ -855,9 +855,7 @@ $(document).ready(function() {
 
 				zoomedIn = false;
 
-				setTimeout(function(){
-					showEverything();
-				}, 50);
+				showEverything();
 
 				prevPlanetIndex = currentPlanetIndex = nextPlanetIndex = null;
 			}
