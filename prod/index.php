@@ -158,7 +158,7 @@
 				<label for="episode6">Episode VI: Return of the Jedi</label>
 			</li>
 			<li class="filter-list-single">
-				<input type="checkbox" id="other" name="other" value="0" checked />
+				<input type="checkbox" id="other" name="other" value="0" checked class="checked" />
 				<label for="other">Expanded Universe</label>
 			</li>
 		</ul>

@@ -762,11 +762,6 @@ $(document).ready(function() {
 		intersections = true;
 		controls.enabled = true;
 
-		console.log( filterURLArray );
-
-		// for ( planet = 0; planet < visiblePlanets.length; planet ++ ) {
-		// 	visiblePlanets[planet].visible = true;
-		// }
 		visiblePlanets = [];
 
 		for ( planet = 0; planet < planets.length; planet ++ ) {
@@ -774,20 +769,21 @@ $(document).ready(function() {
 
 			if ( planets[planet].films.length == 0 && !$('#other').hasClass('checked') ) {
 				planets[planet].visible = false;
-			} else if ( planets[planet].films.length > 0 && filterURLArray.length > 0 ) {
-
 			}
-			// if ( filterURLArray.length > 0 && planets[planet].films.length > 0 ) {
-			// 	if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
-			// 		planets[planet].visible = false;
-			// 	}
-			// }
+			if ( planets[planet].films.length > 0 && filterURLArray.length > 0 ) {
+				if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
+					planets[planet].visible = false;
+				}
+			}
 
-			// if ( $('.filter-list-single:last-child').not(':checked') ) {
-			// 	if ( planets[planet].films.length == 0 ) {
-			// 		planets[planet].visible = false;
-			// 	}
-			// }
+			if ( planets[planet].films.length == 0 && $('#other').hasClass('checked') ) {
+				planets[planet].visible = true;
+			}
+			if ( planets[planet].films.length > 0 && filterURLArray.length > 0 ) {
+				if ( JSON.stringify( filterURLArray ) != JSON.stringify( planets[planet].films ) ) {
+					planets[planet].visible = true;
+				}
+			}
 		}
 	}
 
