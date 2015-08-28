@@ -1319,7 +1319,7 @@ $(document).ready(function() {
 			translateZ: 0,
 			translateX: '-125%'
 		}, {
-			delay: 1500,
+			delay: 3000,
 			duration: 1000,
 			complete: function() {
 				$('#load-overlay').remove();
