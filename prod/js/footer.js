@@ -770,7 +770,14 @@ $(document).ready(function() {
 			if ( planets[planet].films.length == 0 && !$('#other').hasClass('checked') ) {
 				planets[planet].visible = false;
 			}
-			if ( planets[planet].films.length > 0 && filterURLArray.length > 0 ) {
+			if ( planets[planet].films.length == 1 ) {
+				for ( film = 0; film < planets[planet].films.length; film ++ ) {
+					if ( filterURL == planets[planet].films[film] ) {
+						planets[planet].visible = false;
+					}
+				}
+			}
+			if ( planets[planet].films.length > 1 && filterURLArray.length > 0 ) {
 				if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
 					planets[planet].visible = false;
 				}
@@ -779,10 +786,21 @@ $(document).ready(function() {
 			if ( planets[planet].films.length == 0 && $('#other').hasClass('checked') ) {
 				planets[planet].visible = true;
 			}
-			if ( planets[planet].films.length > 0 && filterURLArray.length > 0 ) {
+			if ( planets[planet].films.length == 1 ) {
+				for ( film = 0; film < planets[planet].films.length; film ++ ) {
+					if ( filterURL != planets[planet].films[film] ) {
+						planets[planet].visible = true;
+					}
+				}
+			}
+			if ( planets[planet].films.length > 1 && filterURLArray.length > 0 ) {
 				if ( JSON.stringify( filterURLArray ) != JSON.stringify( planets[planet].films ) ) {
 					planets[planet].visible = true;
 				}
+			}
+
+			if ( $('input.checked').length == 0 ) {
+				planets[planet].visible = false;
 			}
 		}
 	}
@@ -1146,11 +1164,11 @@ $(document).ready(function() {
 
 
 	// FILTER FUNCTIONALITY
-	var filterURLArray = [];
+	var filterURLArray = [],
+		filterURL;
 
 	$('input').on('click', function(){
 		var filterEpisode = $(this).attr('value'),
-			filterURL,
 			filmIndex;
 
 		if ( filterEpisode == 0 ) {
@@ -1202,6 +1220,7 @@ $(document).ready(function() {
 			if ( $(this).is(':checked') ) {
 				// TURNING CHECK ON
 				$(this).attr('checked', '');
+				$(this).addClass('checked');
 
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					if ( planets[planet].films.length == 1 ) {
@@ -1219,6 +1238,7 @@ $(document).ready(function() {
 			} else {
 				// TURNING CHECK OFF
 				$(this).removeAttr('checked');
+				$(this).removeClass('checked');
 
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					if ( planets[planet].films.length == 1 ) {
@@ -1233,6 +1253,12 @@ $(document).ready(function() {
 						}
 					}
 				}
+			}
+		}
+
+		if ( $('input.checked').length == 0 ) {
+			for ( planet = 0; planet < planets.length; planet ++ ) {
+				if ( !zoomedIn ) planets[planet].visible = false;
 			}
 		}
 

@@ -134,27 +134,27 @@
 		<ul class="filter-list">
 			<span class="filter-title">Filter By Movie</span>
 			<li class="filter-list-single">
-				<input type="checkbox" id="episode1" name="episode1" value="1" checked />
+				<input type="checkbox" id="episode1" name="episode1" value="1" checked class="checked" />
 				<label for="episode1">Episode I: The Phantom Menace</label>
 			</li>
 			<li class="filter-list-single">
-				<input type="checkbox" id="episode2" name="episode2" value="2" checked />
+				<input type="checkbox" id="episode2" name="episode2" value="2" checked class="checked" />
 				<label for="episode2">Episode II: Attack of the Clones</label>
 			</li>
 			<li class="filter-list-single">
-				<input type="checkbox" id="episode3" name="episode3" value="3" checked />
+				<input type="checkbox" id="episode3" name="episode3" value="3" checked class="checked" />
 				<label for="episode3">Episode III: Revenge of the Sith</label>
 			</li>
 			<li class="filter-list-single">
-				<input type="checkbox" id="episode4" name="episode4" value="4" checked />
+				<input type="checkbox" id="episode4" name="episode4" value="4" checked class="checked" />
 				<label for="episode4">Episode IV: A New Hope</label>
 			</li>
 			<li class="filter-list-single">
-				<input type="checkbox" id="episode5" name="episode5" value="5" checked />
+				<input type="checkbox" id="episode5" name="episode5" value="5" checked class="checked" />
 				<label for="episode5">Episode V: The Empire Strikes Back</label>
 			</li>
 			<li class="filter-list-single">
-				<input type="checkbox" id="episode6" name="episode6" value="6" checked />
+				<input type="checkbox" id="episode6" name="episode6" value="6" checked class="checked" />
 				<label for="episode6">Episode VI: Return of the Jedi</label>
 			</li>
 			<li class="filter-list-single">
