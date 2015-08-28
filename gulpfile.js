@@ -17,7 +17,6 @@ var gulp = require('gulp'),
 	stripDebug = require('gulp-strip-debug'),
 	imagemin = require('gulp-imagemin'),
 	gzip = require('gulp-gzip'),
-	sitemap = require('gulp-sitemap'),
 	gutil = require('gulp-util'),
 	rsync = require('rsyncwrapper').rsync;
 
@@ -183,14 +182,6 @@ gulp.task('images', function() {
 	);
 });
 
-gulp.task('sitemap', ['html'], function () {
-    gulp.src('./dist/*.php', './dist/*.html')
-        .pipe(sitemap({
-            siteUrl: 'http://www.starwarsgalaxy.co'
-        }))
-        .pipe(gulp.dest('./dist'));
-});
-
 
 // Watching files for changes before reloading
 gulp.task('watch-img', function() {
@@ -244,7 +235,6 @@ gulp.task('build', ['remove'], function(){
 		'minify',
 		'gzip',
 		'html',
-		'images',
-		'sitemap'
+		'images'
 	);
 });
