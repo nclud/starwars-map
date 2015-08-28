@@ -151,6 +151,10 @@ gulp.task('html', ['scripts'], function() {
 	  	gulp.src("./prod/**/*.xml")
 	  		.pipe(gulp.dest('./dist')),
   		gulp.src("./prod/**/*.mp3")
+	  		.pipe(gulp.dest('./dist')),
+	  	gulp.src("./prod/fonts/**.*")
+	  		.pipe(gulp.dest('./dist')),
+	  	gulp.src("./prod/cache/**.*")
 	  		.pipe(gulp.dest('./dist'))
 	);
 });

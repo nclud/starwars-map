@@ -1,4 +1,39 @@
 /* GLYPHS */
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-style: normal;
+  src: url('/fonts/Roboto-500.eot');
+  src: url('/fonts/Roboto-500.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Roboto-500.woff2') format('woff2'),
+       url('/fonts/Roboto-500.woff') format('woff'),
+       url('/fonts/Roboto-500/Roboto-500.ttf') format('truetype'),
+       url('/fonts/Roboto-500/Roboto-500.svg#Roboto') format('svg');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/Roboto-700.eot');
+  src: url('/fonts/Roboto-700.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Roboto-700.woff2') format('woff2'),
+       url('/fonts/Roboto-700.woff') format('woff'),
+       url('/fonts/Roboto-700.ttf') format('truetype'),
+       url('/fonts/Roboto-700.svg#Roboto') format('svg');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 900;
+  font-style: normal;
+  src: url('/fonts/Roboto-900.eot');
+  src: url('/fonts/Roboto-900.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Roboto-900.woff2') format('woff2'),
+       url('/fonts/Roboto-900.woff') format('woff'),
+       url('/fonts/Roboto-900.ttf') format('truetype'),
+       url('/fonts/Roboto-900.svg#Roboto') format('svg');
+}
+
+
 
 #button-nav {
 	cursor: pointer;
