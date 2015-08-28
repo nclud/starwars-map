@@ -75,26 +75,26 @@ gulp.task('scripts', function() {
 	return es.merge(
 		gulp.src('./prod/js/lib/*.js')
 			.pipe(concat('lib.js'))
-			.pipe(stripDebug())
+			// .pipe(stripDebug())
 			.pipe(uglify({
 	      		mangle: false
 	      	}))
 			.pipe(gulp.dest('./dist/js')),
 		gulp.src('./prod/js/shaders/*.js')
 			.pipe(concat('shaders.js'))
-			.pipe(stripDebug())
+			// .pipe(stripDebug())
 			.pipe(uglify({
 	      		mangle: false
 	      	}))
 			.pipe(gulp.dest('./dist/js')),
 		gulp.src('./prod/js/*.js')
-			.pipe(stripDebug())
+			// .pipe(stripDebug())
 	      	.pipe(uglify({
 	      		mangle: false
 	      	}))
 	      	.pipe(gulp.dest('./dist/js')),
 		gulp.src('./prod/js/workers/*.js')
-			.pipe(stripDebug())
+			// .pipe(stripDebug())
 	      	.pipe(uglify({
 	      		mangle: false
 	      	}))

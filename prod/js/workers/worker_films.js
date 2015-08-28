@@ -4,7 +4,7 @@ var workerFilms = [];
 var protocol;
 
 function getFilmData() {
-	var url = protocol + '//swapi.co/api/films/?page=1';
+	var url = 'http://swapi.co/api/films/?page=1';
 
 	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400' )
 		.node('results.*', function( film ){

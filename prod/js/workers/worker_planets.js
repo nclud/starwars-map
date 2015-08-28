@@ -27,11 +27,11 @@ function getRemotePlanetData() {
 	var url = '';
 
 	for ( i = 1; i < pages; i ++ ) {
-		url += protocol + '//swapi.co/api/planets/?page=' + i + ',';
+		url += 'http://swapi.co/api/planets/?page=' + i + ',';
 	}
-	url += protocol + '//swapi.co/api/planets/?page=' + pages;
+	url += 'http://swapi.co/api/planets/?page=' + pages;
 
-	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400&json' )
+	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400&json&errors' )
 		.node('results.*', function( planet ){
 			workerRemotePlanets.push( planet );
 
