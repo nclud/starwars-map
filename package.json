@@ -25,6 +25,13 @@
     "gulp-uglify": "~1.2.0",
     "gulp-htmlbuild": "^0.3.0",
     "event-stream": "~3.3.1",
-    "gulp-concat": "~2.5.2"
+    "gulp-concat": "~2.5.2",
+    "gulp-gzip": "~1.1.0",
+    "gulp-sitemap": "~2.1.0",
+    "rsyncwrapper": "~0.4.2",
+    "gulp-util": "~3.0.4",
+    "gulp-strip-debug": "~1.0.2",
+    "gulp-inject": "~1.5.0",
+    "gulp-usemin": "0.3.11"
   }
 }

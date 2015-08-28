@@ -10,8 +10,16 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	sourcemaps = require('gulp-sourcemaps'),
 	minify = require('gulp-minify-css'),
+	usemin = require('gulp-usemin'),
+	inject = require('gulp-inject'),
+	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
-	imagemin = require('gulp-imagemin');
+	stripDebug = require('gulp-strip-debug'),
+	imagemin = require('gulp-imagemin'),
+	gzip = require('gulp-gzip'),
+	sitemap = require('gulp-sitemap'),
+	gutil = require('gulp-util'),
+	rsync = require('rsyncwrapper').rsync;
 
 
 
@@ -61,19 +69,88 @@ gulp.task('minify', ['sass'], function() {
 		.pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('html', function() {
+gulp.task('scripts', function() {
 	return es.merge(
-		gulp.src("./prod/**/*.html")
-	  		.pipe(gulp.dest('./dist')),
-	  	gulp.src("./prod/**/*.txt")
-	  		.pipe(gulp.dest('./dist'))
+		gulp.src('./prod/js/lib/*.js')
+			.pipe(concat('lib.js'))
+			.pipe(stripDebug())
+			.pipe(uglify({
+	      		mangle: false
+	      	}))
+			.pipe(gulp.dest('./dist/js')),
+		gulp.src('./prod/js/shaders/*.js')
+			.pipe(concat('shaders.js'))
+			.pipe(stripDebug())
+			.pipe(uglify({
+	      		mangle: false
+	      	}))
+			.pipe(gulp.dest('./dist/js')),
+		gulp.src('./prod/js/*.js')
+			.pipe(stripDebug())
+	      	.pipe(uglify({
+	      		mangle: false
+	      	}))
+	      	.pipe(gulp.dest('./dist/js')),
+		gulp.src('./prod/js/workers/*.js')
+			.pipe(stripDebug())
+	      	.pipe(uglify({
+	      		mangle: false
+	      	}))
+	      	.pipe(gulp.dest('./dist/js/workers'))
 	);
 });
 
-gulp.task('scripts', function() {
-  	return gulp.src('./prod/js/*.js')
-      	.pipe(uglify())
-      	.pipe(gulp.dest('./dist/js'));
+gulp.task('gzip', ['scripts'], function() {
+	return gulp.src(['./dist/js/lib.js', './dist/js/shaders.js'])
+		.pipe(gzip())
+        .pipe(gulp.dest('./dist/js'));
+});
+
+gulp.task('html', ['scripts'], function() {
+	return es.merge(
+		gulp.src("./prod/**/*.html")
+			.pipe(usemin())
+			.pipe(inject(gulp.src('./dist/js/lib.js', {
+				read: false
+			}), {
+				ignorePath: 'dist',
+				removeTags: true,
+				name: 'lib'
+			}))
+			.pipe(inject(gulp.src('./dist/js/shaders.js', {
+				read: false
+			}), {
+				ignorePath: 'dist',
+				removeTags: true,
+				name: 'shaders'
+			}))
+	  		.pipe(gulp.dest('./dist')),
+		gulp.src("./prod/**/*.php")
+			.pipe(usemin())
+			.pipe(inject(gulp.src('./dist/js/lib.js', {
+				read: false
+			}), {
+				ignorePath: 'dist',
+				removeTags: true,
+				name: 'lib'
+			}))
+			.pipe(inject(gulp.src('./dist/js/shaders.js', {
+				read: false
+			}), {
+				ignorePath: 'dist',
+				removeTags: true,
+				name: 'shaders'
+			}))
+	  		.pipe(gulp.dest('./dist')),
+	  	gulp.src("./prod/**/*.txt")
+	  		.pipe(gulp.dest('./dist')),
+	  	gulp.src("./prod/**/*.json")
+	  		.pipe(gulp.dest('./dist')),
+	  	gulp.src("./prod/**/*.xml")
+	  		.pipe(gulp.dest('./dist')),
+  		gulp.src("./prod/**/*.mp3")
+	  		.pipe(gulp.dest('./dist'))
+	);
 });
 
 gulp.task('images', function() {
@@ -99,10 +176,16 @@ gulp.task('images', function() {
 	        .pipe(imagemin({
 	        	progressive: true
 	        }))
-	        .pipe(gulp.dest('./dist')),
-		gulp.src('./prod/*.ico')
-			.pipe(gulp.dest('./dist'))
+	        .pipe(gulp.dest('./dist'))
 	);
+});
+
+gulp.task('sitemap', ['html'], function () {
+    gulp.src('./dist/*.php', './dist/*.html')
+        .pipe(sitemap({
+            siteUrl: 'http://www.starwarsgalaxy.co'
+        }))
+        .pipe(gulp.dest('./dist'));
 });
 
 
@@ -150,12 +233,15 @@ gulp.task('default', ['serve', 'sass'], function(){
 	gulp.watch('./prod/**/*.php', ['watch-php']);
 });
 
+
+
 // Build functionality with cleaning, moving, compiling, etc.
 gulp.task('build', ['remove'], function(){
 	return gulp.start(
 		'minify',
+		'gzip',
 		'html',
-		'scripts',
-		'images'
+		'images',
+		'sitemap'
 	);
 });
