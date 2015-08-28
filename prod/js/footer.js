@@ -1305,16 +1305,28 @@ $(document).ready(function() {
 	function logozoom() {
 		$('#load-button').addClass('launching');
 
-		$('#logo-fill').velocity({
-			translateZ: 0,
-			scale: '0.2',
-			opacity: 1
-		}, {
-			duration: 3000,
-			complete: function() {
-				classicwipe();
-			}
-		});
+		if ( !isMobile ) {
+			$('#logo-fill').velocity({
+				translateZ: 0,
+				scale: '0.2',
+				opacity: 1
+			}, {
+				duration: 3000,
+				complete: function() {
+					classicwipe();
+				}
+			});
+		} else {
+			$('#logo-fill').velocity({
+				translateZ: 0,
+				opacity: 1
+			}, {
+				duration: 3000,
+				complete: function() {
+					classicwipe();
+				}
+			});
+		}
 	}
 	function classicwipe() {
 		$('#classic-wipe').velocity({

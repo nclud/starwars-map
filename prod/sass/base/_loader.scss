@@ -62,8 +62,10 @@
 
 	pointer-events: none;
 
-	@include breakpoint(mobile) {
-		top: 40%;
+	.mobile & {
+		width: 60%;
+		height: auto;
+		top: 41%;
 	}
 }
 
@@ -186,24 +188,22 @@
 	stroke-dasharray: 4500;
 	stroke-dashoffset: 4500;
 
-	@include transform(scale(0.2));
+	.desktop & {
+		@include transform(scale(0.2));
+	}
 
 	.begin-animation & {
 		@include animation(logo-stroke-animate 5s linear);
 		@include animation-fill-mode(forwards);
 	}
+
+	.mobile & {
+		stroke-width: 10px;
+	}
 }
 #logo-fill {
-	// fill: none;
 	fill: white;
 	opacity: 0;
-	// @include transform(scale(1.5));
-
-	// &.loaded {
-	// 	@include animation(logo-fill-animate 2.25s cubic-bezier(.23,.61,.68,.97));
-	// 	@include animation-fill-mode(forwards);
-	// 	@include animation-delay(1.25s);
-	// }
 }
 
 
