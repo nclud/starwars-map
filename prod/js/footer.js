@@ -945,11 +945,11 @@ $(document).ready(function() {
 		currentPlanetIndex = findPlanetIndex( planets, 'name', planet.name );
 
 		if ( currentPlanetIndex === 0 ) {
-			prevPlanetIndex = planets.length;
+			prevPlanetIndex = planets.length - 1;
 		} else {
 			prevPlanetIndex = currentPlanetIndex - 1;
 		}
-		if ( currentPlanetIndex === planets.length ) {
+		if ( currentPlanetIndex === planets.length - 1 ) {
 			nextPlanetIndex = 0;
 		} else {
 			nextPlanetIndex = currentPlanetIndex + 1;
