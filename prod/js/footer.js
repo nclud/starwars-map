@@ -1,5 +1,5 @@
 // STATS
-var stats;
+// var stats;
 
 
 // WINDOW VARIABLES
@@ -193,11 +193,11 @@ $(document).ready(function() {
 
 
 		// STATS
-		stats = new Stats();
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.bottom = '0px';
-		stats.domElement.style.right = '0px';
-		container.appendChild( stats.domElement );
+		// stats = new Stats();
+		// stats.domElement.style.position = 'absolute';
+		// stats.domElement.style.bottom = '0px';
+		// stats.domElement.style.right = '0px';
+		// container.appendChild( stats.domElement );
 
 
 		// RENDERING SETUP
@@ -561,7 +561,7 @@ $(document).ready(function() {
 		controls.update( clock.getDelta() );
 
 		// STATS
-		stats.update();
+		// stats.update();
 	}
 
 

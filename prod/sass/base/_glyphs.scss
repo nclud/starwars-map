@@ -127,7 +127,14 @@
 
 	@include transition(1s);
 
-	.desktop &:before {
+	@include breakpoint(mobile) {
+		top: 25%;
+		width: 2rem;
+		height: 2rem;
+	}
+
+
+	&:before {
 		position: absolute;
 		display: block;
 
@@ -145,6 +152,10 @@
 		opacity: 0;
 
 		@include transition(0.05s);
+
+		.mobile & {
+			display: none;
+		}
 	}
 
 
@@ -165,6 +176,10 @@
 
 			content: 'Previous';
 		}
+
+		@include breakpoint(mobile) {
+			left: 1.75rem;
+		}
 	}
 	&#planet-right {
 		right: 2.25rem;
@@ -182,6 +197,10 @@
 			@include transform(rotate(45deg));
 
 			content: 'Next';
+		}
+
+		@include breakpoint(mobile) {
+			right: 1.75rem;
 		}
 	}
 

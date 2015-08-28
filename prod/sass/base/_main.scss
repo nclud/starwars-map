@@ -4,6 +4,8 @@ html {
 	background: black;
 
 	font-size: 100%;
+
+	overflow: hidden;
 }
 
 body {
@@ -11,6 +13,7 @@ body {
 
 	&.desktop.nav-open {
 		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
 	}
 }
 
