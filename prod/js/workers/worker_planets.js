@@ -31,7 +31,7 @@ function getRemotePlanetData() {
 	}
 	url += 'http://swapi.co/api/planets/?page=' + pages;
 
-	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400&json&errors' )
+	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400&json' )
 		.node('results.*', function( planet ){
 			workerRemotePlanets.push( planet );
 

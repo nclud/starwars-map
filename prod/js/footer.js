@@ -1175,7 +1175,10 @@ $(document).ready(function() {
 	
 	// AUDIO
 	var sfxMute = false;
-	var r2hover = new Howl({ src: ['/audio/r2-hover.mp3'] }),
+	var r2hover = new Howl({
+			src: ['/audio/r2-hover.mp3'],
+			volume: 0.85
+		}),
 		r2navclose = new Howl({ src: ['/audio/r2-navclose.mp3'] }),
 		r2navopen = new Howl({ src: ['/audio/r2-navopen.mp3'] }),
 		r2zoomin = new Howl({ src: ['/audio/r2-zoomin.mp3'] }),
