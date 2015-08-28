@@ -150,12 +150,12 @@ gulp.task('html', ['scripts'], function() {
 	  		.pipe(gulp.dest('./dist')),
 	  	gulp.src("./prod/**/*.xml")
 	  		.pipe(gulp.dest('./dist')),
-  		gulp.src("./prod/**/*.mp3")
-	  		.pipe(gulp.dest('./dist')),
-	  	gulp.src("./prod/fonts/**.*")
-	  		.pipe(gulp.dest('./dist')),
-	  	gulp.src("./prod/cache/**.*")
-	  		.pipe(gulp.dest('./dist'))
+  		gulp.src("./prod/audio/**/*")
+	  		.pipe(gulp.dest('./dist/audio')),
+	  	gulp.src("./prod/fonts/**/*")
+	  		.pipe(gulp.dest('./dist/fonts')),
+	  	gulp.src("./prod/cache/**/*")
+	  		.pipe(gulp.dest('./dist/cache'))
 	);
 });
 
