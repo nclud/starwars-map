@@ -406,6 +406,10 @@ $(document).ready(function() {
 			// if ( !planetData[i].xpos && !planetData[i].zpos ) {
 			// 	console.log( planetData[i].name );
 			// }
+			if ( planetData[i].films.length > 0 ) {
+				planetData[i].films.sort();
+			}
+
 			if ( planetData[i].xpos && planetData[i].zpos ) {
 				if ( !isMobile ) {
 					object = new THREE.Mesh(
@@ -765,6 +769,8 @@ $(document).ready(function() {
 	}
 
 	function zoomIntoPlanet( planet, duration ) {
+		console.log( planet );
+
 		// PLAY AUDIO
 		if ( !sfxMute ) {
 			r2zoomin.play();
