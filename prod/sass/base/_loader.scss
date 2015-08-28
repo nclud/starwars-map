@@ -159,6 +159,10 @@
 	&.launching {
 		opacity: 0;
 	}
+
+	&.error {
+		opacity: 0;
+	}
 }
 @include keyframes(loading-button) {
 	from {

@@ -252,3 +252,57 @@ main {
 		}
 	}
 }
+
+
+
+
+
+
+#error-update {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	padding: 2rem;
+
+	text-align: center;
+
+	background: white;
+
+	border-radius: 0.5em;
+	box-shadow: 0 0 30px $gray-dark;
+
+	@include transform(translate(-50%, -50%));
+
+	* {
+		z-index: 5;
+	}
+
+	&:before {
+		position: absolute;
+		top: 0.5em;
+		left: 0.5em;
+		right: 0.5em;
+		bottom: 0.5em;
+		display: block;
+		z-index: 2;
+
+		border: 2px solid $gold;
+		border-radius: 0.4em;
+
+		content: '';
+	}
+}
+#error-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background: $gold-dark;
+	opacity: 0.75;
+}
+#error-update,
+#error-overlay {
+	display: none;
+}

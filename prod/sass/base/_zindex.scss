@@ -1,4 +1,11 @@
 /* Z-INDEX & LAYERS */
+#error-update {
+	z-index: 1005;
+}
+#error-overlay {
+	z-index: 1004;
+}
+
 
 #button-nav,
 #button-sounds {

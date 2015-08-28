@@ -211,6 +211,12 @@
 	</section>
 </main>
 
+<div id="error-update">
+	<span>Your browser does not support the technology necessary for this experience. Please update your browser or install Chrome.</span>
+	<a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">Download Chrome</a>
+</div>
+<div id="error-overlay"></div>
+
 <script type="x-shader/x-vertex" id="galaxyvertex">
 	uniform vec3 color;
 

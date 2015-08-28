@@ -89,8 +89,12 @@ $(document).ready(function() {
 	// DETECT WEBGL
 	if ( !Detector.webgl ) {
 		// NO TO WEBGL - NEED TO PASS MESSAGE ON INTRO SAYING NOT SUPPORTED
+		$('#error-update, #error-overlay').css('display', 'block');
+		$('#load-button').addClass('error');
 	} else {
 		// YES TO WEBGL - INITIATE OVERALL THREE.JS SCENE
+		$('#error-update, #error-overlay').remove;
+
 		init();
 		animate();
 	}

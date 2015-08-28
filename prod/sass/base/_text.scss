@@ -408,3 +408,48 @@ label {
 
 	border-top: 1px solid rgba($gold,0.25);
 }
+
+
+
+
+
+#error-update {
+	span,
+	a {
+		position: relative;
+
+		font-family: 'Roboto', sans-serif;
+		text-transform: uppercase;
+	}
+
+	span {
+		display: block;
+		margin-bottom: 1.5em;
+
+		font-size: 1.15em;
+		line-height: 1.3;
+
+		color: $gold-darkest;
+	}
+
+	a {
+		display: inline-block;
+		padding: 1em 2em;
+
+		font-size: 1.15em;
+
+		background: lighten($gold, 20%);
+		color: $gold-darkest;
+		text-decoration: none;
+
+		border: 2px solid $gold-darkest;
+		border-radius: 0.5em;
+
+		@include transition(0.15s);
+
+		&:hover,
+		&:active {
+			background: lighten($gold, 15%);
+		}
+	}
+}
