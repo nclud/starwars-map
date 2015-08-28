@@ -766,6 +766,8 @@ $(document).ready(function() {
 			r2zoomin.play();
 		}
 
+		planetIndexValues( planet );
+
 		// CAPTURE ORIGINAL VALUES
 		oldCameraPos.x = camera.position.x;
 		oldCameraPos.y = camera.position.y;
@@ -810,8 +812,6 @@ $(document).ready(function() {
 				camera.updateProjectionMatrix();
 
 				zoomedIn = true;
-
-				planetIndexValues( planet );
 			}
 		});
 
@@ -867,6 +867,11 @@ $(document).ready(function() {
 		hideOverlay();
 		showOverlay( newplanet );
 
+		controls.enabled = false;
+		intersections = false;
+
+		planetIndexValues( newplanet );
+
 		currentCameraPos = camera.position;
 		currentCameraFocus = controls.target;
 		var camDistance = (newplanet.geometry.parameters.radius / 25) * gridMultiplier,
@@ -903,8 +908,6 @@ $(document).ready(function() {
 				oldplanet.visible = false;
 
 				zoomedIn = true;
-
-				planetIndexValues( newplanet );
 			}
 		});
 
@@ -941,11 +944,15 @@ $(document).ready(function() {
 
 	// ARROW FUNCTIONS
 	$('.planet-nav-arrow').on('click', function(){
+		if ( !sfxMute ) {
+			r2zoomin.play();
+		}
+
 		if ( $(this).is('#planet-left') ) {
-			panToPlanet( planets[currentPlanetIndex], planets[prevPlanetIndex], 3.5 );
+			panToPlanet( planets[currentPlanetIndex], planets[prevPlanetIndex], 4 );
 		}
 		if ( $(this).is('#planet-right') ) {
-			panToPlanet( planets[currentPlanetIndex], planets[nextPlanetIndex], 3.5 );
+			panToPlanet( planets[currentPlanetIndex], planets[nextPlanetIndex], 4 );
 		}
 
 		return false;

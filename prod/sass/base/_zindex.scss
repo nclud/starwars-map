@@ -1,8 +1,7 @@
 /* Z-INDEX & LAYERS */
 
 #button-nav,
-#button-sounds,
-.planet-nav-arrow {
+#button-sounds {
 	z-index: 1000;
 }
 
@@ -26,7 +25,8 @@
 #button-close {
 	z-index: 125;
 }
-#planet-data {
+#planet-data,
+.planet-nav-arrow {
 	z-index: 100;
 }
 #planet-title {
