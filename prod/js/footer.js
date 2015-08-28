@@ -122,7 +122,7 @@ $(document).ready(function() {
 		camera = new THREE.PerspectiveCamera( 60, aspect, 1, 2500 );
 		focalPointInitial = new THREE.Vector3(
 			0.65 * gridMultiplier,
-			(0 * gridMultiplier) + 1000,
+			(0 * gridMultiplier) + 1250,
 			-1.5 * gridMultiplier
 		);
 		focalPointLoaded = new THREE.Vector3(
@@ -1049,6 +1049,11 @@ $(document).ready(function() {
 			if ( !sfxMute ) {
 				r2navclose.play();
 			}
+			if ( !musicMute ) {
+				musicintro.volume(1);
+				musicloop1.volume(musicVolume);
+				musicloop2.volume(musicVolume);
+			}
 
 			intersections = true;
 			controls.enabled = true;
@@ -1077,6 +1082,11 @@ $(document).ready(function() {
 
 			if ( !sfxMute ) {
 				r2navopen.play();
+			}
+			if ( !musicMute ) {
+				musicintro.volume(0.5);
+				musicloop1.volume(0.5);
+				musicloop2.volume(0.5);
 			}
 
 			intersections = false;
@@ -1179,16 +1189,22 @@ $(document).ready(function() {
 					introCrossfade = 6500;
 
 				setTimeout(function() {
-					musicintro.fade(musicVolume, 0, introCrossfade);
+					if ( !musicMute ) {
+						musicintro.fade(musicVolume, 0, introCrossfade);
 
-					musicloop1.volume(0);
-					musicloop1.play();
-					musicloop1.fade(0, musicVolume, introCrossfade);
+						musicloop1.volume(0);
+						musicloop1.play();
+						musicloop1.fade(0, musicVolume, introCrossfade);
+					}
+					else {
+						musicloop1.play();
+					}
 				}, (introDuration - introCrossfade));
 			}
 		});
 	var musicloop1 = new Howl({
 			src: ['/audio/music-loop.mp3'],
+			volume: musicVolume,
 			onplay: function() {
 				if ( !loopDuration ) {
 					loopDuration = Math.floor( musicloop1._duration * 1000 );
@@ -1201,6 +1217,7 @@ $(document).ready(function() {
 		}),
 		musicloop2 = new Howl({
 			src: ['/audio/music-loop.mp3'],
+			volume: musicVolume,
 			onplay: function() {
 				if ( !loopDuration ) {
 					loopDuration = Math.floor( musicloop2._duration * 1000 );
@@ -1327,7 +1344,7 @@ $(document).ready(function() {
 		    opacity: 0
 		}, {
 			delay: 2000,
-		    duration: 3500,
+		    duration: 4000,
 		    display: 'none',
 		    begin: function() {
 				longagoPan( 5 );
