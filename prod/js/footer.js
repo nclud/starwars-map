@@ -966,10 +966,11 @@ $(document).ready(function() {
 
 	// HIDE OVERLAY
 	function hideOverlay() {
-		var yDistance = '165%';
-		if ( windowHeight > 900 ) {
-			yDistance = '190%';
-		}
+		// var yDistance = '165%';
+		// if ( windowHeight > 900 ) {
+		// 	yDistance = '190%';
+		// }
+		var yDistance = '250%';
 
 		$('#planet-data-overlay').velocity({
 		    translateZ: 0,
