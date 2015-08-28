@@ -93,7 +93,7 @@ $(document).ready(function() {
 		$('#load-button').addClass('error');
 	} else {
 		// YES TO WEBGL - INITIATE OVERALL THREE.JS SCENE
-		$('#error-update, #error-overlay').remove;
+		$('#error-update, #error-overlay').remove();
 
 		init();
 		animate();
@@ -764,14 +764,35 @@ $(document).ready(function() {
 
 		console.log( filterURLArray );
 
-		for ( planet = 0; planet < visiblePlanets.length; planet ++ ) {
-			visiblePlanets[planet].visible = true;
-		}
+		// for ( planet = 0; planet < visiblePlanets.length; planet ++ ) {
+		// 	visiblePlanets[planet].visible = true;
+		// }
 		visiblePlanets = [];
+
+		for ( planet = 0; planet < planets.length; planet ++ ) {
+			planets[planet].visible = true;
+
+			if ( planets[planet].films.length == 0 && !$('#other').hasClass('checked') ) {
+				planets[planet].visible = false;
+			} else if ( planets[planet].films.length > 0 && filterURLArray.length > 0 ) {
+
+			}
+			// if ( filterURLArray.length > 0 && planets[planet].films.length > 0 ) {
+			// 	if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
+			// 		planets[planet].visible = false;
+			// 	}
+			// }
+
+			// if ( $('.filter-list-single:last-child').not(':checked') ) {
+			// 	if ( planets[planet].films.length == 0 ) {
+			// 		planets[planet].visible = false;
+			// 	}
+			// }
+		}
 	}
 
 	function zoomIntoPlanet( planet, duration ) {
-		console.log( planet );
+		zoomedIn = true;
 
 		// PLAY AUDIO
 		if ( !sfxMute ) {
@@ -822,8 +843,6 @@ $(document).ready(function() {
 			},
 			onComplete: function() {
 				camera.updateProjectionMatrix();
-
-				zoomedIn = true;
 			}
 		});
 
@@ -877,6 +896,8 @@ $(document).ready(function() {
 		hideOverlay();
 		showOverlay( newplanet );
 
+		zoomedIn = true;
+
 		controls.enabled = false;
 		intersections = false;
 
@@ -916,8 +937,6 @@ $(document).ready(function() {
 				camera.updateProjectionMatrix();
 
 				oldplanet.visible = false;
-
-				zoomedIn = true;
 			}
 		});
 
@@ -1066,8 +1085,10 @@ $(document).ready(function() {
 				musicloop2.volume(musicVolume);
 			}
 
-			intersections = true;
-			controls.enabled = true;
+			if ( !zoomedIn ) {
+				intersections = true;
+				controls.enabled = true;
+			}
 
 			$('#star-map').velocity({
 			    translateZ: 0,
@@ -1138,6 +1159,9 @@ $(document).ready(function() {
 
 		if ( filterEpisode == 0 ) {
 			if ( $(this).is(':checked') ) {
+				$(this).attr('checked', '');
+				$(this).addClass('checked');
+
 				// TURNING CHECK ON
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					if ( planets[planet].films.length == 0 ) {
@@ -1146,6 +1170,9 @@ $(document).ready(function() {
 				}
 			} else {
 				// TURNING CHECK OFF
+				$(this).removeAttr('checked');
+				$(this).removeClass('checked');
+
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					if ( planets[planet].films.length == 0 ) {
 						if ( !zoomedIn ) planets[planet].visible = false;
@@ -1178,6 +1205,8 @@ $(document).ready(function() {
 
 			if ( $(this).is(':checked') ) {
 				// TURNING CHECK ON
+				$(this).attr('checked', '');
+
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					if ( planets[planet].films.length == 1 ) {
 						for ( film = 0; film < planets[planet].films.length; film ++ ) {
@@ -1193,6 +1222,8 @@ $(document).ready(function() {
 				}
 			} else {
 				// TURNING CHECK OFF
+				$(this).removeAttr('checked');
+
 				for ( planet = 0; planet < planets.length; planet ++ ) {
 					if ( planets[planet].films.length == 1 ) {
 						for ( film = 0; film < planets[planet].films.length; film ++ ) {
@@ -1280,11 +1311,15 @@ $(document).ready(function() {
 
 	// MUSIC LOOPING
 	function loopMusic( first, last ) {
-		first.fade(musicVolume, 0, crossfade);
+		if ( !musicMute ) {
+			first.fade(musicVolume, 0, crossfade);
 
-		last.volume(0);
-		last.play();
-		last.fade(0, musicVolume, crossfade);
+			last.volume(0);
+			last.play();
+			last.fade(0, musicVolume, crossfade);
+		} else {
+			last.play();
+		}
 	}
 
 
