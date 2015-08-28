@@ -1154,7 +1154,7 @@ $(document).ready(function() {
 			if ( !$(this).is(':checked') ) {
 				for ( i = 0; i < filmData.length; i ++ ) {
 					if ( filterEpisode == filmData[i].episode_id ) {
-						// filterURL = filmData[i].url;
+						filterURL = filmData[i].url;
 						filterURLArray.push( filmData[i].url );
 						filterURLArray.sort();
 					}
@@ -1162,8 +1162,8 @@ $(document).ready(function() {
 			} else {
 				for ( i = 0; i < filmData.length; i ++ ) {
 					if ( filterEpisode == filmData[i].episode_id ) {
-						// filterURL = filmData[i].url;
-						// filterURLArray.push( filmData[i].url );
+						filterURL = filmData[i].url;
+
 						filmIndex = filterURLArray.indexOf( filmData[i].url );
 
 						if ( filmIndex > -1 ) {
@@ -1177,8 +1177,15 @@ $(document).ready(function() {
 			if ( $(this).is(':checked') ) {
 				// TURNING CHECK ON
 				for ( planet = 0; planet < planets.length; planet ++ ) {
-					for ( film = 0; film < planets[planet].films.length; film ++ ) {
-						if ( filterURL == planets[planet].films[film] ) {
+					if ( planets[planet].films.length == 1 ) {
+						for ( film = 0; film < planets[planet].films.length; film ++ ) {
+							if ( filterURL == planets[planet].films[film] ) {
+								planets[planet].visible = true;
+							}
+						}
+					} else if ( planets[planet].films.length > 1 ) {
+						if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
+							console.log( planets[planet] );
 							planets[planet].visible = true;
 						}
 					}
@@ -1186,8 +1193,15 @@ $(document).ready(function() {
 			} else {
 				// TURNING CHECK OFF
 				for ( planet = 0; planet < planets.length; planet ++ ) {
-					for ( film = 0; film < planets[planet].films.length; film ++ ) {
-						if ( filterURL == planets[planet].films[film] ) {
+					if ( planets[planet].films.length == 1 ) {
+						for ( film = 0; film < planets[planet].films.length; film ++ ) {
+							if ( filterURL == planets[planet].films[film] ) {
+								planets[planet].visible = false;
+							}
+						}
+					} else if ( planets[planet].films.length > 1 ) {
+						if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
+							console.log( planets[planet] );
 							planets[planet].visible = false;
 						}
 					}
@@ -1195,7 +1209,7 @@ $(document).ready(function() {
 			}
 		}
 
-		console.log( filterURLArray );
+		console.log( filterURL, filterURLArray );
 	});
 
 
