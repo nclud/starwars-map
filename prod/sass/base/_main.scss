@@ -306,3 +306,18 @@ main {
 #error-overlay {
 	display: none;
 }
+
+#r2-404 {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	height: 100%;
+
+	@include transform(translate3d(-50%,-50%,0));
+
+	img {
+		height: 100%;
+		width: auto;
+	}
+}
