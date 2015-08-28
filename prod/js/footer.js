@@ -1127,9 +1127,12 @@ $(document).ready(function() {
 
 
 	// FILTER FUNCTIONALITY
+	var filterURLArray = [];
+
 	$('input').on('click', function(){
 		var filterEpisode = $(this).attr('value'),
-			filterURL;
+			filterURL,
+			filmIndex;
 
 		if ( filterEpisode == 0 ) {
 			if ( $(this).is(':checked') ) {
@@ -1148,9 +1151,26 @@ $(document).ready(function() {
 				}
 			}
 		} else {
-			for ( i = 0; i < filmData.length; i ++ ) {
-				if ( filterEpisode == filmData[i].episode_id ) {
-					filterURL = filmData[i].url;
+			if ( !$(this).is(':checked') ) {
+				for ( i = 0; i < filmData.length; i ++ ) {
+					if ( filterEpisode == filmData[i].episode_id ) {
+						// filterURL = filmData[i].url;
+						filterURLArray.push( filmData[i].url );
+						filterURLArray.sort();
+					}
+				}
+			} else {
+				for ( i = 0; i < filmData.length; i ++ ) {
+					if ( filterEpisode == filmData[i].episode_id ) {
+						// filterURL = filmData[i].url;
+						// filterURLArray.push( filmData[i].url );
+						filmIndex = filterURLArray.indexOf( filmData[i].url );
+
+						if ( filmIndex > -1 ) {
+							filterURLArray.splice( filmIndex, 1 );
+						}
+						filterURLArray.sort();
+					}
 				}
 			}
 
@@ -1174,6 +1194,8 @@ $(document).ready(function() {
 				}
 			}
 		}
+
+		console.log( filterURLArray );
 	});
 
 
