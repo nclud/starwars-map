@@ -769,32 +769,34 @@ $(document).ready(function() {
 
 			if ( planets[planet].films.length == 0 && !$('#other').hasClass('checked') ) {
 				planets[planet].visible = false;
+			} else if ( planets[planet].films.length == 0 && $('#other').hasClass('checked') ) {
+				planets[planet].visible = true;
 			}
+
 			if ( planets[planet].films.length == 1 ) {
 				for ( film = 0; film < planets[planet].films.length; film ++ ) {
 					if ( filterURL == planets[planet].films[film] ) {
 						planets[planet].visible = false;
-					}
-				}
-			}
-			if ( planets[planet].films.length > 1 && filterURLArray.length > 0 ) {
-				if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
-					planets[planet].visible = false;
-				}
-			}
-
-			if ( planets[planet].films.length == 0 && $('#other').hasClass('checked') ) {
-				planets[planet].visible = true;
-			}
-			if ( planets[planet].films.length == 1 ) {
-				for ( film = 0; film < planets[planet].films.length; film ++ ) {
-					if ( filterURL != planets[planet].films[film] ) {
+					} else if ( filterURL != planets[planet].films[film] ) {
 						planets[planet].visible = true;
 					}
 				}
 			}
+
 			if ( planets[planet].films.length > 1 && filterURLArray.length > 0 ) {
-				if ( JSON.stringify( filterURLArray ) != JSON.stringify( planets[planet].films ) ) {
+				var planetFilterArray = [];
+
+				for ( filterfilm = 0; filterfilm < filterURLArray.length; filterfilm ++ ) {
+					for ( planetfilm = 0; planetfilm < planets[planet].films.length; planetfilm ++ ) {
+						if ( planets[planet].films[planetfilm] == filterURLArray[filterfilm] ) {
+							planetFilterArray.push( filterURLArray[filterfilm].url );
+						}
+					}
+				}
+
+				if ( planetFilterArray.length == planets[planet].films.length ) {
+					planets[planet].visible = false;
+				} else if ( planetFilterArray.length != planets[planet].films.length ) {
 					planets[planet].visible = true;
 				}
 			}
