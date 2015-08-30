@@ -403,9 +403,6 @@ $(document).ready(function() {
 				planetRotation = planetData[i].rotation_period,
 				planetTexture = planetData[i].texture;
 
-			// if ( !planetData[i].xpos && !planetData[i].zpos ) {
-			// 	console.log( planetData[i].name );
-			// }
 			if ( planetData[i].films.length > 0 ) {
 				planetData[i].films.sort();
 			}
