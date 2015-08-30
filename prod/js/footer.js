@@ -1223,14 +1223,8 @@ $(document).ready(function() {
 				$(this).addClass('checked');
 
 				for ( planet = 0; planet < planets.length; planet ++ ) {
-					if ( planets[planet].films.length == 1 ) {
-						for ( film = 0; film < planets[planet].films.length; film ++ ) {
-							if ( filterURL == planets[planet].films[film] ) {
-								if ( !zoomedIn ) planets[planet].visible = true;
-							}
-						}
-					} else if ( planets[planet].films.length > 1 ) {
-						if ( JSON.stringify( filterURLArray ) != JSON.stringify( planets[planet].films ) ) {
+					for ( film = 0; film < planets[planet].films.length; film ++ ) {
+						if ( filterURL == planets[planet].films[film] ) {
 							if ( !zoomedIn ) planets[planet].visible = true;
 						}
 					}
@@ -1248,7 +1242,17 @@ $(document).ready(function() {
 							}
 						}
 					} else if ( planets[planet].films.length > 1 ) {
-						if ( JSON.stringify( filterURLArray ) == JSON.stringify( planets[planet].films ) ) {
+						var planetFilterArray = [];
+
+						for ( filterfilm = 0; filterfilm < filterURLArray.length; filterfilm ++ ) {
+							for ( planetfilm = 0; planetfilm < planets[planet].films.length; planetfilm ++ ) {
+								if ( planets[planet].films[planetfilm] == filterURLArray[filterfilm] ) {
+									planetFilterArray.push( filterURLArray[filterfilm].url );
+								}
+							}
+						}
+
+						if ( planetFilterArray.length == planets[planet].films.length ) {
 							if ( !zoomedIn ) planets[planet].visible = false;
 						}
 					}
@@ -1261,8 +1265,6 @@ $(document).ready(function() {
 				if ( !zoomedIn ) planets[planet].visible = false;
 			}
 		}
-
-		// console.log( filterURL, filterURLArray );
 	});
 
 
