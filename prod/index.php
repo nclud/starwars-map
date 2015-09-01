@@ -164,8 +164,8 @@
 		</ul>
 
 		<div class="share-buttons">
-			<a href="https://twitter.com/intent/tweet?url=http://www.starwarsgalaxy.co&via=nclud&text=Star Wars - An Interactive Galactic Experience&original_referer=nclud" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" class="social-share">Share On Twitter</a>
-			<a href="https://www.facebook.com/sharer/sharer.php?u=http://www.starwarsgalaxy.co" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" class="social-share">Share On Facebook</a>
+			<a href="https://twitter.com/intent/tweet?url=http://www.starwarsgalaxy.co&via=nclud&text=Star Wars - An Interactive Galactic Experience&original_referer=nclud" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');_gaq.push(['_trackEvent', 'twitter-share', 'clicked']);return false;" target="_blank" class="social-share">Share On Twitter</a>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=http://www.starwarsgalaxy.co" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');_gaq.push(['_trackEvent', 'facebook-share', 'clicked']);return false;" target="_blank" class="social-share">Share On Facebook</a>
 		</div>
 
 		<span class="site-credits">

@@ -155,7 +155,9 @@ gulp.task('html', ['scripts'], function() {
 	  	gulp.src("./prod/fonts/**/*")
 	  		.pipe(gulp.dest('./dist/fonts')),
 	  	gulp.src("./prod/cache/**/*")
-	  		.pipe(gulp.dest('./dist/cache'))
+	  		.pipe(gulp.dest('./dist/cache')),
+	  	gulp.src("./prod/.htaccess")
+	  		.pipe(gulp.dest('./dist'))
 	);
 });
 
