@@ -496,7 +496,7 @@ $(document).ready(function() {
 
 			setTimeout(function(){
 				beginLoaded();
-			}, 2500);
+			}, 3500);
 		}
 	}
 
