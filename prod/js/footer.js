@@ -494,9 +494,9 @@ $(document).ready(function() {
 
 			planetsLoaded = true;
 
-			// setTimeout(function(){
+			setTimeout(function(){
 				beginLoaded();
-			// }, 1000);
+			}, 2500);
 		}
 	}
 
@@ -1281,13 +1281,13 @@ $(document).ready(function() {
 	// AUDIO
 	var sfxMute = false;
 	var r2hover = new Howl({
-			src: ['/audio/r2-hover.mp3'],
+			src: ['//starwarsgalaxy.s3.amazonaws.com/audio/r2-hover.mp3'],
 			volume: 0.85
 		}),
-		r2navclose = new Howl({ src: ['/audio/r2-navclose.mp3'] }),
-		r2navopen = new Howl({ src: ['/audio/r2-navopen.mp3'] }),
-		r2zoomin = new Howl({ src: ['/audio/r2-zoomin.mp3'] }),
-		r2zoomout = new Howl({ src: ['/audio/r2-zoomout.mp3'] });
+		r2navclose = new Howl({ src: ['//starwarsgalaxy.s3.amazonaws.com/audio/r2-navclose.mp3'] }),
+		r2navopen = new Howl({ src: ['//starwarsgalaxy.s3.amazonaws.com/audio/r2-navopen.mp3'] }),
+		r2zoomin = new Howl({ src: ['//starwarsgalaxy.s3.amazonaws.com/audio/r2-zoomin.mp3'] }),
+		r2zoomout = new Howl({ src: ['//starwarsgalaxy.s3.amazonaws.com/audio/r2-zoomout.mp3'] });
 	var sfxArray = [r2hover, r2navclose, r2navopen, r2zoomin, r2zoomout];
 
 	var musicMute = false,
@@ -1295,7 +1295,7 @@ $(document).ready(function() {
 		musicVolume = 0.85,
 		loopDuration;
 	var musicintro = new Howl({
-			src: ['/audio/music-intro.mp3'],
+			src: ['//starwarsgalaxy.s3.amazonaws.com/audio/music-intro.mp3'],
 			onplay: function() {
 				var introDuration = Math.floor( musicintro._duration * 1000 ),
 					introCrossfade = 6500;
@@ -1315,7 +1315,7 @@ $(document).ready(function() {
 			}
 		});
 	var musicloop1 = new Howl({
-			src: ['/audio/music-loop.mp3'],
+			src: ['//starwarsgalaxy.s3.amazonaws.com/audio/music-loop.mp3'],
 			volume: musicVolume,
 			onplay: function() {
 				if ( !loopDuration ) {
@@ -1328,7 +1328,7 @@ $(document).ready(function() {
 			}
 		}),
 		musicloop2 = new Howl({
-			src: ['/audio/music-loop.mp3'],
+			src: ['//starwarsgalaxy.s3.amazonaws.com/audio/music-loop.mp3'],
 			volume: musicVolume,
 			onplay: function() {
 				if ( !loopDuration ) {
