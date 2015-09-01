@@ -140,7 +140,8 @@ $(document).ready(function() {
 			d - gridMultiplier
 		);
 		camera.position.set( initialCameraPos.x, initialCameraPos.y, initialCameraPos.z );
-		camera.lookAt( focalPointInitial );
+		// camera.lookAt( focalPointInitial );
+		camera.lookAt( focalPointLoaded );
 
 
 		// ADDING LIGHTS
@@ -152,7 +153,8 @@ $(document).ready(function() {
 
 		// ADDING CONTROLS & LIMITS
 		controls = new THREE.OrbitControls( camera );
-		controls.target = focalPointInitial;
+		// controls.target = focalPointInitial;
+		controls.target = focalPointLoaded;
 		controls.noKeys = true;
 		controls.rotateSpeed = 1;
 		controls.zoomSpeed = 1.5;
@@ -181,11 +183,11 @@ $(document).ready(function() {
 
 
 		// CREATE GALAXY
-		getGalaxy( 15000 );
+		// getGalaxy( 15000 );
 
 
 		// GET & MAKE PLANETS
-		getPlanets();
+		// getPlanets();
 
 
 		// GET FILM DATA
@@ -294,6 +296,9 @@ $(document).ready(function() {
 
 	        scene.add( starfield[fields] );
 	    }
+
+
+	    getGalaxy( 15000 );
 	}
 
 
@@ -376,6 +381,9 @@ $(document).ready(function() {
 		galaxy.receiveShadow = false;
 
 		scene.add( galaxy );
+
+
+		getPlanets();
 	}
 
 
@@ -486,7 +494,9 @@ $(document).ready(function() {
 
 			planetsLoaded = true;
 
-			beginLoaded();
+			// setTimeout(function(){
+				beginLoaded();
+			// }, 1000);
 		}
 	}
 
@@ -1403,6 +1413,10 @@ $(document).ready(function() {
 		$('#load-button').addClass('loaded');
 	}
 	function logozoom() {
+		// FIX CAMERA POSITION
+		camera.lookAt( focalPointInitial );
+		controls.target = focalPointInitial;
+
 		$('#load-button').addClass('launching');
 
 		if ( !isMobile ) {
@@ -1495,6 +1509,8 @@ $(document).ready(function() {
 
 				intersections = true;
 				controls.enabled = true;
+
+				controls.target = focalPointLoaded;
 
 				$('#star-map').addClass('loaded');
 

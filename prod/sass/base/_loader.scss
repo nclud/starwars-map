@@ -101,7 +101,7 @@
 	cursor: default;
 
 	@include transform(translate(-50%, 0));
-	@include transition(0.2s);
+	// @include transition(0.2s);
 
 	@include breakpoint(mobile) {
 		padding: 1.25em 1.05em 1.25em 1.25em;
@@ -129,12 +129,12 @@
 		content: '';
 	}
 
-	.begin-animation & {
-		&:after {
-			@include animation(loading-button 7.25s ease-in-out);
-			@include animation-fill-mode(forwards);
-		}
-	}
+	// .begin-animation & {
+	// 	&:after {
+	// 		@include animation(loading-button 7.25s ease-in-out);
+	// 		@include animation-fill-mode(forwards);
+	// 	}
+	// }
 
 	&.loaded {
 		// border-color: rgba($gold-darkest, 0.5);
@@ -142,6 +142,8 @@
 		background: rgba($gold-darkest, 0.5);
 
 		cursor: pointer;
+
+		// @include transition(0.2s);
 
 		&:before {
 			content: 'Explore The Galaxy';
@@ -185,20 +187,19 @@
 	fill: none;
 	stroke: $gold-dark;
 	stroke-width: 8px;
-	stroke-dasharray: 4500;
-	stroke-dashoffset: 4500;
+	@include transition(0);
+	@include transform(scale(0.2));
+	// stroke-dasharray: 4500;
+	// stroke-dashoffset: 4500;
 
-	.desktop & {
-		@include transform(scale(0.2));
-	}
-
-	.begin-animation & {
-		@include animation(logo-stroke-animate 5s linear);
-		@include animation-fill-mode(forwards);
-	}
+	// .begin-animation & {
+	// 	@include animation(logo-stroke-animate 4s linear);
+	// 	@include animation-fill-mode(forwards);
+	// }
 
 	.mobile & {
 		stroke-width: 10px;
+		@include transform(scale(1));
 	}
 }
 #logo-fill {

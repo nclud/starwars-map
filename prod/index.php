@@ -197,12 +197,12 @@
 				<span class="planet-data-text">Terrain: <span class="planet-data-value" id="planet-data-terrain"></span></span>
 			</div>
 			<div class="planet-films-column">
-				<div class="planet-film disabled" id="episode1" data-episode="1"><img src="/img/movie-episode1.jpg"></div>
-				<div class="planet-film disabled" id="episode2" data-episode="2"><img src="/img/movie-episode2.jpg"></div>
-				<div class="planet-film disabled" id="episode3" data-episode="3"><img src="/img/movie-episode3.jpg"></div>
-				<div class="planet-film disabled" id="episode4" data-episode="4"><img src="/img/movie-episode4.jpg"></div>
-				<div class="planet-film disabled" id="episode5" data-episode="5"><img src="/img/movie-episode5.jpg"></div>
-				<div class="planet-film disabled" id="episode6" data-episode="6"><img src="/img/movie-episode6.jpg"></div>
+				<div class="planet-film disabled" id="episode1" data-episode="1"><img src="http://starwarsgalaxy.s3.amazonaws.com/img/movie-episode1.jpg"></div>
+				<div class="planet-film disabled" id="episode2" data-episode="2"><img src="http://starwarsgalaxy.s3.amazonaws.com/img/movie-episode2.jpg"></div>
+				<div class="planet-film disabled" id="episode3" data-episode="3"><img src="http://starwarsgalaxy.s3.amazonaws.com/img/movie-episode3.jpg"></div>
+				<div class="planet-film disabled" id="episode4" data-episode="4"><img src="http://starwarsgalaxy.s3.amazonaws.com/img/movie-episode4.jpg"></div>
+				<div class="planet-film disabled" id="episode5" data-episode="5"><img src="http://starwarsgalaxy.s3.amazonaws.com/img/movie-episode5.jpg"></div>
+				<div class="planet-film disabled" id="episode6" data-episode="6"><img src="http://starwarsgalaxy.s3.amazonaws.com/img/movie-episode6.jpg"></div>
 			</div>
 		</div>
 

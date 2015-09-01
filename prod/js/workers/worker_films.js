@@ -4,9 +4,10 @@ var workerFilms = [];
 var protocol;
 
 function getFilmData() {
-	var url = 'http://swapi.co/api/films/?page=1';
+	// var url = 'http://swapi.co/api/films/?page=1';
 
-	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400' )
+	// oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400' )
+	oboe( '/data/films.json' )
 		.node('results.*', function( film ){
 			workerFilms.push( film );
 

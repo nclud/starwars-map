@@ -42,6 +42,8 @@ main {
 
 	overflow: hidden;
 
+	will-change: auto;
+
 	&:before {
 		position: absolute;
 		display: block;

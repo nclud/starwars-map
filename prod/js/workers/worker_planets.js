@@ -24,14 +24,15 @@ function getLocalPlanetData() {
 }
 
 function getRemotePlanetData() {
-	var url = '';
+	// var url = '';
 
-	for ( i = 1; i < pages; i ++ ) {
-		url += 'http://swapi.co/api/planets/?page=' + i + ',';
-	}
-	url += 'http://swapi.co/api/planets/?page=' + pages;
+	// for ( i = 1; i < pages; i ++ ) {
+	// 	url += 'http://swapi.co/api/planets/?page=' + i + ',';
+	// }
+	// url += 'http://swapi.co/api/planets/?page=' + pages;
 
-	oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400&json' )
+	// oboe( '/apipull.php?url=' + encodeURIComponent( url ) + '&expire=518400&json' )
+	oboe( '/data/swapi.json' )
 		.node('results.*', function( planet ){
 			workerRemotePlanets.push( planet );
 
