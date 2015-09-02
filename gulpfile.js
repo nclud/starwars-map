@@ -30,7 +30,7 @@ gulp.task('php', function() {
     php.server({
     	base: 'prod',
     	port: 8010,
-    	keepalive: true
+    	keepalive: false
     });
 });
 gulp.task('serve', ['php'], function() {
