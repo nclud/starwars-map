@@ -66,6 +66,13 @@
 		width: 60%;
 		height: auto;
 		top: 41%;
+
+		@include breakpoint(landscape) {
+			width: 37%;
+		}
+		@include breakpoint(portrait) {
+			top: 42%;
+		}
 	}
 }
 
