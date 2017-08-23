@@ -79,7 +79,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="http://www.starwarsgalaxy.co/social-facebook.jpg" />
 
-	<script src="//use.typekit.net/ltv6yfq.js"></script>
+	<script src="https://use.typekit.net/xvh7woo.js"></script>
 	<script>try{Typekit.load({ async: true });}catch(e){}</script>
 
     <link href="/css/style.css" rel="stylesheet" type="text/css" />
